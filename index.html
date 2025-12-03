@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🧠 AI Pro Coder - Auto Fallback System</title>
+    <title>🧠 AI Pro Coder - Auto Fallback + Document Upload</title>
     
     <script src="https://js.puter.com/v2/" 
             onload="initApp()" 
@@ -229,18 +229,6 @@
             font-size: 14px;
         }
 
-        /* Fallback indicator */
-        .fallback-info {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            font-size: 10px;
-            color: var(--accent-orange);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
         /* Badges */
         .model-badges {
             display: flex;
@@ -271,7 +259,6 @@
         .badge-best { background: linear-gradient(135deg, #ffd700, #ffaa00); color: #000; }
         .badge-coding { background: var(--accent-green); color: #000; }
         .badge-search { background: var(--accent-orange); color: #000; }
-        .badge-analysis { background: var(--accent-purple); color: white; }
         .badge-fallback { background: linear-gradient(135deg, #ff9500, #ff6b00); color: white; }
 
         .model-name {
@@ -312,6 +299,8 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .selected-name {
@@ -360,6 +349,340 @@
             font-size: 18px;
         }
 
+        /* ========== DOCUMENT UPLOAD SECTION ========== */
+        .upload-section {
+            background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-card));
+            border: 2px dashed var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .upload-section:hover {
+            border-color: var(--accent-purple);
+        }
+
+        .upload-section.drag-over {
+            border-color: var(--accent-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .upload-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .upload-title {
+            font-size: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .token-info {
+            background: var(--bg-tertiary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--accent-yellow);
+            border: 1px solid var(--accent-yellow);
+        }
+
+        .upload-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .upload-method {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .upload-method:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .upload-method-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .upload-method-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .upload-method-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        /* File Input Styling */
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-input-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            color: white;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-input-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(168, 85, 247, 0.4);
+        }
+
+        /* URL Input */
+        .url-input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .url-input {
+            flex: 1;
+            padding: 12px 16px;
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .url-input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+
+        .url-fetch-btn {
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .url-fetch-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+        }
+
+        .url-fetch-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Loaded Document Display */
+        .loaded-docs {
+            margin-top: 15px;
+        }
+
+        .loaded-doc-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin-bottom: 8px;
+        }
+
+        .loaded-doc-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .loaded-doc-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .loaded-doc-details {
+            min-width: 0;
+        }
+
+        .loaded-doc-name {
+            font-weight: 600;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .loaded-doc-meta {
+            font-size: 11px;
+            color: var(--text-secondary);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .loaded-doc-actions {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .doc-action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .doc-action-btn.preview {
+            background: var(--accent-blue);
+            color: #000;
+        }
+
+        .doc-action-btn.remove {
+            background: transparent;
+            border: 1px solid var(--error);
+            color: var(--error);
+        }
+
+        .doc-action-btn.remove:hover {
+            background: var(--error);
+            color: white;
+        }
+
+        /* Token Limits Info */
+        .token-limits-card {
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .token-limits-title {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .token-limits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 8px;
+        }
+
+        .token-limit-item {
+            background: var(--bg-secondary);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .token-limit-model {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .token-limit-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+
+        /* Document Preview Modal */
+        .doc-preview-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .doc-preview-content {
+            background: var(--bg-card);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .doc-preview-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .doc-preview-body {
+            flex: 1;
+            overflow: auto;
+            padding: 20px;
+            font-family: monospace;
+            font-size: 13px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .doc-preview-close {
+            background: var(--error);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
         /* Textarea */
         textarea {
             width: 100%;
@@ -375,6 +698,34 @@
         }
 
         textarea:focus { outline: none; border-color: var(--accent-blue); }
+
+        /* Document context indicator */
+        .doc-context-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(0, 212, 255, 0.2));
+            border: 1px solid var(--accent-purple);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .doc-context-indicator .icon {
+            font-size: 20px;
+        }
+
+        .doc-context-clear {
+            margin-left: auto;
+            background: transparent;
+            border: 1px solid var(--error);
+            color: var(--error);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+        }
 
         /* Buttons */
         .btn-group {
@@ -562,6 +913,7 @@
             .stats-grid { grid-template-columns: repeat(3, 1fr); }
             .model-chain { flex-direction: column; align-items: flex-start; }
             .chain-arrow { transform: rotate(90deg); }
+            .url-input-group { flex-direction: column; }
         }
 
         ::-webkit-scrollbar { width: 8px; height: 8px; }
@@ -578,15 +930,99 @@
     <!-- Header -->
     <header>
         <h1>🧠 AI Pro Coder</h1>
-        <p class="subtitle">Intelligent Auto-Fallback System</p>
+        <p class="subtitle">Auto-Fallback + Document Upload</p>
         <div class="fallback-badge">
-            🔄 Auto-Fallback: Primary → OpenRouter
+            🔄 Auto-Fallback + 📄 Document Analysis
         </div>
         <div id="status" class="status-loading">
             <div class="pulse"></div>
             <span>Initializing...</span>
         </div>
     </header>
+
+    <!-- Document Upload Section -->
+    <div class="upload-section" id="uploadSection">
+        <div class="upload-header">
+            <div class="upload-title">
+                📄 Document Upload
+            </div>
+            <div class="token-info" id="tokenInfo">
+                📊 Context: 0 tokens used
+            </div>
+        </div>
+
+        <div class="upload-methods">
+            <!-- File Upload -->
+            <div class="upload-method">
+                <div class="upload-method-icon">📁</div>
+                <div class="upload-method-title">Upload from Device</div>
+                <div class="upload-method-desc">
+                    .txt, .md, .json, .csv, .js, .py, .html, .css, .xml, .log
+                </div>
+                <div class="file-input-wrapper">
+                    <input type="file" id="fileInput" 
+                           accept=".txt,.md,.json,.csv,.js,.ts,.py,.html,.css,.xml,.log,.yaml,.yml,.toml,.ini,.cfg,.env,.sh,.bat,.sql,.java,.c,.cpp,.h,.go,.rs,.rb,.php,.swift,.kt"
+                           multiple
+                           onchange="handleFileUpload(event)">
+                    <div class="file-input-btn">
+                        📤 Choose Files
+                    </div>
+                </div>
+            </div>
+
+            <!-- URL Fetch -->
+            <div class="upload-method">
+                <div class="upload-method-icon">🌐</div>
+                <div class="upload-method-title">Fetch from URL</div>
+                <div class="upload-method-desc">
+                    Paste a URL to fetch text content (raw files, APIs, etc.)
+                </div>
+                <div class="url-input-group">
+                    <input type="url" class="url-input" id="urlInput" 
+                           placeholder="https://example.com/file.txt">
+                    <button class="url-fetch-btn" id="fetchBtn" onclick="fetchFromUrl()">
+                        🔗 Fetch
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loaded Documents -->
+        <div class="loaded-docs" id="loadedDocs"></div>
+
+        <!-- Token Limits Reference -->
+        <div class="token-limits-card">
+            <div class="token-limits-title">
+                📊 Token Limits by Model
+            </div>
+            <div class="token-limits-grid">
+                <div class="token-limit-item">
+                    <div class="token-limit-model">Claude 4.5</div>
+                    <div class="token-limit-value">200K</div>
+                </div>
+                <div class="token-limit-item">
+                    <div class="token-limit-model">GPT-4o</div>
+                    <div class="token-limit-value">128K</div>
+                </div>
+                <div class="token-limit-item">
+                    <div class="token-limit-model">Gemini 2.5 Pro</div>
+                    <div class="token-limit-value">1M</div>
+                </div>
+                <div class="token-limit-item">
+                    <div class="token-limit-model">DeepSeek</div>
+                    <div class="token-limit-value">64K</div>
+                </div>
+                <div class="token-limit-item">
+                    <div class="token-limit-model">Mistral Large</div>
+                    <div class="token-limit-value">128K</div>
+                </div>
+                <div class="token-limit-item">
+                    <div class="token-limit-model">Llama 4</div>
+                    <div class="token-limit-value">128K</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Category Tabs -->
     <div class="card">
@@ -605,7 +1041,7 @@
         <div class="model-grid" id="modelGrid"></div>
     </div>
 
-    <!-- Selected Model with Fallback Chain -->
+    <!-- Selected Model Display -->
     <div class="selected-display">
         <div class="selected-header">
             <div class="selected-name">
@@ -616,23 +1052,23 @@
         </div>
         
         <div class="card-title" style="margin-bottom: 10px; margin-top: 10px;">
-            🔄 Fallback Chain (will try in order):
+            🔄 Fallback Chain:
         </div>
         
         <div class="model-chain" id="modelChain">
             <div class="chain-item pending">
                 <span>1️⃣</span>
-                <span id="chain1">Primary Model</span>
+                <span id="chain1">Primary</span>
             </div>
             <span class="chain-arrow">→</span>
             <div class="chain-item pending">
                 <span>2️⃣</span>
-                <span id="chain2">OpenRouter Fallback</span>
+                <span id="chain2">Fallback 1</span>
             </div>
             <span class="chain-arrow">→</span>
             <div class="chain-item pending">
                 <span>3️⃣</span>
-                <span id="chain3">Alternative Fallback</span>
+                <span id="chain3">Fallback 2</span>
             </div>
         </div>
     </div>
@@ -640,11 +1076,19 @@
     <!-- Input -->
     <div class="card">
         <div class="card-title">💬 Your Prompt</div>
+        
+        <!-- Document Context Indicator -->
+        <div class="doc-context-indicator hidden" id="docContextIndicator">
+            <span class="icon">📎</span>
+            <span id="docContextText">0 documents attached (0 tokens)</span>
+            <button class="doc-context-clear" onclick="clearAllDocuments()">Clear All</button>
+        </div>
+
         <textarea id="userQuestion" placeholder="Enter your coding question, search query, or analysis request...
 
-💡 The system will automatically try the primary model first.
-   If it fails, it will fallback to OpenRouter version.
-   If that fails too, it tries an alternative model."
+📄 You can upload documents above to analyze, review code, or ask questions about files.
+
+💡 The system will automatically include document content in your prompt."
         ></textarea>
         
         <div class="btn-group">
@@ -658,10 +1102,10 @@
                 🧪 Test Chain
             </button>
             <button class="btn-secondary" onclick="forcePrimary()">
-                1️⃣ Force Primary
+                1️⃣ Primary
             </button>
             <button class="btn-secondary" onclick="forceFallback()">
-                2️⃣ Force Fallback
+                2️⃣ Fallback
             </button>
             <button class="btn-danger" onclick="clearAll()">
                 🗑️ Clear
@@ -678,7 +1122,7 @@
         <div id="output" class="empty">
             💭 AI response will appear here...
             <br><br>
-            🔄 Auto-fallback enabled: If primary fails → tries OpenRouter
+            📄 Upload documents above to analyze them
         </div>
         
         <div class="output-actions">
@@ -698,7 +1142,7 @@
                 <div class="stat-value" id="tokenCount">--</div>
             </div>
             <div class="stat-box">
-                <div class="stat-label">🎯 Model Used</div>
+                <div class="stat-label">🎯 Model</div>
                 <div class="stat-value" id="usedModel" style="font-size: 11px;">--</div>
             </div>
             <div class="stat-box">
@@ -715,294 +1159,113 @@
             </div>
         </div>
 
-        <!-- Fallback Log -->
         <div class="fallback-log" id="fallbackLog">
-            <div class="log-entry info">🔄 Fallback system ready. Select a model and send a message.</div>
+            <div class="log-entry info">🔄 System ready. Upload documents or type your question.</div>
         </div>
     </div>
 </div>
 
+<!-- Document Preview Modal -->
+<div class="doc-preview-modal hidden" id="docPreviewModal" onclick="closePreview(event)">
+    <div class="doc-preview-content" onclick="event.stopPropagation()">
+        <div class="doc-preview-header">
+            <span id="previewTitle">Document Preview</span>
+            <button class="doc-preview-close" onclick="closePreview()">✕ Close</button>
+        </div>
+        <div class="doc-preview-body" id="previewBody"></div>
+    </div>
+</div>
+
 <script>
-// ===== MODEL DATABASE WITH FALLBACKS =====
+// ===== MODEL DATABASE =====
 const MODELS_WITH_FALLBACKS = [
-    // ========== CLAUDE MODELS ==========
-    {
-        id: 'claude-opus-4-5',
-        name: 'Claude Opus 4.5',
-        icon: '🧠',
-        provider: 'anthropic',
-        desc: 'Most powerful Claude - Ultimate coding & analysis',
-        categories: ['coding', 'analysis', 'new'],
-        isNew: true,
-        isBest: true,
-        fallbacks: [
-            'openrouter:anthropic/claude-opus-4.5',
-            'openrouter:anthropic/claude-opus-4',
-            'claude-opus-4'
-        ]
-    },
     {
         id: 'claude-sonnet-4-5',
         name: 'Claude Sonnet 4.5',
         icon: '⚡',
         provider: 'anthropic',
-        desc: 'Best balance - Great for coding tasks',
+        desc: 'Best balance - 200K context',
         categories: ['coding', 'analysis', 'new'],
         isNew: true,
         isBest: true,
-        fallbacks: [
-            'openrouter:anthropic/claude-sonnet-4.5',
-            'openrouter:anthropic/claude-sonnet-4',
-            'claude-sonnet-4'
-        ]
+        contextSize: 200000,
+        fallbacks: ['openrouter:anthropic/claude-sonnet-4.5', 'openrouter:anthropic/claude-sonnet-4', 'claude-sonnet-4']
     },
     {
-        id: 'claude-haiku-4-5',
-        name: 'Claude Haiku 4.5',
-        icon: '🚀',
+        id: 'claude-opus-4-5',
+        name: 'Claude Opus 4.5',
+        icon: '🧠',
         provider: 'anthropic',
-        desc: 'Fastest Claude - Quick responses',
-        categories: ['coding', 'new'],
-        isNew: true,
-        fallbacks: [
-            'openrouter:anthropic/claude-haiku-4.5',
-            'openrouter:anthropic/claude-3.5-haiku',
-            'claude-3-5-haiku'
-        ]
-    },
-    {
-        id: 'claude-opus-4',
-        name: 'Claude Opus 4',
-        icon: '🎯',
-        provider: 'anthropic',
-        desc: 'Highly capable for complex reasoning',
-        categories: ['coding', 'analysis'],
-        isBest: true,
-        fallbacks: [
-            'openrouter:anthropic/claude-opus-4',
-            'openrouter:anthropic/claude-3-opus',
-            'claude-3-opus'
-        ]
-    },
-    {
-        id: 'claude-sonnet-4',
-        name: 'Claude Sonnet 4',
-        icon: '✨',
-        provider: 'anthropic',
-        desc: 'Excellent coding assistant',
-        categories: ['coding', 'analysis'],
-        fallbacks: [
-            'openrouter:anthropic/claude-sonnet-4',
-            'openrouter:anthropic/claude-3.7-sonnet',
-            'claude-3-7-sonnet'
-        ]
-    },
-
-    // ========== OPENAI GPT-5 ==========
-    {
-        id: 'gpt-5',
-        name: 'GPT-5',
-        icon: '👑',
-        provider: 'openai',
-        desc: 'Latest OpenAI flagship',
+        desc: 'Most powerful - 200K context',
         categories: ['coding', 'analysis', 'new'],
         isNew: true,
         isBest: true,
-        fallbacks: [
-            'openrouter:openai/gpt-5',
-            'openrouter:openai/gpt-5-chat',
-            'gpt-4o'
-        ]
-    },
-    {
-        id: 'gpt-5.1',
-        name: 'GPT-5.1',
-        icon: '🌟',
-        provider: 'openai',
-        desc: 'Enhanced GPT-5',
-        categories: ['coding', 'analysis', 'new'],
-        isNew: true,
-        fallbacks: [
-            'openrouter:openai/gpt-5.1',
-            'openrouter:openai/gpt-5.1-chat',
-            'gpt-5'
-        ]
-    },
-    {
-        id: 'gpt-5-codex',
-        name: 'GPT-5 Codex',
-        icon: '💻',
-        provider: 'openai',
-        desc: 'GPT-5 optimized for code',
-        categories: ['coding', 'new'],
-        isNew: true,
-        isBest: true,
-        fallbacks: [
-            'openrouter:openai/gpt-5-codex',
-            'openrouter:openai/gpt-5.1-codex',
-            'gpt-5'
-        ]
+        contextSize: 200000,
+        fallbacks: ['openrouter:anthropic/claude-opus-4.5', 'openrouter:anthropic/claude-opus-4', 'claude-opus-4']
     },
     {
         id: 'gpt-4o',
         name: 'GPT-4o',
         icon: '🎯',
         provider: 'openai',
-        desc: 'Multimodal flagship',
+        desc: 'Multimodal - 128K context',
         categories: ['coding', 'analysis'],
-        fallbacks: [
-            'openrouter:openai/gpt-4o',
-            'openrouter:openai/chatgpt-4o-latest',
-            'gpt-4o-mini'
-        ]
-    },
-    {
-        id: 'o3',
-        name: 'O3',
-        icon: '🔬',
-        provider: 'openai',
-        desc: 'Advanced reasoning',
-        categories: ['analysis', 'new'],
-        isNew: true,
-        fallbacks: [
-            'openrouter:openai/o3',
-            'openrouter:openai/o3-mini',
-            'o1'
-        ]
-    },
-    {
-        id: 'o4-mini',
-        name: 'O4 Mini',
-        icon: '🧪',
-        provider: 'openai',
-        desc: 'Fast reasoning model',
-        categories: ['analysis', 'new'],
-        isNew: true,
-        fallbacks: [
-            'openrouter:openai/o4-mini',
-            'openrouter:openai/o4-mini-high',
-            'o3-mini'
-        ]
-    },
-
-    // ========== GOOGLE GEMINI ==========
-    {
-        id: 'gemini-3-pro-preview',
-        name: 'Gemini 3 Pro',
-        icon: '💎',
-        provider: 'google',
-        desc: 'Latest Gemini model',
-        categories: ['coding', 'analysis', 'new'],
-        isNew: true,
-        isBest: true,
-        fallbacks: [
-            'openrouter:google/gemini-3-pro-preview',
-            'gemini-2.5-pro',
-            'openrouter:google/gemini-2.5-pro'
-        ]
+        contextSize: 128000,
+        fallbacks: ['openrouter:openai/gpt-4o', 'openrouter:openai/chatgpt-4o-latest', 'gpt-4o-mini']
     },
     {
         id: 'gemini-2.5-pro',
         name: 'Gemini 2.5 Pro',
-        icon: '📚',
+        icon: '💎',
         provider: 'google',
-        desc: '1M token context',
+        desc: 'Massive 1M token context!',
         categories: ['coding', 'analysis'],
         isBest: true,
-        fallbacks: [
-            'openrouter:google/gemini-2.5-pro',
-            'openrouter:google/gemini-2.5-pro-preview',
-            'gemini-2.5-flash'
-        ]
+        contextSize: 1000000,
+        fallbacks: ['openrouter:google/gemini-2.5-pro', 'openrouter:google/gemini-2.5-pro-preview', 'gemini-2.5-flash']
     },
     {
         id: 'gemini-2.5-flash',
         name: 'Gemini 2.5 Flash',
         icon: '⚡',
         provider: 'google',
-        desc: 'Fast multimodal',
+        desc: 'Fast - 1M token context',
         categories: ['coding'],
-        fallbacks: [
-            'openrouter:google/gemini-2.5-flash',
-            'openrouter:google/gemini-2.5-flash-lite',
-            'gemini-2.0-flash'
-        ]
+        contextSize: 1000000,
+        fallbacks: ['openrouter:google/gemini-2.5-flash', 'openrouter:google/gemini-2.5-flash-lite', 'gemini-2.0-flash']
     },
-
-    // ========== MISTRAL CODING ==========
+    {
+        id: 'deepseek-chat',
+        name: 'DeepSeek Chat',
+        icon: '🐋',
+        provider: 'deepseek',
+        desc: 'Free coder - 64K context',
+        categories: ['coding'],
+        contextSize: 64000,
+        fallbacks: ['openrouter:deepseek/deepseek-chat', 'openrouter:deepseek/deepseek-chat-v3-0324', 'openrouter:deepseek/deepseek-chat-v3.1']
+    },
     {
         id: 'codestral-2508',
         name: 'Codestral 2508',
         icon: '🔧',
         provider: 'mistral',
-        desc: 'Dedicated code model',
+        desc: 'Code specialist - 32K context',
         categories: ['coding', 'new'],
         isNew: true,
         isBest: true,
-        fallbacks: [
-            'openrouter:mistralai/codestral-2508',
-            'codestral-latest',
-            'openrouter:mistralai/codestral-2501'
-        ]
-    },
-    {
-        id: 'devstral-small-2507',
-        name: 'Devstral Small',
-        icon: '👨‍💻',
-        provider: 'mistral',
-        desc: 'Developer assistant',
-        categories: ['coding', 'new'],
-        isNew: true,
-        fallbacks: [
-            'openrouter:mistralai/devstral-small',
-            'openrouter:mistralai/devstral-small-2505',
-            'codestral-latest'
-        ]
+        contextSize: 32000,
+        fallbacks: ['openrouter:mistralai/codestral-2508', 'codestral-latest', 'openrouter:mistralai/codestral-2501']
     },
     {
         id: 'mistral-large-latest',
         name: 'Mistral Large',
         icon: '🌟',
         provider: 'mistral',
-        desc: 'Flagship Mistral',
+        desc: 'Flagship - 128K context',
         categories: ['coding', 'analysis'],
-        fallbacks: [
-            'openrouter:mistralai/mistral-large',
-            'openrouter:mistralai/mistral-large-2411',
-            'mistral-medium'
-        ]
+        contextSize: 128000,
+        fallbacks: ['openrouter:mistralai/mistral-large', 'openrouter:mistralai/mistral-large-2411', 'mistral-medium']
     },
-
-    // ========== DEEPSEEK ==========
-    {
-        id: 'deepseek-chat',
-        name: 'DeepSeek Chat',
-        icon: '🐋',
-        provider: 'deepseek',
-        desc: 'Excellent free coder',
-        categories: ['coding'],
-        fallbacks: [
-            'openrouter:deepseek/deepseek-chat',
-            'openrouter:deepseek/deepseek-chat-v3-0324',
-            'openrouter:deepseek/deepseek-chat-v3.1'
-        ]
-    },
-    {
-        id: 'deepseek-reasoner',
-        name: 'DeepSeek Reasoner',
-        icon: '🧠',
-        provider: 'deepseek',
-        desc: 'R1 reasoning model',
-        categories: ['coding', 'analysis'],
-        isBest: true,
-        fallbacks: [
-            'openrouter:deepseek/deepseek-r1',
-            'openrouter:deepseek/deepseek-r1-0528',
-            'deepseek-chat'
-        ]
-    },
-
-    // ========== PERPLEXITY SEARCH ==========
     {
         id: 'openrouter:perplexity/sonar-pro-search',
         name: 'Sonar Pro Search',
@@ -1011,57 +1274,9 @@ const MODELS_WITH_FALLBACKS = [
         desc: 'Real-time web search',
         categories: ['search'],
         isBest: true,
-        fallbacks: [
-            'openrouter:perplexity/sonar-pro',
-            'openrouter:perplexity/sonar-deep-research',
-            'openrouter:perplexity/sonar'
-        ]
+        contextSize: 128000,
+        fallbacks: ['openrouter:perplexity/sonar-pro', 'openrouter:perplexity/sonar-deep-research', 'openrouter:perplexity/sonar']
     },
-    {
-        id: 'openrouter:perplexity/sonar-deep-research',
-        name: 'Sonar Deep Research',
-        icon: '📊',
-        provider: 'perplexity',
-        desc: 'In-depth research',
-        categories: ['search', 'analysis'],
-        isBest: true,
-        fallbacks: [
-            'openrouter:perplexity/sonar-reasoning-pro',
-            'openrouter:perplexity/sonar-pro',
-            'openrouter:perplexity/sonar'
-        ]
-    },
-
-    // ========== GROK ==========
-    {
-        id: 'grok-3',
-        name: 'Grok 3',
-        icon: '🤖',
-        provider: 'xai',
-        desc: 'xAI flagship',
-        categories: ['coding', 'analysis'],
-        fallbacks: [
-            'openrouter:x-ai/grok-3',
-            'openrouter:x-ai/grok-3-beta',
-            'grok-3-mini'
-        ]
-    },
-    {
-        id: 'openrouter:x-ai/grok-4',
-        name: 'Grok 4',
-        icon: '🚀',
-        provider: 'xai',
-        desc: 'Latest Grok',
-        categories: ['coding', 'analysis', 'new'],
-        isNew: true,
-        fallbacks: [
-            'openrouter:x-ai/grok-4-fast:free',
-            'grok-3',
-            'openrouter:x-ai/grok-3'
-        ]
-    },
-
-    // ========== QWEN ==========
     {
         id: 'openrouter:qwen/qwen3-coder',
         name: 'Qwen3 Coder',
@@ -1070,41 +1285,29 @@ const MODELS_WITH_FALLBACKS = [
         desc: 'Alibaba code model',
         categories: ['coding', 'new'],
         isNew: true,
-        fallbacks: [
-            'openrouter:qwen/qwen3-coder:free',
-            'openrouter:qwen/qwen3-coder-plus',
-            'openrouter:qwen/qwen-2.5-coder-32b-instruct'
-        ]
+        contextSize: 32000,
+        fallbacks: ['openrouter:qwen/qwen3-coder:free', 'openrouter:qwen/qwen-2.5-coder-32b-instruct', 'openrouter:qwen/qwen3-max']
     },
-    {
-        id: 'openrouter:qwen/qwen3-max',
-        name: 'Qwen3 Max',
-        icon: '👑',
-        provider: 'qwen',
-        desc: 'Maximum Qwen',
-        categories: ['coding', 'analysis', 'new'],
-        isNew: true,
-        fallbacks: [
-            'openrouter:qwen/qwen3-235b-a22b',
-            'openrouter:qwen/qwen-max',
-            'openrouter:qwen/qwen-2.5-72b-instruct'
-        ]
-    },
-
-    // ========== META LLAMA ==========
     {
         id: 'openrouter:meta-llama/llama-4-maverick',
         name: 'Llama 4 Maverick',
         icon: '🦙',
         provider: 'meta',
-        desc: 'Latest Llama',
+        desc: 'Latest Llama - 128K context',
         categories: ['coding', 'analysis', 'new'],
         isNew: true,
-        fallbacks: [
-            'openrouter:meta-llama/llama-4-maverick:free',
-            'openrouter:meta-llama/llama-4-scout',
-            'openrouter:meta-llama/llama-3.3-70b-instruct'
-        ]
+        contextSize: 128000,
+        fallbacks: ['openrouter:meta-llama/llama-4-maverick:free', 'openrouter:meta-llama/llama-4-scout', 'openrouter:meta-llama/llama-3.3-70b-instruct']
+    },
+    {
+        id: 'grok-3',
+        name: 'Grok 3',
+        icon: '🤖',
+        provider: 'xai',
+        desc: 'xAI flagship - 128K context',
+        categories: ['coding', 'analysis'],
+        contextSize: 128000,
+        fallbacks: ['openrouter:x-ai/grok-3', 'openrouter:x-ai/grok-3-beta', 'grok-3-mini']
     }
 ];
 
@@ -1113,16 +1316,17 @@ let selectedModel = null;
 let currentCategory = 'all';
 let isProcessing = false;
 let lastQuestion = '';
-let fallbackLog = [];
+let loadedDocuments = []; // Array of {name, content, size, tokens, type}
 
 // ===== INITIALIZATION =====
 function initApp() {
     if (typeof puter !== 'undefined') {
-        updateStatus('ready', `✅ Ready - ${MODELS_WITH_FALLBACKS.length} models with fallbacks`);
+        updateStatus('ready', `✅ Ready - ${MODELS_WITH_FALLBACKS.length} models`);
         renderModels();
         selectModel(MODELS_WITH_FALLBACKS[0]);
+        setupDragDrop();
     } else {
-        updateStatus('error', '❌ Puter.js failed to load');
+        updateStatus('error', '❌ Puter.js failed');
     }
 }
 
@@ -1132,7 +1336,275 @@ function updateStatus(type, message) {
     status.innerHTML = `<div class="pulse"></div><span>${message}</span>`;
 }
 
-// ===== RENDER MODELS =====
+// ===== DOCUMENT HANDLING =====
+function setupDragDrop() {
+    const uploadSection = document.getElementById('uploadSection');
+    
+    uploadSection.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadSection.classList.add('drag-over');
+    });
+    
+    uploadSection.addEventListener('dragleave', () => {
+        uploadSection.classList.remove('drag-over');
+    });
+    
+    uploadSection.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadSection.classList.remove('drag-over');
+        handleFileUpload({ target: { files: e.dataTransfer.files } });
+    });
+}
+
+function estimateTokens(text) {
+    // Rough estimate: ~4 characters per token
+    return Math.ceil(text.length / 4);
+}
+
+async function handleFileUpload(event) {
+    const files = event.target.files;
+    if (!files || files.length === 0) return;
+
+    for (const file of files) {
+        try {
+            addLog('info', `📄 Loading: ${file.name}`);
+            
+            const content = await readFileContent(file);
+            const tokens = estimateTokens(content);
+            
+            const doc = {
+                id: Date.now() + Math.random(),
+                name: file.name,
+                content: content,
+                size: file.size,
+                tokens: tokens,
+                type: getFileType(file.name),
+                source: 'file'
+            };
+            
+            loadedDocuments.push(doc);
+            addLog('success', `✅ Loaded: ${file.name} (~${tokens} tokens)`);
+            
+        } catch (err) {
+            addLog('error', `❌ Failed to load ${file.name}: ${err.message}`);
+            showToast(`Failed to load ${file.name}`, 'error');
+        }
+    }
+    
+    renderLoadedDocs();
+    updateTokenInfo();
+    event.target.value = ''; // Reset input
+}
+
+function readFileContent(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => resolve(e.target.result);
+        reader.onerror = () => reject(new Error('Failed to read file'));
+        reader.readAsText(file);
+    });
+}
+
+async function fetchFromUrl() {
+    const urlInput = document.getElementById('urlInput');
+    const url = urlInput.value.trim();
+    
+    if (!url) {
+        showToast('Please enter a URL', 'error');
+        return;
+    }
+
+    const fetchBtn = document.getElementById('fetchBtn');
+    fetchBtn.disabled = true;
+    fetchBtn.innerHTML = '<div class="spinner"></div>';
+
+    addLog('info', `🌐 Fetching: ${url}`);
+
+    try {
+        // Try direct fetch first (works for CORS-enabled URLs)
+        let content;
+        
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            content = await response.text();
+        } catch (corsError) {
+            // Try using a CORS proxy
+            addLog('warning', '⚠️ CORS blocked, trying proxy...');
+            
+            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+            const proxyResponse = await fetch(proxyUrl);
+            
+            if (!proxyResponse.ok) throw new Error('Proxy failed');
+            content = await proxyResponse.text();
+        }
+
+        const tokens = estimateTokens(content);
+        const fileName = url.split('/').pop() || 'fetched-content.txt';
+        
+        const doc = {
+            id: Date.now() + Math.random(),
+            name: fileName,
+            content: content,
+            size: content.length,
+            tokens: tokens,
+            type: getFileType(fileName),
+            source: 'url',
+            url: url
+        };
+        
+        loadedDocuments.push(doc);
+        addLog('success', `✅ Fetched: ${fileName} (~${tokens} tokens)`);
+        showToast(`Loaded from URL (~${tokens} tokens)`, 'success');
+        
+        renderLoadedDocs();
+        updateTokenInfo();
+        urlInput.value = '';
+        
+    } catch (err) {
+        addLog('error', `❌ Fetch failed: ${err.message}`);
+        showToast(`Failed to fetch URL: ${err.message}`, 'error');
+    }
+
+    fetchBtn.disabled = false;
+    fetchBtn.innerHTML = '🔗 Fetch';
+}
+
+function getFileType(filename) {
+    const ext = filename.split('.').pop().toLowerCase();
+    const types = {
+        'js': '📜 JavaScript',
+        'ts': '📘 TypeScript',
+        'py': '🐍 Python',
+        'html': '🌐 HTML',
+        'css': '🎨 CSS',
+        'json': '📋 JSON',
+        'md': '📝 Markdown',
+        'txt': '📄 Text',
+        'csv': '📊 CSV',
+        'xml': '📰 XML',
+        'sql': '🗃️ SQL',
+        'java': '☕ Java',
+        'c': '⚙️ C',
+        'cpp': '⚙️ C++',
+        'go': '🔷 Go',
+        'rs': '🦀 Rust',
+        'rb': '💎 Ruby',
+        'php': '🐘 PHP',
+        'swift': '🍎 Swift',
+        'kt': '🟣 Kotlin',
+        'yaml': '⚙️ YAML',
+        'yml': '⚙️ YAML',
+        'sh': '🖥️ Shell',
+        'log': '📋 Log'
+    };
+    return types[ext] || '📄 File';
+}
+
+function formatBytes(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
+
+function renderLoadedDocs() {
+    const container = document.getElementById('loadedDocs');
+    
+    if (loadedDocuments.length === 0) {
+        container.innerHTML = '';
+        document.getElementById('docContextIndicator').classList.add('hidden');
+        return;
+    }
+
+    container.innerHTML = loadedDocuments.map(doc => `
+        <div class="loaded-doc-item">
+            <div class="loaded-doc-info">
+                <span class="loaded-doc-icon">${doc.type.split(' ')[0]}</span>
+                <div class="loaded-doc-details">
+                    <div class="loaded-doc-name">${doc.name}</div>
+                    <div class="loaded-doc-meta">
+                        <span>📦 ${formatBytes(doc.size)}</span>
+                        <span>📊 ~${doc.tokens.toLocaleString()} tokens</span>
+                        <span>${doc.source === 'url' ? '🌐 URL' : '📁 File'}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="loaded-doc-actions">
+                <button class="doc-action-btn preview" onclick="previewDoc('${doc.id}')">👁️ View</button>
+                <button class="doc-action-btn remove" onclick="removeDoc('${doc.id}')">✕</button>
+            </div>
+        </div>
+    `).join('');
+
+    document.getElementById('docContextIndicator').classList.remove('hidden');
+}
+
+function updateTokenInfo() {
+    const totalTokens = loadedDocuments.reduce((sum, doc) => sum + doc.tokens, 0);
+    const docCount = loadedDocuments.length;
+    
+    document.getElementById('tokenInfo').innerHTML = `📊 Context: ${totalTokens.toLocaleString()} tokens`;
+    document.getElementById('docContextText').textContent = 
+        `${docCount} document${docCount !== 1 ? 's' : ''} attached (~${totalTokens.toLocaleString()} tokens)`;
+    
+    // Warn if approaching limits
+    if (selectedModel && totalTokens > selectedModel.contextSize * 0.8) {
+        showToast(`⚠️ Approaching ${selectedModel.name}'s context limit!`, 'warning');
+    }
+}
+
+function previewDoc(docId) {
+    const doc = loadedDocuments.find(d => d.id == docId);
+    if (!doc) return;
+    
+    document.getElementById('previewTitle').textContent = `${doc.type} - ${doc.name}`;
+    document.getElementById('previewBody').textContent = doc.content.substring(0, 50000) + 
+        (doc.content.length > 50000 ? '\n\n... (truncated for preview)' : '');
+    document.getElementById('docPreviewModal').classList.remove('hidden');
+}
+
+function closePreview(event) {
+    if (!event || event.target.id === 'docPreviewModal') {
+        document.getElementById('docPreviewModal').classList.add('hidden');
+    }
+}
+
+function removeDoc(docId) {
+    loadedDocuments = loadedDocuments.filter(d => d.id != docId);
+    renderLoadedDocs();
+    updateTokenInfo();
+    addLog('info', '🗑️ Document removed');
+}
+
+function clearAllDocuments() {
+    loadedDocuments = [];
+    renderLoadedDocs();
+    updateTokenInfo();
+    addLog('info', '🗑️ All documents cleared');
+    showToast('All documents cleared', 'success');
+}
+
+function buildPromptWithDocs(userPrompt) {
+    if (loadedDocuments.length === 0) {
+        return userPrompt;
+    }
+
+    let contextParts = ['📄 **ATTACHED DOCUMENTS:**\n'];
+    
+    loadedDocuments.forEach((doc, index) => {
+        contextParts.push(`\n--- Document ${index + 1}: ${doc.name} ---`);
+        contextParts.push('```' + doc.name.split('.').pop());
+        contextParts.push(doc.content);
+        contextParts.push('```\n');
+    });
+
+    contextParts.push('\n📝 **USER REQUEST:**');
+    contextParts.push(userPrompt);
+
+    return contextParts.join('\n');
+}
+
+// ===== MODEL RENDERING =====
 function renderModels() {
     const grid = document.getElementById('modelGrid');
     const search = document.getElementById('modelSearch').value.toLowerCase();
@@ -1140,8 +1612,7 @@ function renderModels() {
     let models = MODELS_WITH_FALLBACKS.filter(m => {
         if (currentCategory !== 'all' && !m.categories.includes(currentCategory)) return false;
         if (search && !m.name.toLowerCase().includes(search) && 
-            !m.provider.toLowerCase().includes(search) &&
-            !m.desc.toLowerCase().includes(search)) return false;
+            !m.provider.toLowerCase().includes(search)) return false;
         return true;
     });
 
@@ -1151,16 +1622,15 @@ function renderModels() {
             <div class="model-badges">
                 <span class="badge badge-${m.provider}">${m.provider.toUpperCase()}</span>
                 ${m.isNew ? '<span class="badge badge-new">NEW</span>' : ''}
-                ${m.isBest ? '<span class="badge badge-best">⭐ BEST</span>' : ''}
+                ${m.isBest ? '<span class="badge badge-best">⭐</span>' : ''}
                 ${m.categories.includes('coding') ? '<span class="badge badge-coding">CODE</span>' : ''}
                 ${m.categories.includes('search') ? '<span class="badge badge-search">SEARCH</span>' : ''}
-                <span class="badge badge-fallback">+${m.fallbacks.length} fallbacks</span>
+                <span class="badge badge-fallback">+${m.fallbacks.length}</span>
             </div>
             <div class="model-name">${m.icon} ${m.name}</div>
             <div class="model-desc">${m.desc}</div>
             <div class="model-ids">
-                <div><span class="primary">1️⃣ ${m.id}</span></div>
-                <div><span class="fallback">2️⃣ ${m.fallbacks[0]}</span></div>
+                <div><span class="primary">Context: ${(m.contextSize/1000)}K tokens</span></div>
             </div>
         </div>
     `).join('');
@@ -1179,46 +1649,46 @@ function selectModel(model) {
     }
     selectedModel = model;
     
-    // Update display
     document.getElementById('selectedIcon').textContent = model.icon;
     document.getElementById('selectedName').textContent = model.name;
     document.getElementById('selectedStatus').textContent = 'Ready';
     document.getElementById('selectedStatus').className = 'selected-status status-primary';
     
-    // Update chain display
-    document.getElementById('chain1').textContent = model.id.substring(0, 30) + (model.id.length > 30 ? '...' : '');
-    document.getElementById('chain2').textContent = model.fallbacks[0]?.substring(0, 30) + '...' || 'None';
-    document.getElementById('chain3').textContent = model.fallbacks[1]?.substring(0, 30) + '...' || 'None';
+    document.getElementById('chain1').textContent = model.id.substring(0, 25) + (model.id.length > 25 ? '...' : '');
+    document.getElementById('chain2').textContent = model.fallbacks[0]?.substring(0, 25) + '...' || 'None';
+    document.getElementById('chain3').textContent = model.fallbacks[1]?.substring(0, 25) + '...' || 'None';
     
-    // Reset chain styling
     document.querySelectorAll('.chain-item').forEach(item => {
         item.classList.remove('active', 'failed');
         item.classList.add('pending');
     });
     
     renderModels();
-    addLog('info', `Selected: ${model.name} with ${model.fallbacks.length} fallbacks`);
+    updateTokenInfo(); // Check token limits
+    addLog('info', `Selected: ${model.name} (${(model.contextSize/1000)}K context)`);
 }
 
-// ===== FALLBACK LOGIC =====
-async function tryModel(modelId, prompt, isStream = false) {
-    if (isStream) {
-        return await puter.ai.chat(prompt, { model: modelId, stream: true });
-    } else {
-        return await puter.ai.chat(prompt, { model: modelId });
-    }
-}
-
+// ===== AI REQUESTS =====
 async function askWithFallback() {
     if (!selectedModel || isProcessing) return;
     
-    const txt = document.getElementById('userQuestion').value.trim();
-    if (!txt) {
+    const userText = document.getElementById('userQuestion').value.trim();
+    if (!userText) {
         showToast('Please enter a prompt!', 'error');
         return;
     }
 
-    lastQuestion = txt;
+    // Build prompt with documents
+    const fullPrompt = buildPromptWithDocs(userText);
+    const promptTokens = estimateTokens(fullPrompt);
+    
+    // Check token limit
+    if (promptTokens > selectedModel.contextSize * 0.9) {
+        showToast(`⚠️ Prompt too large (~${promptTokens} tokens) for ${selectedModel.name}!`, 'error');
+        return;
+    }
+
+    lastQuestion = userText;
     isProcessing = true;
     const output = document.getElementById('output');
     const sendBtn = document.getElementById('sendBtn');
@@ -1228,63 +1698,54 @@ async function askWithFallback() {
     sendBtn.innerHTML = '<div class="spinner"></div> Trying...';
     output.className = 'thinking';
     
-    // Build chain: primary + all fallbacks
     const modelChain = [selectedModel.id, ...selectedModel.fallbacks];
     let successModel = null;
     let successResponse = null;
     let attemptCount = 0;
 
-    // Reset chain display
     const chainItems = document.querySelectorAll('.chain-item');
     chainItems.forEach(item => {
         item.classList.remove('active', 'failed');
         item.classList.add('pending');
     });
 
-    addLog('info', `Starting request with ${modelChain.length} models in chain`);
+    addLog('info', `Starting with ${loadedDocuments.length} docs (~${promptTokens} tokens)`);
 
     for (let i = 0; i < modelChain.length; i++) {
         const modelId = modelChain[i];
         attemptCount = i + 1;
         
-        output.textContent = `🔄 Attempt ${attemptCount}/${modelChain.length}\n\nTrying: ${modelId}\n\nPlease wait...`;
+        output.textContent = `🔄 Attempt ${attemptCount}/${modelChain.length}\n\nModel: ${modelId}\n📄 Docs: ${loadedDocuments.length}\n📊 Tokens: ~${promptTokens}`;
         
-        // Update chain visual
         if (chainItems[i]) {
             chainItems[i].classList.remove('pending');
             chainItems[i].classList.add('active');
         }
         
-        addLog('info', `Attempt ${attemptCount}: Trying ${modelId}`);
+        addLog('info', `Attempt ${attemptCount}: ${modelId}`);
         
         try {
-            const response = await tryModel(modelId, txt, false);
+            const response = await puter.ai.chat(fullPrompt, { model: modelId });
             successModel = modelId;
             successResponse = response;
             
-            addLog('success', `✅ Success with ${modelId}`);
+            addLog('success', `✅ Success: ${modelId}`);
             
-            // Mark as successful
             if (chainItems[i]) {
-                chainItems[i].classList.remove('active');
-                chainItems[i].classList.add('active');
                 chainItems[i].style.borderColor = 'var(--success)';
             }
-            
-            break; // Success! Exit loop
+            break;
             
         } catch (err) {
-            addLog('error', `❌ Failed: ${modelId} - ${err.message?.substring(0, 50) || 'Unknown error'}`);
+            addLog('error', `❌ Failed: ${modelId}`);
             
-            // Mark as failed
             if (chainItems[i]) {
                 chainItems[i].classList.remove('active');
                 chainItems[i].classList.add('failed');
             }
             
-            // Continue to next fallback
             if (i < modelChain.length - 1) {
-                addLog('warning', `⏳ Falling back to: ${modelChain[i + 1]}`);
+                addLog('warning', `⏳ Trying: ${modelChain[i + 1]}`);
             }
         }
     }
@@ -1292,38 +1753,28 @@ async function askWithFallback() {
     const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
 
     if (successModel && successResponse) {
-        // SUCCESS!
         const answer = extractResponse(successResponse);
         const isPrimary = successModel === selectedModel.id;
         
         output.className = isPrimary ? 'success' : 'success fallback-used';
         output.innerHTML = `<div class="output-badge ${isPrimary ? 'primary' : 'fallback'}">${isPrimary ? '1️⃣ Primary' : '🔄 Fallback'}</div>\n${answer}`;
         
-        // Update stats
         document.getElementById('responseTime').textContent = elapsed + 's';
         document.getElementById('tokenCount').textContent = '~' + Math.ceil(answer.length / 4);
         document.getElementById('usedModel').textContent = successModel.split('/').pop().substring(0, 15);
         document.getElementById('attemptNum').textContent = attemptCount;
         document.getElementById('modelSource').textContent = isPrimary ? 'Primary' : 'Fallback';
-        document.getElementById('modelSource').className = 'stat-value' + (isPrimary ? '' : ' fallback');
         document.getElementById('finalStatus').textContent = '✅';
         
-        // Update header status
         document.getElementById('selectedStatus').textContent = isPrimary ? 'Primary ✓' : 'Fallback ✓';
         document.getElementById('selectedStatus').className = `selected-status ${isPrimary ? 'status-primary' : 'status-fallback'}`;
         
-        showToast(isPrimary ? '✅ Primary model worked!' : `🔄 Used fallback: ${successModel.split('/').pop()}`, 'success');
+        showToast(isPrimary ? '✅ Success!' : `🔄 Used fallback`, 'success');
         
     } else {
-        // ALL FAILED
         output.className = 'error';
-        output.textContent = `❌ All ${modelChain.length} models failed!\n\nTried:\n${modelChain.map((m, i) => `${i + 1}. ${m}`).join('\n')}\n\nPlease try again later or select a different model.`;
-        
+        output.textContent = `❌ All ${modelChain.length} models failed!`;
         document.getElementById('finalStatus').textContent = '❌';
-        document.getElementById('attemptNum').textContent = attemptCount;
-        document.getElementById('selectedStatus').textContent = 'All Failed';
-        document.getElementById('selectedStatus').className = 'selected-status status-failed';
-        
         showToast('❌ All models failed', 'error');
     }
 
@@ -1332,17 +1783,17 @@ async function askWithFallback() {
     sendBtn.innerHTML = '🚀 Send (Auto-Fallback)';
 }
 
-// ===== STREAMING WITH FALLBACK =====
 async function streamWithFallback() {
     if (!selectedModel || isProcessing) return;
     
-    const txt = document.getElementById('userQuestion').value.trim();
-    if (!txt) {
+    const userText = document.getElementById('userQuestion').value.trim();
+    if (!userText) {
         showToast('Please enter a prompt!', 'error');
         return;
     }
 
-    lastQuestion = txt;
+    const fullPrompt = buildPromptWithDocs(userText);
+    lastQuestion = userText;
     isProcessing = true;
     const output = document.getElementById('output');
     const startTime = Date.now();
@@ -1350,19 +1801,14 @@ async function streamWithFallback() {
     const modelChain = [selectedModel.id, ...selectedModel.fallbacks];
     let successModel = null;
 
-    addLog('info', `Starting stream with ${modelChain.length} models in chain`);
-
     for (let i = 0; i < modelChain.length; i++) {
         const modelId = modelChain[i];
         
         output.className = '';
-        output.textContent = `⚡ Streaming attempt ${i + 1}/${modelChain.length}\n\nModel: ${modelId}\n\n`;
-        
-        addLog('info', `Stream attempt ${i + 1}: ${modelId}`);
+        output.textContent = `⚡ Streaming attempt ${i + 1}/${modelChain.length}\n\n`;
         
         try {
-            const response = await puter.ai.chat(txt, { model: modelId, stream: true });
-            
+            const response = await puter.ai.chat(fullPrompt, { model: modelId, stream: true });
             output.textContent = '';
             
             for await (const chunk of response) {
@@ -1373,14 +1819,10 @@ async function streamWithFallback() {
             }
             
             successModel = modelId;
-            addLog('success', `✅ Stream success: ${modelId}`);
             break;
             
         } catch (err) {
-            addLog('error', `❌ Stream failed: ${modelId}`);
-            if (i < modelChain.length - 1) {
-                addLog('warning', `⏳ Trying next: ${modelChain[i + 1]}`);
-            }
+            if (i < modelChain.length - 1) continue;
         }
     }
 
@@ -1389,144 +1831,88 @@ async function streamWithFallback() {
     if (successModel) {
         const isPrimary = successModel === selectedModel.id;
         output.className = isPrimary ? 'success' : 'success fallback-used';
-        
         document.getElementById('responseTime').textContent = elapsed + 's';
-        document.getElementById('usedModel').textContent = successModel.split('/').pop().substring(0, 15);
-        document.getElementById('modelSource').textContent = isPrimary ? 'Primary' : 'Fallback';
         document.getElementById('finalStatus').textContent = '✅';
-        
-        showToast(isPrimary ? '⚡ Streamed from primary!' : `🔄 Streamed from fallback`, 'success');
+        showToast('⚡ Streaming complete!', 'success');
     } else {
         output.className = 'error';
         output.textContent = '❌ All streaming attempts failed';
-        document.getElementById('finalStatus').textContent = '❌';
     }
 
     isProcessing = false;
 }
 
-// ===== TEST ALL FALLBACKS =====
 async function testAllFallbacks() {
-    if (!selectedModel) {
-        showToast('Select a model first!', 'error');
-        return;
-    }
-
+    if (!selectedModel) return;
     const output = document.getElementById('output');
     const modelChain = [selectedModel.id, ...selectedModel.fallbacks];
     
     output.className = 'thinking';
-    output.textContent = `🧪 Testing all ${modelChain.length} models in chain...\n\n`;
-    
-    addLog('info', `Testing ${modelChain.length} models`);
-
-    const results = [];
+    output.textContent = `🧪 Testing ${modelChain.length} models...\n\n`;
 
     for (let i = 0; i < modelChain.length; i++) {
         const modelId = modelChain[i];
-        output.textContent += `Testing ${i + 1}/${modelChain.length}: ${modelId}...\n`;
+        output.textContent += `Testing: ${modelId}...\n`;
         
         try {
             const start = Date.now();
             await puter.ai.chat('Say OK', { model: modelId });
             const time = Date.now() - start;
-            
-            results.push({ model: modelId, status: '✅', time: time + 'ms' });
             output.textContent += `  ✅ Working (${time}ms)\n`;
-            addLog('success', `✅ ${modelId} - ${time}ms`);
-            
         } catch (err) {
-            results.push({ model: modelId, status: '❌', error: err.message?.substring(0, 30) });
-            output.textContent += `  ❌ Failed: ${err.message?.substring(0, 40)}\n`;
-            addLog('error', `❌ ${modelId} failed`);
+            output.textContent += `  ❌ Failed\n`;
         }
     }
-
-    const working = results.filter(r => r.status === '✅').length;
-    output.textContent += `\n━━━━━━━━━━━━━━━━━━━━\n`;
-    output.textContent += `📊 Results: ${working}/${modelChain.length} working\n`;
     
-    output.className = working > 0 ? 'success' : 'error';
-    showToast(`${working}/${modelChain.length} models working`, working > 0 ? 'success' : 'error');
+    output.className = 'success';
 }
 
-// ===== FORCE PRIMARY / FALLBACK =====
 async function forcePrimary() {
     if (!selectedModel) return;
-    
-    const txt = document.getElementById('userQuestion').value.trim();
-    if (!txt) {
-        showToast('Enter a prompt first!', 'error');
-        return;
-    }
+    const userText = document.getElementById('userQuestion').value.trim();
+    if (!userText) return;
 
+    const fullPrompt = buildPromptWithDocs(userText);
     const output = document.getElementById('output');
     output.className = 'thinking';
-    output.textContent = `1️⃣ Forcing PRIMARY only: ${selectedModel.id}\n\nNo fallback will be used...`;
-    
-    addLog('info', `Force primary: ${selectedModel.id}`);
+    output.textContent = `1️⃣ Primary only: ${selectedModel.id}...`;
 
     try {
         const start = Date.now();
-        const response = await puter.ai.chat(txt, { model: selectedModel.id });
+        const response = await puter.ai.chat(fullPrompt, { model: selectedModel.id });
         const elapsed = ((Date.now() - start) / 1000).toFixed(2);
         
         output.className = 'success';
-        output.innerHTML = `<div class="output-badge primary">1️⃣ Primary Only</div>\n${extractResponse(response)}`;
-        
+        output.innerHTML = `<div class="output-badge primary">1️⃣ Primary</div>\n${extractResponse(response)}`;
         document.getElementById('responseTime').textContent = elapsed + 's';
-        document.getElementById('modelSource').textContent = 'Primary';
-        document.getElementById('finalStatus').textContent = '✅';
-        
-        addLog('success', `Primary success: ${elapsed}s`);
-        showToast('✅ Primary model worked!', 'success');
-        
     } catch (err) {
         output.className = 'error';
-        output.textContent = `❌ Primary failed: ${err.message}\n\nUse "Send (Auto-Fallback)" to try alternatives.`;
-        document.getElementById('finalStatus').textContent = '❌';
-        addLog('error', `Primary failed: ${err.message}`);
-        showToast('❌ Primary failed - use auto-fallback', 'error');
+        output.textContent = `❌ Primary failed: ${err.message}`;
     }
 }
 
 async function forceFallback() {
-    if (!selectedModel || !selectedModel.fallbacks.length) return;
-    
-    const txt = document.getElementById('userQuestion').value.trim();
-    if (!txt) {
-        showToast('Enter a prompt first!', 'error');
-        return;
-    }
+    if (!selectedModel?.fallbacks?.length) return;
+    const userText = document.getElementById('userQuestion').value.trim();
+    if (!userText) return;
 
+    const fullPrompt = buildPromptWithDocs(userText);
     const fallbackId = selectedModel.fallbacks[0];
     const output = document.getElementById('output');
     output.className = 'thinking';
-    output.textContent = `2️⃣ Forcing FALLBACK: ${fallbackId}\n\nSkipping primary...`;
-    
-    addLog('info', `Force fallback: ${fallbackId}`);
+    output.textContent = `2️⃣ Fallback: ${fallbackId}...`;
 
     try {
         const start = Date.now();
-        const response = await puter.ai.chat(txt, { model: fallbackId });
+        const response = await puter.ai.chat(fullPrompt, { model: fallbackId });
         const elapsed = ((Date.now() - start) / 1000).toFixed(2);
         
         output.className = 'success fallback-used';
-        output.innerHTML = `<div class="output-badge fallback">2️⃣ Fallback Only</div>\n${extractResponse(response)}`;
-        
+        output.innerHTML = `<div class="output-badge fallback">2️⃣ Fallback</div>\n${extractResponse(response)}`;
         document.getElementById('responseTime').textContent = elapsed + 's';
-        document.getElementById('modelSource').textContent = 'Fallback';
-        document.getElementById('modelSource').className = 'stat-value fallback';
-        document.getElementById('finalStatus').textContent = '✅';
-        
-        addLog('success', `Fallback success: ${elapsed}s`);
-        showToast('✅ Fallback worked!', 'success');
-        
     } catch (err) {
         output.className = 'error';
         output.textContent = `❌ Fallback failed: ${err.message}`;
-        document.getElementById('finalStatus').textContent = '❌';
-        addLog('error', `Fallback failed: ${err.message}`);
     }
 }
 
@@ -1551,19 +1937,14 @@ function addLog(type, message) {
     
     const entry = document.createElement('div');
     entry.className = `log-entry ${type}`;
-    entry.innerHTML = `<span>${icons[type] || '•'}</span><span style="opacity:0.6">${time}</span><span>${message}</span>`;
+    entry.innerHTML = `<span>${icons[type]}</span><span style="opacity:0.6">${time}</span><span>${message}</span>`;
     
     logDiv.insertBefore(entry, logDiv.firstChild);
-    
-    // Keep only last 20 entries
-    while (logDiv.children.length > 20) {
-        logDiv.removeChild(logDiv.lastChild);
-    }
+    while (logDiv.children.length > 20) logDiv.removeChild(logDiv.lastChild);
 }
 
 function copyOutput() {
-    const text = document.getElementById('output').textContent;
-    navigator.clipboard.writeText(text);
+    navigator.clipboard.writeText(document.getElementById('output').textContent);
     showToast('📋 Copied!', 'success');
 }
 
@@ -1571,8 +1952,7 @@ function copyCode() {
     const text = document.getElementById('output').textContent;
     const codeMatch = text.match(/```[\s\S]*?```/g);
     if (codeMatch) {
-        const code = codeMatch.map(c => c.replace(/```\w*\n?/g, '')).join('\n\n');
-        navigator.clipboard.writeText(code);
+        navigator.clipboard.writeText(codeMatch.map(c => c.replace(/```\w*\n?/g, '')).join('\n\n'));
         showToast('📦 Code copied!', 'success');
     } else {
         showToast('No code blocks found', 'warning');
@@ -1580,8 +1960,7 @@ function copyCode() {
 }
 
 function downloadOutput() {
-    const text = document.getElementById('output').textContent;
-    const blob = new Blob([text], { type: 'text/plain' });
+    const blob = new Blob([document.getElementById('output').textContent], { type: 'text/plain' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
     a.download = `ai-response-${Date.now()}.txt`;
@@ -1597,9 +1976,9 @@ function regenerate() {
 
 function clearAll() {
     document.getElementById('userQuestion').value = '';
-    document.getElementById('output').textContent = '💭 AI response will appear here...\n\n🔄 Auto-fallback enabled';
+    document.getElementById('output').textContent = '💭 AI response will appear here...';
     document.getElementById('output').className = 'empty';
-    document.getElementById('fallbackLog').innerHTML = '<div class="log-entry info">🔄 Log cleared</div>';
+    clearAllDocuments();
     ['responseTime', 'tokenCount', 'usedModel', 'attemptNum', 'modelSource', 'finalStatus'].forEach(id => {
         document.getElementById(id).textContent = '--';
     });
@@ -1622,7 +2001,7 @@ function showError(msg) {
 // Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && e.key === 'Enter') { e.preventDefault(); askWithFallback(); }
-    if (e.key === 'Escape') clearAll();
+    if (e.key === 'Escape') closePreview();
 });
 </script>
 
