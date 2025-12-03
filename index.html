@@ -178,7 +178,6 @@
         .search-box input:focus { outline: none; border-color: var(--accent-blue); }
         .search-box::before { content: "🔍"; position: absolute; left: 18px; top: 50%; transform: translateY(-50%); }
 
-        /* ===== FIX: SCROLLABLE MODEL GRID ===== */
         .model-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -867,12 +866,12 @@
         <div class="token-limits-card">
             <div class="token-limits-title">📊 Token Limits by Model</div>
             <div class="token-limits-grid">
-                <div class="token-limit-item"><div class="token-limit-model">Claude 4.5</div><div class="token-limit-value">200K</div></div>
+                <div class="token-limit-item"><div class="token-limit-model">Claude 3.5</div><div class="token-limit-value">200K</div></div>
                 <div class="token-limit-item"><div class="token-limit-model">GPT-4o</div><div class="token-limit-value">128K</div></div>
-                <div class="token-limit-item"><div class="token-limit-model">Gemini 2.5 Pro</div><div class="token-limit-value">1M</div></div>
+                <div class="token-limit-item"><div class="token-limit-model">Gemini 1.5 Pro</div><div class="token-limit-value">1M</div></div>
                 <div class="token-limit-item"><div class="token-limit-model">DeepSeek</div><div class="token-limit-value">64K</div></div>
                 <div class="token-limit-item"><div class="token-limit-model">Mistral Large</div><div class="token-limit-value">128K</div></div>
-                <div class="token-limit-item"><div class="token-limit-model">Llama 4</div><div class="token-limit-value">128K</div></div>
+                <div class="token-limit-item"><div class="token-limit-model">Llama 3.3</div><div class="token-limit-value">128K</div></div>
             </div>
         </div>
     </div>
@@ -883,7 +882,7 @@
             <button class="category-tab" onclick="filterCategory('coding')">💻 Coding</button>
             <button class="category-tab" onclick="filterCategory('search')">🔍 Search</button>
             <button class="category-tab" onclick="filterCategory('analysis')">🧪 Analysis</button>
-            <button class="category-tab" onclick="filterCategory('new')">✨ Latest</button>
+            <button class="category-tab" onclick="filterCategory('free')">🆓 Free</button>
         </div>
 
         <div class="search-box">
@@ -975,136 +974,212 @@
 </div>
 
 <script>
+// ===== CORRECTED MODEL DATABASE WITH REAL MODEL IDs =====
 const MODELS_WITH_FALLBACKS = [
+    // ===== CLAUDE MODELS (CORRECT IDs) =====
     {
-        id: 'claude-sonnet-4-5',
-        name: 'Claude Sonnet 4.5',
+        id: 'claude-3-5-sonnet',
+        name: 'Claude 3.5 Sonnet',
         icon: '⚡',
         provider: 'anthropic',
         desc: 'Best balance - 200K context',
-        categories: ['coding', 'analysis', 'new'],
-        isNew: true,
+        categories: ['coding', 'analysis'],
         isBest: true,
         contextSize: 200000,
-        fallbacks: ['openrouter:anthropic/claude-sonnet-4.5', 'openrouter:anthropic/claude-sonnet-4', 'claude-sonnet-4']
+        fallbacks: ['claude-3-5-sonnet-20241022', 'claude-3-sonnet-20240229', 'gpt-4o']
     },
     {
-        id: 'claude-opus-4-5',
-        name: 'Claude Opus 4.5',
+        id: 'claude-3-opus',
+        name: 'Claude 3 Opus',
         icon: '🧠',
         provider: 'anthropic',
-        desc: 'Most powerful - 200K context',
-        categories: ['coding', 'analysis', 'new'],
-        isNew: true,
+        desc: 'Most powerful Claude - 200K context',
+        categories: ['coding', 'analysis'],
         isBest: true,
         contextSize: 200000,
-        fallbacks: ['openrouter:anthropic/claude-opus-4.5', 'openrouter:anthropic/claude-opus-4', 'claude-opus-4']
+        fallbacks: ['claude-3-opus-20240229', 'claude-3-5-sonnet', 'gpt-4o']
     },
+    {
+        id: 'claude-3-haiku',
+        name: 'Claude 3 Haiku',
+        icon: '🚀',
+        provider: 'anthropic',
+        desc: 'Fast & efficient - 200K context',
+        categories: ['coding', 'analysis'],
+        contextSize: 200000,
+        fallbacks: ['claude-3-haiku-20240307', 'claude-3-5-sonnet', 'gpt-4o-mini']
+    },
+
+    // ===== OPENAI MODELS =====
     {
         id: 'gpt-4o',
         name: 'GPT-4o',
         icon: '🎯',
         provider: 'openai',
-        desc: 'Multimodal - 128K context',
+        desc: 'Latest OpenAI - 128K context',
+        categories: ['coding', 'analysis'],
+        isBest: true,
+        contextSize: 128000,
+        fallbacks: ['gpt-4o-2024-08-06', 'gpt-4-turbo', 'gpt-4o-mini']
+    },
+    {
+        id: 'gpt-4o-mini',
+        name: 'GPT-4o Mini',
+        icon: '⚡',
+        provider: 'openai',
+        desc: 'Fast & cheap - 128K context',
+        categories: ['coding', 'analysis', 'free'],
+        contextSize: 128000,
+        fallbacks: ['gpt-4o', 'gpt-3.5-turbo', 'claude-3-haiku']
+    },
+    {
+        id: 'o1-mini',
+        name: 'o1 Mini',
+        icon: '🔬',
+        provider: 'openai',
+        desc: 'Reasoning model - 128K context',
         categories: ['coding', 'analysis'],
         contextSize: 128000,
-        fallbacks: ['openrouter:openai/gpt-4o', 'openrouter:openai/chatgpt-4o-latest', 'gpt-4o-mini']
+        fallbacks: ['gpt-4o', 'claude-3-5-sonnet', 'gpt-4o-mini']
     },
+
+    // ===== GOOGLE MODELS =====
     {
-        id: 'gemini-2.5-pro',
-        name: 'Gemini 2.5 Pro',
-        icon: '💎',
+        id: 'gemini-2.0-flash',
+        name: 'Gemini 2.0 Flash',
+        icon: '⚡',
         provider: 'google',
-        desc: 'Massive 1M token context!',
+        desc: 'Latest Gemini - 1M context',
         categories: ['coding', 'analysis'],
         isBest: true,
         contextSize: 1000000,
-        fallbacks: ['openrouter:google/gemini-2.5-pro', 'openrouter:google/gemini-2.5-pro-preview', 'gemini-2.5-flash']
+        fallbacks: ['gemini-1.5-pro', 'gemini-1.5-flash', 'gpt-4o']
     },
     {
-        id: 'gemini-2.5-flash',
-        name: 'Gemini 2.5 Flash',
-        icon: '⚡',
+        id: 'gemini-1.5-pro',
+        name: 'Gemini 1.5 Pro',
+        icon: '💎',
         provider: 'google',
-        desc: 'Fast - 1M token context',
-        categories: ['coding'],
+        desc: 'Powerful - 1M context',
+        categories: ['coding', 'analysis'],
         contextSize: 1000000,
-        fallbacks: ['openrouter:google/gemini-2.5-flash', 'openrouter:google/gemini-2.5-flash-lite', 'gemini-2.0-flash']
+        fallbacks: ['gemini-2.0-flash', 'gemini-1.5-flash', 'gpt-4o']
     },
+    {
+        id: 'gemini-1.5-flash',
+        name: 'Gemini 1.5 Flash',
+        icon: '🚀',
+        provider: 'google',
+        desc: 'Fast Gemini - 1M context',
+        categories: ['coding', 'analysis', 'free'],
+        contextSize: 1000000,
+        fallbacks: ['gemini-1.5-pro', 'gemini-2.0-flash', 'gpt-4o-mini']
+    },
+
+    // ===== DEEPSEEK =====
     {
         id: 'deepseek-chat',
-        name: 'DeepSeek Chat',
+        name: 'DeepSeek V3',
         icon: '🐋',
         provider: 'deepseek',
-        desc: 'Free coder - 64K context',
-        categories: ['coding'],
+        desc: 'Great coder - 64K context',
+        categories: ['coding', 'free'],
         contextSize: 64000,
-        fallbacks: ['openrouter:deepseek/deepseek-chat', 'openrouter:deepseek/deepseek-chat-v3-0324', 'openrouter:deepseek/deepseek-chat-v3.1']
+        fallbacks: ['deepseek-reasoner', 'gpt-4o-mini', 'claude-3-haiku']
     },
     {
-        id: 'codestral-2508',
-        name: 'Codestral 2508',
-        icon: '🔧',
-        provider: 'mistral',
-        desc: 'Code specialist - 32K context',
-        categories: ['coding', 'new'],
-        isNew: true,
+        id: 'deepseek-reasoner',
+        name: 'DeepSeek R1',
+        icon: '🧠',
+        provider: 'deepseek',
+        desc: 'Reasoning model - 64K context',
+        categories: ['coding', 'analysis'],
         isBest: true,
-        contextSize: 32000,
-        fallbacks: ['openrouter:mistralai/codestral-2508', 'codestral-latest', 'openrouter:mistralai/codestral-2501']
+        contextSize: 64000,
+        fallbacks: ['deepseek-chat', 'o1-mini', 'claude-3-5-sonnet']
     },
+
+    // ===== MISTRAL =====
     {
         id: 'mistral-large-latest',
         name: 'Mistral Large',
         icon: '🌟',
         provider: 'mistral',
-        desc: 'Flagship - 128K context',
+        desc: 'Flagship Mistral - 128K context',
         categories: ['coding', 'analysis'],
         contextSize: 128000,
-        fallbacks: ['openrouter:mistralai/mistral-large', 'openrouter:mistralai/mistral-large-2411', 'mistral-medium']
+        fallbacks: ['mistral-medium', 'codestral-latest', 'gpt-4o']
     },
     {
-        id: 'openrouter:perplexity/sonar-pro-search',
-        name: 'Sonar Pro Search',
-        icon: '🔍',
-        provider: 'perplexity',
-        desc: 'Real-time web search',
-        categories: ['search'],
+        id: 'codestral-latest',
+        name: 'Codestral',
+        icon: '🔧',
+        provider: 'mistral',
+        desc: 'Code specialist - 32K context',
+        categories: ['coding'],
         isBest: true,
-        contextSize: 128000,
-        fallbacks: ['openrouter:perplexity/sonar-pro', 'openrouter:perplexity/sonar-deep-research', 'openrouter:perplexity/sonar']
-    },
-    {
-        id: 'openrouter:qwen/qwen3-coder',
-        name: 'Qwen3 Coder',
-        icon: '💻',
-        provider: 'qwen',
-        desc: 'Alibaba code model',
-        categories: ['coding', 'new'],
-        isNew: true,
         contextSize: 32000,
-        fallbacks: ['openrouter:qwen/qwen3-coder:free', 'openrouter:qwen/qwen-2.5-coder-32b-instruct', 'openrouter:qwen/qwen3-max']
+        fallbacks: ['mistral-large-latest', 'deepseek-chat', 'gpt-4o']
     },
+
+    // ===== META LLAMA (via OpenRouter) =====
     {
-        id: 'openrouter:meta-llama/llama-4-maverick',
-        name: 'Llama 4 Maverick',
+        id: 'openrouter:meta-llama/llama-3.3-70b-instruct',
+        name: 'Llama 3.3 70B',
         icon: '🦙',
         provider: 'meta',
         desc: 'Latest Llama - 128K context',
-        categories: ['coding', 'analysis', 'new'],
-        isNew: true,
+        categories: ['coding', 'analysis', 'free'],
         contextSize: 128000,
-        fallbacks: ['openrouter:meta-llama/llama-4-maverick:free', 'openrouter:meta-llama/llama-4-scout', 'openrouter:meta-llama/llama-3.3-70b-instruct']
+        fallbacks: ['openrouter:meta-llama/llama-3.1-70b-instruct', 'openrouter:meta-llama/llama-3.1-8b-instruct', 'gpt-4o-mini']
     },
     {
-        id: 'grok-3',
-        name: 'Grok 3',
+        id: 'openrouter:meta-llama/llama-3.1-8b-instruct:free',
+        name: 'Llama 3.1 8B (Free)',
+        icon: '🦙',
+        provider: 'meta',
+        desc: 'Free Llama - 128K context',
+        categories: ['coding', 'free'],
+        contextSize: 128000,
+        fallbacks: ['openrouter:meta-llama/llama-3.3-70b-instruct', 'gpt-4o-mini', 'gemini-1.5-flash']
+    },
+
+    // ===== QWEN (via OpenRouter) =====
+    {
+        id: 'openrouter:qwen/qwen-2.5-coder-32b-instruct',
+        name: 'Qwen 2.5 Coder 32B',
+        icon: '💻',
+        provider: 'qwen',
+        desc: 'Alibaba code model - 32K',
+        categories: ['coding'],
+        isBest: true,
+        contextSize: 32000,
+        fallbacks: ['openrouter:qwen/qwen-2.5-72b-instruct', 'codestral-latest', 'deepseek-chat']
+    },
+
+    // ===== PERPLEXITY SEARCH =====
+    {
+        id: 'openrouter:perplexity/sonar',
+        name: 'Perplexity Sonar',
+        icon: '🔍',
+        provider: 'perplexity',
+        desc: 'Web search AI',
+        categories: ['search'],
+        isBest: true,
+        contextSize: 128000,
+        fallbacks: ['openrouter:perplexity/sonar-pro', 'gpt-4o', 'gemini-1.5-pro']
+    },
+
+    // ===== GROK (xAI) =====
+    {
+        id: 'grok-beta',
+        name: 'Grok Beta',
         icon: '🤖',
         provider: 'xai',
-        desc: 'xAI flagship - 128K context',
+        desc: 'xAI model - 128K context',
         categories: ['coding', 'analysis'],
         contextSize: 128000,
-        fallbacks: ['openrouter:x-ai/grok-3', 'openrouter:x-ai/grok-3-beta', 'grok-3-mini']
+        fallbacks: ['gpt-4o', 'claude-3-5-sonnet', 'gemini-1.5-pro']
     }
 ];
 
@@ -1285,15 +1360,15 @@ function renderModels() {
         <div class="model-card ${selectedModel?.id === m.id ? 'selected' : ''}" onclick='selectModel(${JSON.stringify(m).replace(/'/g, "\\'")})'>
             <div class="model-badges">
                 <span class="badge badge-${m.provider}">${m.provider.toUpperCase()}</span>
-                ${m.isNew ? '<span class="badge badge-new">NEW</span>' : ''}
-                ${m.isBest ? '<span class="badge badge-best">⭐</span>' : ''}
+                ${m.isBest ? '<span class="badge badge-best">⭐ BEST</span>' : ''}
                 ${m.categories.includes('coding') ? '<span class="badge badge-coding">CODE</span>' : ''}
                 ${m.categories.includes('search') ? '<span class="badge badge-search">SEARCH</span>' : ''}
+                ${m.categories.includes('free') ? '<span class="badge badge-new">FREE</span>' : ''}
                 <span class="badge badge-fallback">+${m.fallbacks.length}</span>
             </div>
             <div class="model-name">${m.icon} ${m.name}</div>
             <div class="model-desc">${m.desc}</div>
-            <div class="model-ids"><div><span class="primary">Context: ${(m.contextSize/1000)}K tokens</span></div></div>
+            <div class="model-ids"><div><span class="primary">ID: ${m.id}</span></div></div>
         </div>
     `).join('');
 }
@@ -1313,15 +1388,14 @@ function selectModel(model) {
     document.getElementById('selectedStatus').textContent = 'Ready';
     document.getElementById('selectedStatus').className = 'selected-status status-primary';
     document.getElementById('chain1').textContent = model.id.substring(0, 25) + (model.id.length > 25 ? '...' : '');
-    document.getElementById('chain2').textContent = model.fallbacks[0]?.substring(0, 25) + '...' || 'None';
-    document.getElementById('chain3').textContent = model.fallbacks[1]?.substring(0, 25) + '...' || 'None';
+    document.getElementById('chain2').textContent = model.fallbacks[0]?.substring(0, 25) || 'None';
+    document.getElementById('chain3').textContent = model.fallbacks[1]?.substring(0, 25) || 'None';
     document.querySelectorAll('.chain-item').forEach(item => { item.classList.remove('active', 'failed'); item.classList.add('pending'); });
     renderModels();
     updateTokenInfo();
     addLog('info', `Selected: ${model.name} (${(model.contextSize/1000)}K context)`);
 }
 
-// ===== FIX: PROPER ERROR MESSAGE EXTRACTION =====
 function getErrorMessage(err) {
     if (typeof err === 'string') return err;
     if (err?.message) return err.message;
@@ -1374,7 +1448,6 @@ async function askWithFallback() {
             if (chainItems[i]) chainItems[i].style.borderColor = 'var(--success)';
             break;
         } catch (err) {
-            // FIX: Use getErrorMessage to properly extract error
             const errMsg = getErrorMessage(err);
             addLog('error', `❌ Failed: ${modelId} - ${errMsg}`);
             if (chainItems[i]) { chainItems[i].classList.remove('active'); chainItems[i].classList.add('failed'); }
@@ -1400,7 +1473,7 @@ async function askWithFallback() {
         showToast(isPrimary ? '✅ Success!' : `🔄 Used fallback`, 'success');
     } else {
         output.className = 'error';
-        output.textContent = `❌ All ${modelChain.length} models failed!`;
+        output.textContent = `❌ All ${modelChain.length} models failed!\n\nTry selecting a different model.`;
         document.getElementById('finalStatus').textContent = '❌';
         showToast('❌ All models failed', 'error');
     }
@@ -1426,7 +1499,7 @@ async function streamWithFallback() {
     for (let i = 0; i < modelChain.length; i++) {
         const modelId = modelChain[i];
         output.className = '';
-        output.textContent = `⚡ Streaming attempt ${i + 1}/${modelChain.length}\n\n`;
+        output.textContent = `⚡ Streaming attempt ${i + 1}/${modelChain.length}: ${modelId}\n\n`;
 
         try {
             const response = await puter.ai.chat(fullPrompt, { model: modelId, stream: true });
@@ -1436,8 +1509,10 @@ async function streamWithFallback() {
                 if (typeof text === 'string') output.textContent += text;
             }
             successModel = modelId;
+            addLog('success', `✅ Streamed: ${modelId}`);
             break;
         } catch (err) {
+            addLog('error', `❌ Stream failed: ${modelId} - ${getErrorMessage(err)}`);
             if (i < modelChain.length - 1) continue;
         }
     }
@@ -1468,20 +1543,20 @@ async function testAllFallbacks() {
         output.textContent += `Testing: ${modelId}...\n`;
         try {
             const start = Date.now();
-            await puter.ai.chat('Say OK', { model: modelId });
-            output.textContent += `  ✅ Working (${Date.now() - start}ms)\n`;
+            await puter.ai.chat('Say "OK" and nothing else.', { model: modelId });
+            output.textContent += `  ✅ Working (${Date.now() - start}ms)\n\n`;
         } catch (err) {
-            // FIX: Show actual error message
-            output.textContent += `  ❌ Failed: ${getErrorMessage(err)}\n`;
+            output.textContent += `  ❌ Failed: ${getErrorMessage(err)}\n\n`;
         }
     }
     output.className = 'success';
+    showToast('🧪 Test complete!', 'success');
 }
 
 async function forcePrimary() {
     if (!selectedModel) return;
     const userText = document.getElementById('userQuestion').value.trim();
-    if (!userText) return;
+    if (!userText) { showToast('Enter a prompt first!', 'warning'); return; }
 
     const fullPrompt = buildPromptWithDocs(userText);
     const output = document.getElementById('output');
@@ -1495,17 +1570,18 @@ async function forcePrimary() {
         output.className = 'success';
         output.innerHTML = `<div class="output-badge primary">1️⃣ Primary</div>\n${extractResponse(response)}`;
         document.getElementById('responseTime').textContent = elapsed + 's';
+        addLog('success', `✅ Primary success: ${selectedModel.id}`);
     } catch (err) {
         output.className = 'error';
-        // FIX: Show actual error message
         output.textContent = `❌ Primary failed: ${getErrorMessage(err)}`;
+        addLog('error', `❌ Primary failed: ${getErrorMessage(err)}`);
     }
 }
 
 async function forceFallback() {
-    if (!selectedModel?.fallbacks?.length) return;
+    if (!selectedModel?.fallbacks?.length) { showToast('No fallbacks available!', 'warning'); return; }
     const userText = document.getElementById('userQuestion').value.trim();
-    if (!userText) return;
+    if (!userText) { showToast('Enter a prompt first!', 'warning'); return; }
 
     const fullPrompt = buildPromptWithDocs(userText);
     const fallbackId = selectedModel.fallbacks[0];
@@ -1520,10 +1596,11 @@ async function forceFallback() {
         output.className = 'success fallback-used';
         output.innerHTML = `<div class="output-badge fallback">2️⃣ Fallback</div>\n${extractResponse(response)}`;
         document.getElementById('responseTime').textContent = elapsed + 's';
+        addLog('success', `✅ Fallback success: ${fallbackId}`);
     } catch (err) {
         output.className = 'error';
-        // FIX: Show actual error message
         output.textContent = `❌ Fallback failed: ${getErrorMessage(err)}`;
+        addLog('error', `❌ Fallback failed: ${getErrorMessage(err)}`);
     }
 }
 
@@ -1546,7 +1623,7 @@ function addLog(type, message) {
     entry.className = `log-entry ${type}`;
     entry.innerHTML = `<span>${icons[type]}</span><span style="opacity:0.6">${time}</span><span>${message}</span>`;
     logDiv.insertBefore(entry, logDiv.firstChild);
-    while (logDiv.children.length > 20) logDiv.removeChild(logDiv.lastChild);
+    while (logDiv.children.length > 30) logDiv.removeChild(logDiv.lastChild);
 }
 
 function copyOutput() { navigator.clipboard.writeText(document.getElementById('output').textContent); showToast('📋 Copied!', 'success'); }
