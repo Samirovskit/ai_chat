@@ -41,31 +41,31 @@
 
         header {
             text-align: center;
-            padding: 25px 20px;
+            padding: 20px;
             background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
             border-radius: 16px;
             border: 1px solid var(--border);
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         header h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-green));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .subtitle { color: var(--text-secondary); margin: 8px 0; }
+        .subtitle { color: var(--text-secondary); margin: 5px 0; font-size: 14px; }
 
         #status {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 20px;
-            font-size: 13px;
-            margin-top: 10px;
+            font-size: 12px;
+            margin-top: 8px;
         }
 
         .status-loading { background: rgba(255, 170, 0, 0.2); color: var(--warning); }
@@ -88,12 +88,12 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 18px;
-            margin-bottom: 18px;
+            padding: 16px;
+            margin-bottom: 16px;
         }
 
         .card-title {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-secondary);
             margin-bottom: 12px;
             text-transform: uppercase;
@@ -108,8 +108,8 @@
             background: var(--bg-card);
             border: 2px dashed var(--border);
             border-radius: 14px;
-            padding: 18px;
-            margin-bottom: 18px;
+            padding: 16px;
+            margin-bottom: 16px;
             transition: all 0.3s ease;
         }
 
@@ -122,41 +122,38 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
 
-        .upload-title {
-            font-size: 15px;
-            font-weight: 600;
-        }
+        .upload-title { font-size: 14px; font-weight: 600; }
 
         .token-info {
             background: var(--bg-tertiary);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
             color: var(--accent-green);
         }
 
         .upload-methods {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 10px;
         }
 
         .upload-method {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: 10px;
-            padding: 15px;
+            padding: 14px;
             text-align: center;
         }
 
-        .upload-method-icon { font-size: 30px; margin-bottom: 8px; }
-        .upload-method-title { font-weight: 600; margin-bottom: 5px; font-size: 14px; }
-        .upload-method-desc { font-size: 11px; color: var(--text-secondary); margin-bottom: 10px; }
+        .upload-method-icon { font-size: 28px; margin-bottom: 6px; }
+        .upload-method-title { font-weight: 600; margin-bottom: 4px; font-size: 13px; }
+        .upload-method-desc { font-size: 10px; color: var(--text-secondary); margin-bottom: 10px; }
 
         .file-input-wrapper {
             position: relative;
@@ -177,43 +174,42 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
-            padding: 10px 16px;
+            padding: 10px 14px;
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
             color: white;
             border-radius: 8px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
         }
 
-        .url-input-group { display: flex; gap: 8px; }
+        .url-input-group { display: flex; gap: 6px; }
 
         .url-input {
             flex: 1;
-            padding: 10px 12px;
+            padding: 10px;
             background: var(--bg-tertiary);
             border: 1px solid var(--border);
             border-radius: 8px;
             color: var(--text-primary);
-            font-size: 13px;
+            font-size: 12px;
         }
 
         .url-input:focus { outline: none; border-color: var(--accent-blue); }
 
         .url-fetch-btn {
-            padding: 10px 16px;
+            padding: 10px 14px;
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
             color: #000;
             border: none;
             border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 12px;
         }
 
-        .url-fetch-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .url-fetch-btn:disabled { opacity: 0.5; }
 
-        /* Loaded Documents */
         .loaded-doc-item {
             display: flex;
             align-items: center;
@@ -221,21 +217,21 @@
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: 8px;
-            padding: 10px 14px;
-            margin-top: 10px;
-            gap: 10px;
+            padding: 8px 12px;
+            margin-top: 8px;
+            gap: 8px;
         }
 
-        .loaded-doc-info { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
-        .loaded-doc-icon { font-size: 20px; }
-        .loaded-doc-name { font-weight: 600; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .loaded-doc-info { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
+        .loaded-doc-icon { font-size: 18px; }
+        .loaded-doc-name { font-weight: 600; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .loaded-doc-meta { font-size: 10px; color: var(--text-secondary); }
 
         .doc-action-btn {
-            padding: 5px 10px;
+            padding: 4px 8px;
             border: none;
-            border-radius: 5px;
-            font-size: 11px;
+            border-radius: 4px;
+            font-size: 10px;
             cursor: pointer;
         }
 
@@ -243,14 +239,14 @@
         .doc-action-btn.remove { background: transparent; border: 1px solid var(--error); color: var(--error); }
         .doc-action-btn.remove:hover { background: var(--error); color: white; }
 
-        /* Model Grid */
+        /* Model Grid - FIXED */
         .model-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 10px;
-            max-height: 300px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 8px;
+            max-height: 250px;
             overflow-y: auto;
-            padding: 5px;
+            padding: 4px;
         }
 
         .model-card {
@@ -262,19 +258,21 @@
             transition: all 0.2s ease;
         }
 
-        .model-card:hover { border-color: var(--accent-blue); }
+        .model-card:hover { border-color: var(--accent-blue); transform: translateY(-1px); }
+        
         .model-card.selected {
-            border-color: var(--accent-blue);
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(168, 85, 247, 0.1));
+            border-color: var(--accent-green);
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.1));
         }
 
-        .model-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 6px; }
+        .model-badges { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 6px; }
 
         .badge {
-            font-size: 9px;
-            padding: 2px 6px;
-            border-radius: 8px;
+            font-size: 8px;
+            padding: 2px 5px;
+            border-radius: 6px;
             font-weight: 600;
+            text-transform: uppercase;
         }
 
         .badge-anthropic { background: #a855f7; color: white; }
@@ -288,14 +286,14 @@
         .badge-xai { background: #555; color: white; }
         .badge-best { background: #ffd700; color: #000; }
 
-        .model-name { font-weight: 600; font-size: 14px; margin-bottom: 3px; }
-        .model-desc { font-size: 11px; color: var(--text-secondary); }
+        .model-name { font-weight: 600; font-size: 13px; margin-bottom: 2px; }
+        .model-desc { font-size: 10px; color: var(--text-secondary); }
 
         /* Textarea */
         textarea {
             width: 100%;
-            min-height: 100px;
-            padding: 14px;
+            min-height: 80px;
+            padding: 12px;
             background: var(--bg-tertiary);
             border: 2px solid var(--border);
             border-radius: 10px;
@@ -315,8 +313,8 @@
             background: rgba(168, 85, 247, 0.15);
             border: 1px solid var(--accent-purple);
             border-radius: 8px;
-            margin-bottom: 12px;
-            font-size: 12px;
+            margin-bottom: 10px;
+            font-size: 11px;
         }
 
         .doc-context-clear {
@@ -324,8 +322,8 @@
             background: transparent;
             border: 1px solid var(--error);
             color: var(--error);
-            padding: 3px 8px;
-            border-radius: 5px;
+            padding: 2px 6px;
+            border-radius: 4px;
             font-size: 10px;
             cursor: pointer;
         }
@@ -333,136 +331,225 @@
         /* Buttons */
         .btn-group {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
             gap: 8px;
-            margin-top: 12px;
+            margin-top: 10px;
         }
 
         button {
-            padding: 12px 14px;
+            padding: 10px 12px;
             border: none;
-            border-radius: 10px;
-            font-size: 13px;
+            border-radius: 8px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 5px;
             transition: all 0.2s ease;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            color: white;
-        }
-
+        .btn-primary { background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); color: white; }
         .btn-primary:hover:not(:disabled) { transform: translateY(-2px); }
         .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
-
-        .btn-secondary {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            border: 1px solid var(--border);
-        }
-
+        .btn-secondary { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border); }
         .btn-secondary:hover { border-color: var(--accent-blue); }
         .btn-success { background: var(--accent-green); color: #000; }
         .btn-warning { background: var(--accent-orange); color: #000; }
         .btn-danger { background: transparent; border: 1px solid var(--error); color: var(--error); }
 
-        /* ========== SCROLLABLE OUTPUT AREA ========== */
-        #output {
+        /* ========== CONVERSATION HISTORY ========== */
+        .conversation-container {
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 10px;
             background: var(--bg-tertiary);
-            border: 2px solid var(--border);
             border-radius: 10px;
-            padding: 16px;
-            min-height: 150px;
-            max-height: 500px;           /* SCROLLABLE! */
-            overflow-y: auto;            /* SCROLLABLE! */
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            font-size: 14px;
-            line-height: 1.6;
-            position: relative;
+            border: 2px solid var(--border);
         }
 
-        #output.empty {
-            color: var(--text-secondary);
-            font-style: italic;
+        .conversation-container.empty {
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
             min-height: 150px;
+            color: var(--text-secondary);
+            font-style: italic;
         }
 
-        #output.thinking { color: var(--warning); border-color: var(--warning); }
-        #output.error { color: var(--error); background: rgba(255, 71, 87, 0.1); border-color: var(--error); }
-        #output.success { border-color: var(--success); }
-        #output.fallback-used { border-color: var(--accent-orange); }
+        .chat-message {
+            margin-bottom: 16px;
+            animation: fadeIn 0.3s ease;
+        }
 
-        .output-badge {
-            position: sticky;
-            top: 0;
-            float: right;
-            padding: 4px 10px;
-            border-radius: 10px;
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-message.user {
+            text-align: right;
+        }
+
+        .chat-message.assistant {
+            text-align: left;
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
             font-size: 11px;
-            font-weight: 600;
-            margin-left: 10px;
-            margin-bottom: 10px;
+            color: var(--text-secondary);
         }
 
-        .output-badge.primary { background: var(--accent-blue); color: #000; }
-        .output-badge.fallback { background: var(--accent-orange); color: #000; }
+        .chat-message.user .message-header {
+            justify-content: flex-end;
+        }
 
+        .message-role {
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+        }
+
+        .message-role.user {
+            background: var(--accent-purple);
+            color: white;
+        }
+
+        .message-role.assistant {
+            background: var(--accent-blue);
+            color: #000;
+        }
+
+        .message-model {
+            font-size: 10px;
+            color: var(--accent-green);
+        }
+
+        .message-content {
+            display: inline-block;
+            max-width: 85%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            text-align: left;
+        }
+
+        .chat-message.user .message-content {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-message.assistant .message-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-bottom-left-radius: 4px;
+        }
+
+        .chat-message.assistant.error .message-content {
+            background: rgba(255, 71, 87, 0.1);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .message-status {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-size: 9px;
+            margin-left: 8px;
+        }
+
+        .message-status.primary { background: var(--accent-blue); color: #000; }
+        .message-status.fallback { background: var(--accent-orange); color: #000; }
+
+        .message-time {
+            font-size: 10px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 4px;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            display: inline-flex;
+        }
+
+        .typing-indicator span {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+            30% { transform: translateY(-8px); opacity: 1; }
+        }
+
+        /* Output Actions */
         .output-actions {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             margin-top: 10px;
             flex-wrap: wrap;
         }
 
-        .output-actions button { flex: 1; min-width: 80px; padding: 8px 12px; font-size: 12px; }
+        .output-actions button { flex: 1; min-width: 70px; padding: 8px 10px; font-size: 11px; }
 
         /* Stats */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-            gap: 8px;
-            margin-top: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 6px;
+            margin-top: 10px;
         }
 
         .stat-box {
             background: var(--bg-tertiary);
-            padding: 10px;
+            padding: 8px;
             border-radius: 8px;
             text-align: center;
         }
 
         .stat-label { font-size: 9px; color: var(--text-secondary); text-transform: uppercase; }
-        .stat-value { font-size: 14px; font-weight: 700; color: var(--accent-blue); margin-top: 3px; }
+        .stat-value { font-size: 13px; font-weight: 700; color: var(--accent-blue); margin-top: 2px; }
         .stat-value.fallback { color: var(--accent-orange); }
 
         /* Log */
         .fallback-log {
             background: var(--bg-tertiary);
             border-radius: 8px;
-            padding: 10px;
-            margin-top: 12px;
-            font-size: 11px;
+            padding: 8px;
+            margin-top: 10px;
+            font-size: 10px;
             font-family: monospace;
-            max-height: 120px;
+            max-height: 100px;
             overflow-y: auto;
         }
 
         .log-entry {
-            padding: 3px 0;
+            padding: 2px 0;
             border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         .log-entry:last-child { border: none; }
@@ -472,7 +559,7 @@
         .log-entry.warning { color: var(--warning); }
 
         .spinner {
-            width: 16px; height: 16px;
+            width: 14px; height: 14px;
             border: 2px solid transparent;
             border-top-color: currentColor;
             border-radius: 50%;
@@ -485,12 +572,13 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            padding: 12px 20px;
+            padding: 10px 18px;
             background: var(--bg-secondary);
             border: 2px solid var(--border);
             border-radius: 10px;
             z-index: 1000;
             animation: slideIn 0.3s ease;
+            font-size: 13px;
         }
 
         .toast.success { border-color: var(--success); }
@@ -518,8 +606,8 @@
             background: var(--bg-card);
             border-radius: 14px;
             width: 100%;
-            max-width: 800px;
-            max-height: 80vh;
+            max-width: 700px;
+            max-height: 75vh;
             display: flex;
             flex-direction: column;
         }
@@ -527,14 +615,15 @@
         .doc-preview-header {
             display: flex;
             justify-content: space-between;
-            padding: 14px 18px;
+            padding: 12px 16px;
             border-bottom: 1px solid var(--border);
+            font-size: 14px;
         }
 
         .doc-preview-body {
             flex: 1;
             overflow: auto;
-            padding: 18px;
+            padding: 16px;
             font-family: monospace;
             font-size: 12px;
             white-space: pre-wrap;
@@ -544,15 +633,16 @@
             background: var(--error);
             color: white;
             border: none;
-            padding: 6px 14px;
+            padding: 5px 12px;
             border-radius: 6px;
             cursor: pointer;
+            font-size: 12px;
         }
 
         .hidden { display: none !important; }
 
         @media (max-width: 600px) {
-            header h1 { font-size: 1.5rem; }
+            header h1 { font-size: 1.4rem; }
             .model-grid { grid-template-columns: 1fr; }
             .url-input-group { flex-direction: column; }
         }
@@ -568,7 +658,7 @@
 <div class="container">
     <header>
         <h1>🧠 AI Pro Coder</h1>
-        <p class="subtitle">Auto-Fallback + Document Upload</p>
+        <p class="subtitle">Auto-Fallback + Document Upload + Chat History</p>
         <div id="status" class="status-loading">
             <div class="pulse"></div>
             <span>Loading...</span>
@@ -586,7 +676,7 @@
             <div class="upload-method">
                 <div class="upload-method-icon">📁</div>
                 <div class="upload-method-title">Upload Files</div>
-                <div class="upload-method-desc">.txt, .md, .json, .js, .py, .html, .css, .csv, etc.</div>
+                <div class="upload-method-desc">.txt, .md, .json, .js, .py, .html, .css, etc.</div>
                 <div class="file-input-wrapper">
                     <input type="file" id="fileInput" multiple
                            accept=".txt,.md,.json,.csv,.js,.ts,.py,.html,.css,.xml,.log,.yaml,.yml,.sql,.java,.c,.cpp,.go,.rs,.rb,.php"
@@ -611,46 +701,50 @@
 
     <!-- Model Selection -->
     <div class="card">
-        <div class="card-title">🤖 Select Model</div>
+        <div class="card-title">
+            🤖 Select Model
+            <span id="selectedModelDisplay" style="color: var(--accent-green); font-size: 11px;"></span>
+        </div>
         <div class="model-grid" id="modelGrid"></div>
     </div>
 
     <!-- Input -->
     <div class="card">
-        <div class="card-title">💬 Your Prompt</div>
+        <div class="card-title">💬 Your Message</div>
         <div class="doc-context-indicator hidden" id="docContextIndicator">
             <span>📎</span>
             <span id="docContextText">0 docs attached</span>
-            <button class="doc-context-clear" onclick="clearAllDocuments()">Clear All</button>
+            <button class="doc-context-clear" onclick="clearAllDocuments()">Clear Docs</button>
         </div>
-        <textarea id="userQuestion" placeholder="Enter your question or request...
-
-📄 Upload documents above to analyze them with AI."></textarea>
+        <textarea id="userQuestion" placeholder="Type your message... (Ctrl+Enter to send)"></textarea>
         
         <div class="btn-group">
-            <button class="btn-primary" id="sendBtn" onclick="askWithFallback()">🚀 Send</button>
-            <button class="btn-success" onclick="streamWithFallback()">⚡ Stream</button>
-            <button class="btn-secondary" onclick="forcePrimary()">1️⃣ Primary</button>
-            <button class="btn-secondary" onclick="forceFallback()">2️⃣ Fallback</button>
-            <button class="btn-danger" onclick="clearAll()">🗑️ Clear</button>
+            <button class="btn-primary" id="sendBtn" onclick="sendMessage()">🚀 Send</button>
+            <button class="btn-success" onclick="streamMessage()">⚡ Stream</button>
+            <button class="btn-warning" onclick="clearConversation()">🗑️ Clear Chat</button>
+            <button class="btn-secondary" onclick="exportConversation()">💾 Export</button>
         </div>
     </div>
 
-    <!-- Output -->
+    <!-- Conversation History -->
     <div class="card">
-        <div class="card-title">📝 Response</div>
-        <div id="output" class="empty">💭 Response will appear here...</div>
+        <div class="card-title">
+            📝 Conversation
+            <span id="messageCount" style="font-size: 11px; color: var(--accent-blue);">0 messages</span>
+        </div>
+        <div class="conversation-container empty" id="conversationContainer">
+            💭 Start a conversation...
+        </div>
         
         <div class="output-actions">
-            <button class="btn-secondary" onclick="copyOutput()">📋 Copy</button>
-            <button class="btn-secondary" onclick="copyCode()">📦 Code</button>
-            <button class="btn-secondary" onclick="downloadOutput()">💾 Save</button>
-            <button class="btn-secondary" onclick="regenerate()">🔄 Retry</button>
+            <button class="btn-secondary" onclick="copyLastResponse()">📋 Copy Last</button>
+            <button class="btn-secondary" onclick="copyAllCode()">📦 All Code</button>
+            <button class="btn-secondary" onclick="regenerateLastMessage()">🔄 Retry</button>
         </div>
 
         <div class="stats-grid">
             <div class="stat-box">
-                <div class="stat-label">⏱️ Time</div>
+                <div class="stat-label">⏱️ Last Time</div>
                 <div class="stat-value" id="responseTime">--</div>
             </div>
             <div class="stat-box">
@@ -662,7 +756,7 @@
                 <div class="stat-value" id="usedModel" style="font-size:10px">--</div>
             </div>
             <div class="stat-box">
-                <div class="stat-label">🔄 Try</div>
+                <div class="stat-label">🔄 Attempts</div>
                 <div class="stat-value" id="attemptNum">--</div>
             </div>
             <div class="stat-box">
@@ -689,35 +783,37 @@
 </div>
 
 <script>
-// ===== MODELS =====
+// ===== MODELS DATABASE =====
 const MODELS = [
     { id: 'claude-sonnet-4-5', name: 'Claude Sonnet 4.5', icon: '⚡', provider: 'anthropic', desc: '200K context', isBest: true, context: 200000, fallbacks: ['openrouter:anthropic/claude-sonnet-4.5', 'claude-sonnet-4'] },
+    { id: 'claude-opus-4', name: 'Claude Opus 4', icon: '🧠', provider: 'anthropic', desc: '200K context', isBest: true, context: 200000, fallbacks: ['openrouter:anthropic/claude-opus-4', 'claude-sonnet-4'] },
     { id: 'gpt-4o', name: 'GPT-4o', icon: '🎯', provider: 'openai', desc: '128K context', context: 128000, fallbacks: ['openrouter:openai/gpt-4o', 'gpt-4o-mini'] },
+    { id: 'gpt-4o-mini', name: 'GPT-4o Mini', icon: '🚀', provider: 'openai', desc: '128K - Fast', context: 128000, fallbacks: ['openrouter:openai/gpt-4o-mini', 'gpt-4o'] },
     { id: 'gemini-2.5-pro', name: 'Gemini 2.5 Pro', icon: '💎', provider: 'google', desc: '1M context!', isBest: true, context: 1000000, fallbacks: ['openrouter:google/gemini-2.5-pro', 'gemini-2.5-flash'] },
-    { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash', icon: '⚡', provider: 'google', desc: '1M context', context: 1000000, fallbacks: ['openrouter:google/gemini-2.5-flash', 'gemini-2.0-flash'] },
-    { id: 'deepseek-chat', name: 'DeepSeek Chat', icon: '🐋', provider: 'deepseek', desc: '64K context', context: 64000, fallbacks: ['openrouter:deepseek/deepseek-chat', 'openrouter:deepseek/deepseek-chat-v3'] },
-    { id: 'mistral-large-latest', name: 'Mistral Large', icon: '🌟', provider: 'mistral', desc: '128K context', context: 128000, fallbacks: ['openrouter:mistralai/mistral-large', 'mistral-medium'] },
+    { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash', icon: '⚡', provider: 'google', desc: '1M - Fast', context: 1000000, fallbacks: ['openrouter:google/gemini-2.5-flash', 'gemini-2.0-flash'] },
+    { id: 'deepseek-chat', name: 'DeepSeek Chat', icon: '🐋', provider: 'deepseek', desc: '64K context', context: 64000, fallbacks: ['openrouter:deepseek/deepseek-chat', 'openrouter:deepseek/deepseek-v3'] },
+    { id: 'mistral-large-latest', name: 'Mistral Large', icon: '🌟', provider: 'mistral', desc: '128K context', context: 128000, fallbacks: ['openrouter:mistralai/mistral-large', 'codestral-latest'] },
+    { id: 'codestral-latest', name: 'Codestral', icon: '💻', provider: 'mistral', desc: 'Code Expert', isBest: true, context: 32000, fallbacks: ['openrouter:mistralai/codestral-latest', 'mistral-large-latest'] },
+    { id: 'grok-3', name: 'Grok 3', icon: '🤖', provider: 'xai', desc: '128K context', context: 128000, fallbacks: ['openrouter:x-ai/grok-3', 'openrouter:x-ai/grok-3-mini'] },
     { id: 'openrouter:meta-llama/llama-4-maverick', name: 'Llama 4', icon: '🦙', provider: 'meta', desc: '128K context', context: 128000, fallbacks: ['openrouter:meta-llama/llama-4-scout', 'openrouter:meta-llama/llama-3.3-70b'] },
-    { id: 'openrouter:qwen/qwen3-235b-a22b', name: 'Qwen3 Max', icon: '👑', provider: 'qwen', desc: '128K context', context: 128000, fallbacks: ['openrouter:qwen/qwen3-coder', 'openrouter:qwen/qwen-2.5-72b'] },
-    { id: 'grok-3', name: 'Grok 3', icon: '🤖', provider: 'xai', desc: '128K context', context: 128000, fallbacks: ['openrouter:x-ai/grok-3', 'grok-3-mini'] },
-    { id: 'openrouter:perplexity/sonar-pro', name: 'Sonar Pro', icon: '🔍', provider: 'perplexity', desc: 'Web Search', context: 128000, fallbacks: ['openrouter:perplexity/sonar', 'openrouter:perplexity/sonar-deep-research'] }
+    { id: 'openrouter:qwen/qwen3-235b-a22b', name: 'Qwen3 Max', icon: '👑', provider: 'qwen', desc: '128K context', context: 128000, fallbacks: ['openrouter:qwen/qwen3-coder', 'openrouter:qwen/qwen-2.5-72b'] }
 ];
 
 // ===== STATE =====
-let selectedModel = null;
+let selectedModelIndex = 0;
 let isProcessing = false;
-let lastQuestion = '';
 let loadedDocuments = [];
+let conversationHistory = []; // {role: 'user'|'assistant', content: string, model?: string, time: Date, status?: 'primary'|'fallback'}
 
 // ===== INIT =====
 function initApp() {
     if (typeof puter !== 'undefined') {
         updateStatus('ready', '✅ Ready');
         renderModels();
-        selectModel(MODELS[0]);
+        selectModelByIndex(0);
         setupDragDrop();
     } else {
-        updateStatus('error', '❌ Failed to load');
+        updateStatus('error', '❌ Puter failed');
     }
 }
 
@@ -725,6 +821,35 @@ function updateStatus(type, msg) {
     const s = document.getElementById('status');
     s.className = 'status-' + type;
     s.innerHTML = `<div class="pulse"></div><span>${msg}</span>`;
+}
+
+// ===== MODELS - FIXED =====
+function renderModels() {
+    const grid = document.getElementById('modelGrid');
+    grid.innerHTML = MODELS.map((m, index) => `
+        <div class="model-card ${index === selectedModelIndex ? 'selected' : ''}" 
+             onclick="selectModelByIndex(${index})"
+             data-index="${index}">
+            <div class="model-badges">
+                <span class="badge badge-${m.provider}">${m.provider}</span>
+                ${m.isBest ? '<span class="badge badge-best">⭐</span>' : ''}
+            </div>
+            <div class="model-name">${m.icon} ${m.name}</div>
+            <div class="model-desc">${m.desc}</div>
+        </div>
+    `).join('');
+}
+
+function selectModelByIndex(index) {
+    selectedModelIndex = index;
+    const model = MODELS[index];
+    document.getElementById('selectedModelDisplay').textContent = `✓ ${model.name}`;
+    renderModels();
+    addLog('info', `Selected: ${model.name}`);
+}
+
+function getSelectedModel() {
+    return MODELS[selectedModelIndex];
 }
 
 // ===== DOCUMENT HANDLING =====
@@ -755,11 +880,11 @@ async function handleFileUpload(event) {
                 content,
                 size: file.size,
                 tokens,
-                type: getFileType(file.name)
+                type: getFileIcon(file.name)
             });
             addLog('success', `✅ ${file.name} (~${tokens} tokens)`);
         } catch (err) {
-            addLog('error', `❌ ${file.name}: ${err.message}`);
+            addLog('error', `❌ ${file.name}`);
         }
     }
     renderLoadedDocs();
@@ -774,27 +899,24 @@ async function fetchFromUrl() {
     const btn = document.getElementById('fetchBtn');
     btn.disabled = true;
     btn.innerHTML = '<div class="spinner"></div>';
-    addLog('info', `🌐 Fetching...`);
 
     try {
         let content;
         try {
-            const res = await fetch(url);
-            content = await res.text();
+            content = await (await fetch(url)).text();
         } catch {
-            const proxy = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-            content = await (await fetch(proxy)).text();
+            content = await (await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`)).text();
         }
 
         const tokens = estimateTokens(content);
         const name = url.split('/').pop() || 'content.txt';
-        loadedDocuments.push({ id: Date.now(), name, content, size: content.length, tokens, type: getFileType(name) });
-        addLog('success', `✅ ${name} (~${tokens} tokens)`);
+        loadedDocuments.push({ id: Date.now(), name, content, size: content.length, tokens, type: getFileIcon(name) });
+        addLog('success', `✅ ${name}`);
         renderLoadedDocs();
         updateTokenInfo();
         document.getElementById('urlInput').value = '';
-    } catch (err) {
-        addLog('error', `❌ Fetch failed`);
+    } catch {
+        addLog('error', '❌ Fetch failed');
         showToast('Fetch failed', 'error');
     }
 
@@ -802,10 +924,9 @@ async function fetchFromUrl() {
     btn.innerHTML = '🔗 Fetch';
 }
 
-function getFileType(name) {
+function getFileIcon(name) {
     const ext = name.split('.').pop().toLowerCase();
-    const types = { js: '📜', py: '🐍', html: '🌐', css: '🎨', json: '📋', md: '📝', txt: '📄' };
-    return types[ext] || '📄';
+    return { js: '📜', py: '🐍', html: '🌐', css: '🎨', json: '📋', md: '📝' }[ext] || '📄';
 }
 
 function formatBytes(b) { return b < 1024 ? b + 'B' : (b/1024).toFixed(1) + 'KB'; }
@@ -826,8 +947,8 @@ function renderLoadedDocs() {
                     <div class="loaded-doc-meta">${formatBytes(d.size)} • ~${d.tokens} tokens</div>
                 </div>
             </div>
-            <button class="doc-action-btn preview" onclick="previewDoc('${d.id}')">👁️</button>
-            <button class="doc-action-btn remove" onclick="removeDoc('${d.id}')">✕</button>
+            <button class="doc-action-btn preview" onclick="previewDoc(${d.id})">👁️</button>
+            <button class="doc-action-btn remove" onclick="removeDoc(${d.id})">✕</button>
         </div>
     `).join('');
     document.getElementById('docContextIndicator').classList.remove('hidden');
@@ -840,7 +961,7 @@ function updateTokenInfo() {
 }
 
 function previewDoc(id) {
-    const doc = loadedDocuments.find(d => d.id == id);
+    const doc = loadedDocuments.find(d => d.id === id);
     if (!doc) return;
     document.getElementById('previewTitle').textContent = doc.name;
     document.getElementById('previewBody').textContent = doc.content.substring(0, 50000);
@@ -854,7 +975,7 @@ function closePreview(e) {
 }
 
 function removeDoc(id) {
-    loadedDocuments = loadedDocuments.filter(d => d.id != id);
+    loadedDocuments = loadedDocuments.filter(d => d.id !== id);
     renderLoadedDocs();
     updateTokenInfo();
 }
@@ -865,182 +986,270 @@ function clearAllDocuments() {
     updateTokenInfo();
 }
 
+// ===== CONVERSATION RENDERING =====
+function renderConversation() {
+    const container = document.getElementById('conversationContainer');
+    
+    if (conversationHistory.length === 0) {
+        container.className = 'conversation-container empty';
+        container.innerHTML = '💭 Start a conversation...';
+        document.getElementById('messageCount').textContent = '0 messages';
+        return;
+    }
+
+    container.className = 'conversation-container';
+    container.innerHTML = conversationHistory.map((msg, index) => {
+        const time = new Date(msg.time).toLocaleTimeString();
+        
+        if (msg.role === 'user') {
+            return `
+                <div class="chat-message user">
+                    <div class="message-header">
+                        <span class="message-role user">You</span>
+                        <span>${time}</span>
+                    </div>
+                    <div class="message-content">${escapeHtml(msg.content)}</div>
+                </div>
+            `;
+        } else {
+            const statusBadge = msg.status ? 
+                `<span class="message-status ${msg.status}">${msg.status === 'primary' ? '1️⃣ Primary' : '🔄 Fallback'}</span>` : '';
+            
+            return `
+                <div class="chat-message assistant ${msg.error ? 'error' : ''}">
+                    <div class="message-header">
+                        <span class="message-role assistant">AI</span>
+                        ${msg.model ? `<span class="message-model">${msg.model}</span>` : ''}
+                        ${statusBadge}
+                        <span>${time}</span>
+                    </div>
+                    <div class="message-content">${escapeHtml(msg.content)}</div>
+                </div>
+            `;
+        }
+    }).join('');
+
+    document.getElementById('messageCount').textContent = `${conversationHistory.length} messages`;
+    
+    // Scroll to bottom
+    container.scrollTop = container.scrollHeight;
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+function addTypingIndicator() {
+    const container = document.getElementById('conversationContainer');
+    const typing = document.createElement('div');
+    typing.className = 'chat-message assistant';
+    typing.id = 'typingIndicator';
+    typing.innerHTML = `
+        <div class="message-header">
+            <span class="message-role assistant">AI</span>
+            <span>typing...</span>
+        </div>
+        <div class="typing-indicator">
+            <span></span><span></span><span></span>
+        </div>
+    `;
+    container.appendChild(typing);
+    container.scrollTop = container.scrollHeight;
+}
+
+function removeTypingIndicator() {
+    const typing = document.getElementById('typingIndicator');
+    if (typing) typing.remove();
+}
+
+// ===== BUILD PROMPT WITH HISTORY =====
 function buildPrompt(userText) {
-    if (!loadedDocuments.length) return userText;
-    let parts = ['📄 ATTACHED DOCUMENTS:\n'];
-    loadedDocuments.forEach((d, i) => {
-        parts.push(`\n--- ${d.name} ---\n\`\`\`\n${d.content}\n\`\`\`\n`);
-    });
-    parts.push('\n📝 USER REQUEST:\n' + userText);
+    let parts = [];
+    
+    // Add documents if any
+    if (loadedDocuments.length > 0) {
+        parts.push('📄 ATTACHED DOCUMENTS:\n');
+        loadedDocuments.forEach(d => {
+            parts.push(`\n--- ${d.name} ---\n\`\`\`\n${d.content}\n\`\`\`\n`);
+        });
+        parts.push('\n---\n');
+    }
+    
+    // Add conversation history (last 10 messages for context)
+    const recentHistory = conversationHistory.slice(-10);
+    if (recentHistory.length > 0) {
+        parts.push('CONVERSATION HISTORY:\n');
+        recentHistory.forEach(msg => {
+            parts.push(`${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}\n`);
+        });
+        parts.push('\n---\n');
+    }
+    
+    parts.push('USER: ' + userText);
+    
     return parts.join('');
 }
 
-// ===== MODELS =====
-function renderModels() {
-    document.getElementById('modelGrid').innerHTML = MODELS.map(m => `
-        <div class="model-card ${selectedModel?.id === m.id ? 'selected' : ''}" onclick='selectModel(${JSON.stringify(m).replace(/'/g, "\\'")})'>
-            <div class="model-badges">
-                <span class="badge badge-${m.provider}">${m.provider}</span>
-                ${m.isBest ? '<span class="badge badge-best">⭐</span>' : ''}
-            </div>
-            <div class="model-name">${m.icon} ${m.name}</div>
-            <div class="model-desc">${m.desc}</div>
-        </div>
-    `).join('');
-}
-
-function selectModel(m) {
-    if (typeof m === 'string') m = MODELS.find(x => x.id === m);
-    selectedModel = m;
-    renderModels();
-    addLog('info', `Selected: ${m.name}`);
-}
-
-// ===== AI REQUESTS =====
-async function askWithFallback() {
-    if (!selectedModel || isProcessing) return;
+// ===== SEND MESSAGE =====
+async function sendMessage() {
+    const model = getSelectedModel();
+    if (!model || isProcessing) return;
+    
     const userText = document.getElementById('userQuestion').value.trim();
-    if (!userText) { showToast('Enter a prompt', 'error'); return; }
+    if (!userText) { showToast('Enter a message', 'error'); return; }
 
+    // Add user message to history
+    conversationHistory.push({
+        role: 'user',
+        content: userText,
+        time: new Date()
+    });
+    renderConversation();
+    
+    // Clear input
+    document.getElementById('userQuestion').value = '';
+    
     const prompt = buildPrompt(userText);
     const tokens = estimateTokens(prompt);
-    if (tokens > selectedModel.context * 0.95) {
+    
+    if (tokens > model.context * 0.95) {
         showToast(`Too large! (~${tokens} tokens)`, 'error');
         return;
     }
 
-    lastQuestion = userText;
     isProcessing = true;
-    const output = document.getElementById('output');
     const btn = document.getElementById('sendBtn');
     const start = Date.now();
 
     btn.disabled = true;
     btn.innerHTML = '<div class="spinner"></div>';
-    output.className = 'thinking';
+    addTypingIndicator();
 
-    const chain = [selectedModel.id, ...selectedModel.fallbacks];
+    const chain = [model.id, ...model.fallbacks];
     let success = null, response = null, attempt = 0;
 
-    addLog('info', `Starting (~${tokens} tokens)`);
+    addLog('info', `Sending (~${tokens} tokens)`);
 
     for (let i = 0; i < chain.length; i++) {
         const id = chain[i];
         attempt = i + 1;
-        output.textContent = `🔄 Attempt ${attempt}/${chain.length}\n\nModel: ${id}`;
-        addLog('info', `Try ${attempt}: ${id}`);
+        addLog('info', `Try ${attempt}: ${id.split('/').pop()}`);
 
         try {
             response = await puter.ai.chat(prompt, { model: id });
             success = id;
-            addLog('success', `✅ ${id}`);
+            addLog('success', `✅ ${id.split('/').pop()}`);
             break;
         } catch (err) {
-            addLog('error', `❌ ${id}`);
+            addLog('error', `❌ ${id.split('/').pop()}`);
         }
     }
 
+    removeTypingIndicator();
     const elapsed = ((Date.now() - start) / 1000).toFixed(2);
 
     if (success && response) {
         const answer = extractResponse(response);
-        const isPrimary = success === selectedModel.id;
-        output.className = isPrimary ? 'success' : 'success fallback-used';
-        output.innerHTML = `<div class="output-badge ${isPrimary ? 'primary' : 'fallback'}">${isPrimary ? '1️⃣ Primary' : '🔄 Fallback'}</div>${answer}`;
+        const isPrimary = success === model.id;
+        
+        // Add assistant message to history
+        conversationHistory.push({
+            role: 'assistant',
+            content: answer,
+            model: success.split('/').pop(),
+            time: new Date(),
+            status: isPrimary ? 'primary' : 'fallback'
+        });
 
         document.getElementById('responseTime').textContent = elapsed + 's';
         document.getElementById('tokenCount').textContent = '~' + estimateTokens(answer);
         document.getElementById('usedModel').textContent = success.split('/').pop().substring(0, 12);
         document.getElementById('attemptNum').textContent = attempt;
         document.getElementById('modelSource').textContent = isPrimary ? 'Primary' : 'Fallback';
-        showToast(isPrimary ? '✅ Success!' : '🔄 Used fallback', 'success');
+        
+        showToast(isPrimary ? '✅ Sent!' : '🔄 Used fallback', 'success');
     } else {
-        output.className = 'error';
-        output.textContent = '❌ All models failed';
+        // Add error message
+        conversationHistory.push({
+            role: 'assistant',
+            content: '❌ All models failed. Please try again.',
+            time: new Date(),
+            error: true
+        });
         showToast('All failed', 'error');
     }
 
+    renderConversation();
     isProcessing = false;
     btn.disabled = false;
     btn.innerHTML = '🚀 Send';
 }
 
-async function streamWithFallback() {
-    if (!selectedModel || isProcessing) return;
+// ===== STREAM MESSAGE =====
+async function streamMessage() {
+    const model = getSelectedModel();
+    if (!model || isProcessing) return;
+    
     const userText = document.getElementById('userQuestion').value.trim();
     if (!userText) return;
+
+    // Add user message
+    conversationHistory.push({ role: 'user', content: userText, time: new Date() });
+    renderConversation();
+    document.getElementById('userQuestion').value = '';
 
     const prompt = buildPrompt(userText);
-    lastQuestion = userText;
     isProcessing = true;
-    const output = document.getElementById('output');
     const start = Date.now();
 
-    const chain = [selectedModel.id, ...selectedModel.fallbacks];
+    const chain = [model.id, ...model.fallbacks];
     let success = null;
+    let streamedContent = '';
+
+    // Add placeholder for streaming
+    const streamIndex = conversationHistory.length;
+    conversationHistory.push({
+        role: 'assistant',
+        content: '▌',
+        model: '',
+        time: new Date()
+    });
+    renderConversation();
 
     for (let i = 0; i < chain.length; i++) {
-        output.className = '';
-        output.textContent = `⚡ Stream attempt ${i + 1}...`;
-
         try {
             const stream = await puter.ai.chat(prompt, { model: chain[i], stream: true });
-            output.textContent = '';
+            streamedContent = '';
+            success = chain[i];
+            
             for await (const chunk of stream) {
                 const text = chunk?.text || chunk?.message?.content || '';
-                if (text) output.textContent += text;
+                if (text) {
+                    streamedContent += text;
+                    conversationHistory[streamIndex].content = streamedContent + '▌';
+                    conversationHistory[streamIndex].model = success.split('/').pop();
+                    renderConversation();
+                }
             }
-            success = chain[i];
             break;
-        } catch {}
+        } catch {
+            continue;
+        }
     }
 
-    output.className = success ? 'success' : 'error';
-    if (!success) output.textContent = '❌ Stream failed';
+    if (success) {
+        conversationHistory[streamIndex].content = streamedContent;
+        conversationHistory[streamIndex].status = success === model.id ? 'primary' : 'fallback';
+    } else {
+        conversationHistory[streamIndex].content = '❌ Stream failed';
+        conversationHistory[streamIndex].error = true;
+    }
+
+    renderConversation();
     document.getElementById('responseTime').textContent = ((Date.now() - start) / 1000).toFixed(2) + 's';
     isProcessing = false;
-}
-
-async function forcePrimary() {
-    if (!selectedModel) return;
-    const userText = document.getElementById('userQuestion').value.trim();
-    if (!userText) return;
-
-    const output = document.getElementById('output');
-    output.className = 'thinking';
-    output.textContent = '1️⃣ Primary only...';
-
-    try {
-        const start = Date.now();
-        const res = await puter.ai.chat(buildPrompt(userText), { model: selectedModel.id });
-        output.className = 'success';
-        output.innerHTML = `<div class="output-badge primary">1️⃣ Primary</div>${extractResponse(res)}`;
-        document.getElementById('responseTime').textContent = ((Date.now() - start) / 1000).toFixed(2) + 's';
-    } catch (err) {
-        output.className = 'error';
-        output.textContent = `❌ ${err.message}`;
-    }
-}
-
-async function forceFallback() {
-    if (!selectedModel?.fallbacks?.length) return;
-    const userText = document.getElementById('userQuestion').value.trim();
-    if (!userText) return;
-
-    const output = document.getElementById('output');
-    output.className = 'thinking';
-    output.textContent = '2️⃣ Fallback only...';
-
-    try {
-        const start = Date.now();
-        const res = await puter.ai.chat(buildPrompt(userText), { model: selectedModel.fallbacks[0] });
-        output.className = 'success fallback-used';
-        output.innerHTML = `<div class="output-badge fallback">2️⃣ Fallback</div>${extractResponse(res)}`;
-        document.getElementById('responseTime').textContent = ((Date.now() - start) / 1000).toFixed(2) + 's';
-    } catch (err) {
-        output.className = 'error';
-        output.textContent = `❌ ${err.message}`;
-    }
 }
 
 // ===== HELPERS =====
@@ -1063,45 +1272,66 @@ function addLog(type, msg) {
     while (log.children.length > 15) log.removeChild(log.lastChild);
 }
 
-function copyOutput() {
-    navigator.clipboard.writeText(document.getElementById('output').textContent);
-    showToast('📋 Copied!', 'success');
+function copyLastResponse() {
+    const lastAssistant = [...conversationHistory].reverse().find(m => m.role === 'assistant');
+    if (lastAssistant) {
+        navigator.clipboard.writeText(lastAssistant.content);
+        showToast('📋 Copied!', 'success');
+    }
 }
 
-function copyCode() {
-    const text = document.getElementById('output').textContent;
-    const code = text.match(/```[\s\S]*?```/g);
-    if (code) {
-        navigator.clipboard.writeText(code.map(c => c.replace(/```\w*\n?/g, '')).join('\n\n'));
+function copyAllCode() {
+    const allContent = conversationHistory
+        .filter(m => m.role === 'assistant')
+        .map(m => m.content)
+        .join('\n\n');
+    const codeBlocks = allContent.match(/```[\s\S]*?```/g);
+    if (codeBlocks) {
+        navigator.clipboard.writeText(codeBlocks.map(c => c.replace(/```\w*\n?/g, '')).join('\n\n'));
         showToast('📦 Code copied!', 'success');
     } else {
         showToast('No code found', 'warning');
     }
 }
 
-function downloadOutput() {
-    const blob = new Blob([document.getElementById('output').textContent], { type: 'text/plain' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `response-${Date.now()}.txt`;
-    a.click();
-}
-
-function regenerate() {
-    if (lastQuestion) {
-        document.getElementById('userQuestion').value = lastQuestion;
-        askWithFallback();
+function regenerateLastMessage() {
+    // Remove last assistant message and resend last user message
+    const lastUserIndex = [...conversationHistory].reverse().findIndex(m => m.role === 'user');
+    if (lastUserIndex >= 0) {
+        const lastUser = [...conversationHistory].reverse()[lastUserIndex];
+        // Remove messages after last user message
+        while (conversationHistory.length > 0 && conversationHistory[conversationHistory.length - 1].role === 'assistant') {
+            conversationHistory.pop();
+        }
+        document.getElementById('userQuestion').value = lastUser.content;
+        conversationHistory.pop(); // Remove the user message too, sendMessage will re-add it
+        renderConversation();
+        sendMessage();
     }
 }
 
-function clearAll() {
-    document.getElementById('userQuestion').value = '';
-    document.getElementById('output').textContent = '💭 Response will appear here...';
-    document.getElementById('output').className = 'empty';
-    clearAllDocuments();
+function clearConversation() {
+    conversationHistory = [];
+    renderConversation();
     ['responseTime', 'tokenCount', 'usedModel', 'attemptNum', 'modelSource'].forEach(id => {
         document.getElementById(id).textContent = '--';
     });
+    showToast('🗑️ Chat cleared', 'success');
+}
+
+function exportConversation() {
+    const text = conversationHistory.map(m => {
+        const time = new Date(m.time).toLocaleString();
+        const role = m.role === 'user' ? '👤 You' : '🤖 AI';
+        return `[${time}] ${role}:\n${m.content}\n`;
+    }).join('\n---\n\n');
+    
+    const blob = new Blob([text], { type: 'text/plain' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `conversation-${Date.now()}.txt`;
+    a.click();
+    showToast('💾 Exported!', 'success');
 }
 
 function showToast(msg, type = 'success') {
@@ -1113,8 +1343,9 @@ function showToast(msg, type = 'success') {
     setTimeout(() => toast.remove(), 3000);
 }
 
+// Keyboard shortcuts
 document.addEventListener('keydown', e => {
-    if (e.ctrlKey && e.key === 'Enter') { e.preventDefault(); askWithFallback(); }
+    if (e.ctrlKey && e.key === 'Enter') { e.preventDefault(); sendMessage(); }
     if (e.key === 'Escape') closePreview();
 });
 </script>
