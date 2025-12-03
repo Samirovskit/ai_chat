@@ -43,7 +43,6 @@
 
         .container { max-width: 1100px; margin: 0 auto; }
 
-        /* Header */
         header {
             text-align: center;
             padding: 30px 20px;
@@ -120,7 +119,6 @@
             50% { opacity: 0.5; transform: scale(1.3); }
         }
 
-        /* Cards */
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -140,7 +138,6 @@
             justify-content: space-between;
         }
 
-        /* Category Tabs */
         .category-tabs {
             display: flex;
             gap: 8px;
@@ -163,7 +160,6 @@
         .category-tab:hover { border-color: var(--accent-blue); color: var(--text-primary); }
         .category-tab.active { background: var(--accent-blue); color: #000; border-color: var(--accent-blue); }
 
-        /* Search */
         .search-box {
             position: relative;
             margin-bottom: 15px;
@@ -182,7 +178,7 @@
         .search-box input:focus { outline: none; border-color: var(--accent-blue); }
         .search-box::before { content: "🔍"; position: absolute; left: 18px; top: 50%; transform: translateY(-50%); }
 
-        /* Model Grid */
+        /* ===== FIX: SCROLLABLE MODEL GRID ===== */
         .model-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -229,7 +225,6 @@
             font-size: 14px;
         }
 
-        /* Badges */
         .model-badges {
             display: flex;
             flex-wrap: wrap;
@@ -261,17 +256,8 @@
         .badge-search { background: var(--accent-orange); color: #000; }
         .badge-fallback { background: linear-gradient(135deg, #ff9500, #ff6b00); color: white; }
 
-        .model-name {
-            font-weight: 700;
-            font-size: 15px;
-            margin-bottom: 5px;
-        }
-
-        .model-desc {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
+        .model-name { font-weight: 700; font-size: 15px; margin-bottom: 5px; }
+        .model-desc { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
 
         .model-ids {
             font-size: 10px;
@@ -285,7 +271,6 @@
         .model-ids .primary { color: var(--accent-blue); }
         .model-ids .fallback { color: var(--accent-orange); }
 
-        /* Selected Display */
         .selected-display {
             background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-card));
             border: 2px solid var(--border);
@@ -344,12 +329,8 @@
         .chain-item.failed { border: 2px solid var(--error); opacity: 0.6; text-decoration: line-through; }
         .chain-item.pending { border: 2px solid var(--border); opacity: 0.5; }
 
-        .chain-arrow {
-            color: var(--text-secondary);
-            font-size: 18px;
-        }
+        .chain-arrow { color: var(--text-secondary); font-size: 18px; }
 
-        /* ========== DOCUMENT UPLOAD SECTION ========== */
         .upload-section {
             background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-card));
             border: 2px dashed var(--border);
@@ -359,14 +340,8 @@
             transition: all 0.3s ease;
         }
 
-        .upload-section:hover {
-            border-color: var(--accent-purple);
-        }
-
-        .upload-section.drag-over {
-            border-color: var(--accent-blue);
-            background: rgba(0, 212, 255, 0.1);
-        }
+        .upload-section:hover { border-color: var(--accent-purple); }
+        .upload-section.drag-over { border-color: var(--accent-blue); background: rgba(0, 212, 255, 0.1); }
 
         .upload-header {
             display: flex;
@@ -409,32 +384,12 @@
             transition: all 0.3s ease;
         }
 
-        .upload-method:hover {
-            border-color: var(--accent-blue);
-        }
+        .upload-method:hover { border-color: var(--accent-blue); }
+        .upload-method-icon { font-size: 40px; margin-bottom: 10px; }
+        .upload-method-title { font-weight: 600; margin-bottom: 8px; }
+        .upload-method-desc { font-size: 12px; color: var(--text-secondary); margin-bottom: 12px; }
 
-        .upload-method-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        .upload-method-title {
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .upload-method-desc {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-        }
-
-        /* File Input Styling */
-        .file-input-wrapper {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
+        .file-input-wrapper { position: relative; display: inline-block; width: 100%; }
 
         .file-input-wrapper input[type="file"] {
             position: absolute;
@@ -466,11 +421,7 @@
             box-shadow: 0 5px 20px rgba(168, 85, 247, 0.4);
         }
 
-        /* URL Input */
-        .url-input-group {
-            display: flex;
-            gap: 10px;
-        }
+        .url-input-group { display: flex; gap: 10px; }
 
         .url-input {
             flex: 1;
@@ -482,10 +433,7 @@
             font-size: 14px;
         }
 
-        .url-input:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-        }
+        .url-input:focus { outline: none; border-color: var(--accent-blue); }
 
         .url-fetch-btn {
             padding: 12px 20px;
@@ -499,19 +447,10 @@
             white-space: nowrap;
         }
 
-        .url-fetch-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-        }
+        .url-fetch-btn:hover:not(:disabled) { transform: translateY(-2px); }
+        .url-fetch-btn:disabled { opacity: 0.6; cursor: not-allowed; }
 
-        .url-fetch-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        /* Loaded Document Display */
-        .loaded-docs {
-            margin-top: 15px;
-        }
+        .loaded-docs { margin-top: 15px; }
 
         .loaded-doc-item {
             display: flex;
@@ -532,14 +471,8 @@
             min-width: 0;
         }
 
-        .loaded-doc-icon {
-            font-size: 24px;
-            flex-shrink: 0;
-        }
-
-        .loaded-doc-details {
-            min-width: 0;
-        }
+        .loaded-doc-icon { font-size: 24px; flex-shrink: 0; }
+        .loaded-doc-details { min-width: 0; }
 
         .loaded-doc-name {
             font-weight: 600;
@@ -557,11 +490,7 @@
             flex-wrap: wrap;
         }
 
-        .loaded-doc-actions {
-            display: flex;
-            gap: 8px;
-            flex-shrink: 0;
-        }
+        .loaded-doc-actions { display: flex; gap: 8px; flex-shrink: 0; }
 
         .doc-action-btn {
             padding: 6px 12px;
@@ -572,23 +501,10 @@
             transition: all 0.2s ease;
         }
 
-        .doc-action-btn.preview {
-            background: var(--accent-blue);
-            color: #000;
-        }
+        .doc-action-btn.preview { background: var(--accent-blue); color: #000; }
+        .doc-action-btn.remove { background: transparent; border: 1px solid var(--error); color: var(--error); }
+        .doc-action-btn.remove:hover { background: var(--error); color: white; }
 
-        .doc-action-btn.remove {
-            background: transparent;
-            border: 1px solid var(--error);
-            color: var(--error);
-        }
-
-        .doc-action-btn.remove:hover {
-            background: var(--error);
-            color: white;
-        }
-
-        /* Token Limits Info */
         .token-limits-card {
             background: var(--bg-tertiary);
             border-radius: 12px;
@@ -618,19 +534,9 @@
             text-align: center;
         }
 
-        .token-limit-model {
-            font-size: 11px;
-            color: var(--text-secondary);
-            margin-bottom: 4px;
-        }
+        .token-limit-model { font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; }
+        .token-limit-value { font-size: 14px; font-weight: 700; color: var(--accent-green); }
 
-        .token-limit-value {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--accent-green);
-        }
-
-        /* Document Preview Modal */
         .doc-preview-modal {
             position: fixed;
             top: 0;
@@ -683,7 +589,6 @@
             cursor: pointer;
         }
 
-        /* Textarea */
         textarea {
             width: 100%;
             min-height: 140px;
@@ -699,7 +604,6 @@
 
         textarea:focus { outline: none; border-color: var(--accent-blue); }
 
-        /* Document context indicator */
         .doc-context-indicator {
             display: flex;
             align-items: center;
@@ -712,9 +616,7 @@
             font-size: 13px;
         }
 
-        .doc-context-indicator .icon {
-            font-size: 20px;
-        }
+        .doc-context-indicator .icon { font-size: 20px; }
 
         .doc-context-clear {
             margin-left: auto;
@@ -727,7 +629,6 @@
             cursor: pointer;
         }
 
-        /* Buttons */
         .btn-group {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -774,7 +675,6 @@
         .btn-danger { background: transparent; border: 2px solid var(--error); color: var(--error); }
         .btn-danger:hover { background: var(--error); color: white; }
 
-        /* Output */
         #output {
             background: var(--bg-tertiary);
             border: 2px solid var(--border);
@@ -824,7 +724,6 @@
 
         .output-actions button { flex: 1; min-width: 90px; padding: 10px 14px; font-size: 13px; }
 
-        /* Stats */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
@@ -844,7 +743,6 @@
         .stat-value { font-size: 16px; font-weight: 700; color: var(--accent-blue); margin-top: 4px; }
         .stat-value.fallback { color: var(--accent-orange); }
 
-        /* Log */
         .fallback-log {
             background: var(--bg-tertiary);
             border-radius: 10px;
@@ -870,7 +768,6 @@
         .log-entry.info { color: var(--accent-blue); }
         .log-entry.warning { color: var(--warning); }
 
-        /* Spinner */
         .spinner {
             width: 18px; height: 18px;
             border: 3px solid transparent;
@@ -881,7 +778,6 @@
 
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* Toast */
         .toast {
             position: fixed;
             bottom: 25px;
@@ -906,7 +802,6 @@
             to { transform: translateX(0); opacity: 1; }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             header h1 { font-size: 1.6rem; }
             .model-grid { grid-template-columns: 1fr; }
@@ -927,104 +822,61 @@
 <body>
 
 <div class="container">
-    <!-- Header -->
     <header>
         <h1>🧠 AI Pro Coder</h1>
         <p class="subtitle">Auto-Fallback + Document Upload</p>
-        <div class="fallback-badge">
-            🔄 Auto-Fallback + 📄 Document Analysis
-        </div>
+        <div class="fallback-badge">🔄 Auto-Fallback + 📄 Document Analysis</div>
         <div id="status" class="status-loading">
             <div class="pulse"></div>
             <span>Initializing...</span>
         </div>
     </header>
 
-    <!-- Document Upload Section -->
     <div class="upload-section" id="uploadSection">
         <div class="upload-header">
-            <div class="upload-title">
-                📄 Document Upload
-            </div>
-            <div class="token-info" id="tokenInfo">
-                📊 Context: 0 tokens used
-            </div>
+            <div class="upload-title">📄 Document Upload</div>
+            <div class="token-info" id="tokenInfo">📊 Context: 0 tokens used</div>
         </div>
 
         <div class="upload-methods">
-            <!-- File Upload -->
             <div class="upload-method">
                 <div class="upload-method-icon">📁</div>
                 <div class="upload-method-title">Upload from Device</div>
-                <div class="upload-method-desc">
-                    .txt, .md, .json, .csv, .js, .py, .html, .css, .xml, .log
-                </div>
+                <div class="upload-method-desc">.txt, .md, .json, .csv, .js, .py, .html, .css, .xml, .log</div>
                 <div class="file-input-wrapper">
                     <input type="file" id="fileInput" 
                            accept=".txt,.md,.json,.csv,.js,.ts,.py,.html,.css,.xml,.log,.yaml,.yml,.toml,.ini,.cfg,.env,.sh,.bat,.sql,.java,.c,.cpp,.h,.go,.rs,.rb,.php,.swift,.kt"
-                           multiple
-                           onchange="handleFileUpload(event)">
-                    <div class="file-input-btn">
-                        📤 Choose Files
-                    </div>
+                           multiple onchange="handleFileUpload(event)">
+                    <div class="file-input-btn">📤 Choose Files</div>
                 </div>
             </div>
 
-            <!-- URL Fetch -->
             <div class="upload-method">
                 <div class="upload-method-icon">🌐</div>
                 <div class="upload-method-title">Fetch from URL</div>
-                <div class="upload-method-desc">
-                    Paste a URL to fetch text content (raw files, APIs, etc.)
-                </div>
+                <div class="upload-method-desc">Paste a URL to fetch text content</div>
                 <div class="url-input-group">
-                    <input type="url" class="url-input" id="urlInput" 
-                           placeholder="https://example.com/file.txt">
-                    <button class="url-fetch-btn" id="fetchBtn" onclick="fetchFromUrl()">
-                        🔗 Fetch
-                    </button>
+                    <input type="url" class="url-input" id="urlInput" placeholder="https://example.com/file.txt">
+                    <button class="url-fetch-btn" id="fetchBtn" onclick="fetchFromUrl()">🔗 Fetch</button>
                 </div>
             </div>
         </div>
 
-        <!-- Loaded Documents -->
         <div class="loaded-docs" id="loadedDocs"></div>
 
-        <!-- Token Limits Reference -->
         <div class="token-limits-card">
-            <div class="token-limits-title">
-                📊 Token Limits by Model
-            </div>
+            <div class="token-limits-title">📊 Token Limits by Model</div>
             <div class="token-limits-grid">
-                <div class="token-limit-item">
-                    <div class="token-limit-model">Claude 4.5</div>
-                    <div class="token-limit-value">200K</div>
-                </div>
-                <div class="token-limit-item">
-                    <div class="token-limit-model">GPT-4o</div>
-                    <div class="token-limit-value">128K</div>
-                </div>
-                <div class="token-limit-item">
-                    <div class="token-limit-model">Gemini 2.5 Pro</div>
-                    <div class="token-limit-value">1M</div>
-                </div>
-                <div class="token-limit-item">
-                    <div class="token-limit-model">DeepSeek</div>
-                    <div class="token-limit-value">64K</div>
-                </div>
-                <div class="token-limit-item">
-                    <div class="token-limit-model">Mistral Large</div>
-                    <div class="token-limit-value">128K</div>
-                </div>
-                <div class="token-limit-item">
-                    <div class="token-limit-model">Llama 4</div>
-                    <div class="token-limit-value">128K</div>
-                </div>
+                <div class="token-limit-item"><div class="token-limit-model">Claude 4.5</div><div class="token-limit-value">200K</div></div>
+                <div class="token-limit-item"><div class="token-limit-model">GPT-4o</div><div class="token-limit-value">128K</div></div>
+                <div class="token-limit-item"><div class="token-limit-model">Gemini 2.5 Pro</div><div class="token-limit-value">1M</div></div>
+                <div class="token-limit-item"><div class="token-limit-model">DeepSeek</div><div class="token-limit-value">64K</div></div>
+                <div class="token-limit-item"><div class="token-limit-model">Mistral Large</div><div class="token-limit-value">128K</div></div>
+                <div class="token-limit-item"><div class="token-limit-model">Llama 4</div><div class="token-limit-value">128K</div></div>
             </div>
         </div>
     </div>
 
-    <!-- Category Tabs -->
     <div class="card">
         <div class="category-tabs">
             <button class="category-tab active" onclick="filterCategory('all')">🌟 All</button>
@@ -1041,7 +893,6 @@
         <div class="model-grid" id="modelGrid"></div>
     </div>
 
-    <!-- Selected Model Display -->
     <div class="selected-display">
         <div class="selected-header">
             <div class="selected-name">
@@ -1051,33 +902,20 @@
             <div class="selected-status status-primary" id="selectedStatus">Ready</div>
         </div>
         
-        <div class="card-title" style="margin-bottom: 10px; margin-top: 10px;">
-            🔄 Fallback Chain:
-        </div>
+        <div class="card-title" style="margin-bottom: 10px; margin-top: 10px;">🔄 Fallback Chain:</div>
         
         <div class="model-chain" id="modelChain">
-            <div class="chain-item pending">
-                <span>1️⃣</span>
-                <span id="chain1">Primary</span>
-            </div>
+            <div class="chain-item pending"><span>1️⃣</span><span id="chain1">Primary</span></div>
             <span class="chain-arrow">→</span>
-            <div class="chain-item pending">
-                <span>2️⃣</span>
-                <span id="chain2">Fallback 1</span>
-            </div>
+            <div class="chain-item pending"><span>2️⃣</span><span id="chain2">Fallback 1</span></div>
             <span class="chain-arrow">→</span>
-            <div class="chain-item pending">
-                <span>3️⃣</span>
-                <span id="chain3">Fallback 2</span>
-            </div>
+            <div class="chain-item pending"><span>3️⃣</span><span id="chain3">Fallback 2</span></div>
         </div>
     </div>
 
-    <!-- Input -->
     <div class="card">
         <div class="card-title">💬 Your Prompt</div>
         
-        <!-- Document Context Indicator -->
         <div class="doc-context-indicator hidden" id="docContextIndicator">
             <span class="icon">📎</span>
             <span id="docContextText">0 documents attached (0 tokens)</span>
@@ -1088,42 +926,21 @@
 
 📄 You can upload documents above to analyze, review code, or ask questions about files.
 
-💡 The system will automatically include document content in your prompt."
-        ></textarea>
+💡 The system will automatically include document content in your prompt."></textarea>
         
         <div class="btn-group">
-            <button class="btn-primary" id="sendBtn" onclick="askWithFallback()">
-                🚀 Send (Auto-Fallback)
-            </button>
-            <button class="btn-success" onclick="streamWithFallback()">
-                ⚡ Stream
-            </button>
-            <button class="btn-warning" onclick="testAllFallbacks()">
-                🧪 Test Chain
-            </button>
-            <button class="btn-secondary" onclick="forcePrimary()">
-                1️⃣ Primary
-            </button>
-            <button class="btn-secondary" onclick="forceFallback()">
-                2️⃣ Fallback
-            </button>
-            <button class="btn-danger" onclick="clearAll()">
-                🗑️ Clear
-            </button>
+            <button class="btn-primary" id="sendBtn" onclick="askWithFallback()">🚀 Send (Auto-Fallback)</button>
+            <button class="btn-success" onclick="streamWithFallback()">⚡ Stream</button>
+            <button class="btn-warning" onclick="testAllFallbacks()">🧪 Test Chain</button>
+            <button class="btn-secondary" onclick="forcePrimary()">1️⃣ Primary</button>
+            <button class="btn-secondary" onclick="forceFallback()">2️⃣ Fallback</button>
+            <button class="btn-danger" onclick="clearAll()">🗑️ Clear</button>
         </div>
     </div>
 
-    <!-- Output -->
     <div class="card">
-        <div class="card-title">
-            📝 Response
-            <span id="usedModelBadge" class="hidden"></span>
-        </div>
-        <div id="output" class="empty">
-            💭 AI response will appear here...
-            <br><br>
-            📄 Upload documents above to analyze them
-        </div>
+        <div class="card-title">📝 Response <span id="usedModelBadge" class="hidden"></span></div>
+        <div id="output" class="empty">💭 AI response will appear here...<br><br>📄 Upload documents above to analyze them</div>
         
         <div class="output-actions">
             <button class="btn-secondary" onclick="copyOutput()">📋 Copy</button>
@@ -1133,30 +950,12 @@
         </div>
 
         <div class="stats-grid">
-            <div class="stat-box">
-                <div class="stat-label">⏱️ Time</div>
-                <div class="stat-value" id="responseTime">--</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-label">📊 Tokens</div>
-                <div class="stat-value" id="tokenCount">--</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-label">🎯 Model</div>
-                <div class="stat-value" id="usedModel" style="font-size: 11px;">--</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-label">🔄 Attempt</div>
-                <div class="stat-value" id="attemptNum">--</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-label">📍 Source</div>
-                <div class="stat-value" id="modelSource" style="font-size: 11px;">--</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-label">✅ Status</div>
-                <div class="stat-value" id="finalStatus">--</div>
-            </div>
+            <div class="stat-box"><div class="stat-label">⏱️ Time</div><div class="stat-value" id="responseTime">--</div></div>
+            <div class="stat-box"><div class="stat-label">📊 Tokens</div><div class="stat-value" id="tokenCount">--</div></div>
+            <div class="stat-box"><div class="stat-label">🎯 Model</div><div class="stat-value" id="usedModel" style="font-size: 11px;">--</div></div>
+            <div class="stat-box"><div class="stat-label">🔄 Attempt</div><div class="stat-value" id="attemptNum">--</div></div>
+            <div class="stat-box"><div class="stat-label">📍 Source</div><div class="stat-value" id="modelSource" style="font-size: 11px;">--</div></div>
+            <div class="stat-box"><div class="stat-label">✅ Status</div><div class="stat-value" id="finalStatus">--</div></div>
         </div>
 
         <div class="fallback-log" id="fallbackLog">
@@ -1165,7 +964,6 @@
     </div>
 </div>
 
-<!-- Document Preview Modal -->
 <div class="doc-preview-modal hidden" id="docPreviewModal" onclick="closePreview(event)">
     <div class="doc-preview-content" onclick="event.stopPropagation()">
         <div class="doc-preview-header">
@@ -1177,7 +975,6 @@
 </div>
 
 <script>
-// ===== MODEL DATABASE =====
 const MODELS_WITH_FALLBACKS = [
     {
         id: 'claude-sonnet-4-5',
@@ -1311,14 +1108,12 @@ const MODELS_WITH_FALLBACKS = [
     }
 ];
 
-// ===== STATE =====
 let selectedModel = null;
 let currentCategory = 'all';
 let isProcessing = false;
 let lastQuestion = '';
-let loadedDocuments = []; // Array of {name, content, size, tokens, type}
+let loadedDocuments = [];
 
-// ===== INITIALIZATION =====
 function initApp() {
     if (typeof puter !== 'undefined') {
         updateStatus('ready', `✅ Ready - ${MODELS_WITH_FALLBACKS.length} models`);
@@ -1336,30 +1131,14 @@ function updateStatus(type, message) {
     status.innerHTML = `<div class="pulse"></div><span>${message}</span>`;
 }
 
-// ===== DOCUMENT HANDLING =====
 function setupDragDrop() {
     const uploadSection = document.getElementById('uploadSection');
-    
-    uploadSection.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        uploadSection.classList.add('drag-over');
-    });
-    
-    uploadSection.addEventListener('dragleave', () => {
-        uploadSection.classList.remove('drag-over');
-    });
-    
-    uploadSection.addEventListener('drop', (e) => {
-        e.preventDefault();
-        uploadSection.classList.remove('drag-over');
-        handleFileUpload({ target: { files: e.dataTransfer.files } });
-    });
+    uploadSection.addEventListener('dragover', (e) => { e.preventDefault(); uploadSection.classList.add('drag-over'); });
+    uploadSection.addEventListener('dragleave', () => { uploadSection.classList.remove('drag-over'); });
+    uploadSection.addEventListener('drop', (e) => { e.preventDefault(); uploadSection.classList.remove('drag-over'); handleFileUpload({ target: { files: e.dataTransfer.files } }); });
 }
 
-function estimateTokens(text) {
-    // Rough estimate: ~4 characters per token
-    return Math.ceil(text.length / 4);
-}
+function estimateTokens(text) { return Math.ceil(text.length / 4); }
 
 async function handleFileUpload(event) {
     const files = event.target.files;
@@ -1368,32 +1147,18 @@ async function handleFileUpload(event) {
     for (const file of files) {
         try {
             addLog('info', `📄 Loading: ${file.name}`);
-            
             const content = await readFileContent(file);
             const tokens = estimateTokens(content);
-            
-            const doc = {
-                id: Date.now() + Math.random(),
-                name: file.name,
-                content: content,
-                size: file.size,
-                tokens: tokens,
-                type: getFileType(file.name),
-                source: 'file'
-            };
-            
-            loadedDocuments.push(doc);
+            loadedDocuments.push({ id: Date.now() + Math.random(), name: file.name, content, size: file.size, tokens, type: getFileType(file.name), source: 'file' });
             addLog('success', `✅ Loaded: ${file.name} (~${tokens} tokens)`);
-            
         } catch (err) {
             addLog('error', `❌ Failed to load ${file.name}: ${err.message}`);
             showToast(`Failed to load ${file.name}`, 'error');
         }
     }
-    
     renderLoadedDocs();
     updateTokenInfo();
-    event.target.value = ''; // Reset input
+    event.target.value = '';
 }
 
 function readFileContent(file) {
@@ -1408,59 +1173,34 @@ function readFileContent(file) {
 async function fetchFromUrl() {
     const urlInput = document.getElementById('urlInput');
     const url = urlInput.value.trim();
-    
-    if (!url) {
-        showToast('Please enter a URL', 'error');
-        return;
-    }
+    if (!url) { showToast('Please enter a URL', 'error'); return; }
 
     const fetchBtn = document.getElementById('fetchBtn');
     fetchBtn.disabled = true;
     fetchBtn.innerHTML = '<div class="spinner"></div>';
-
     addLog('info', `🌐 Fetching: ${url}`);
 
     try {
-        // Try direct fetch first (works for CORS-enabled URLs)
         let content;
-        
         try {
             const response = await fetch(url);
             if (!response.ok) throw new Error(`HTTP ${response.status}`);
             content = await response.text();
         } catch (corsError) {
-            // Try using a CORS proxy
             addLog('warning', '⚠️ CORS blocked, trying proxy...');
-            
-            const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-            const proxyResponse = await fetch(proxyUrl);
-            
+            const proxyResponse = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`);
             if (!proxyResponse.ok) throw new Error('Proxy failed');
             content = await proxyResponse.text();
         }
 
         const tokens = estimateTokens(content);
         const fileName = url.split('/').pop() || 'fetched-content.txt';
-        
-        const doc = {
-            id: Date.now() + Math.random(),
-            name: fileName,
-            content: content,
-            size: content.length,
-            tokens: tokens,
-            type: getFileType(fileName),
-            source: 'url',
-            url: url
-        };
-        
-        loadedDocuments.push(doc);
+        loadedDocuments.push({ id: Date.now() + Math.random(), name: fileName, content, size: content.length, tokens, type: getFileType(fileName), source: 'url', url });
         addLog('success', `✅ Fetched: ${fileName} (~${tokens} tokens)`);
         showToast(`Loaded from URL (~${tokens} tokens)`, 'success');
-        
         renderLoadedDocs();
         updateTokenInfo();
         urlInput.value = '';
-        
     } catch (err) {
         addLog('error', `❌ Fetch failed: ${err.message}`);
         showToast(`Failed to fetch URL: ${err.message}`, 'error');
@@ -1472,32 +1212,7 @@ async function fetchFromUrl() {
 
 function getFileType(filename) {
     const ext = filename.split('.').pop().toLowerCase();
-    const types = {
-        'js': '📜 JavaScript',
-        'ts': '📘 TypeScript',
-        'py': '🐍 Python',
-        'html': '🌐 HTML',
-        'css': '🎨 CSS',
-        'json': '📋 JSON',
-        'md': '📝 Markdown',
-        'txt': '📄 Text',
-        'csv': '📊 CSV',
-        'xml': '📰 XML',
-        'sql': '🗃️ SQL',
-        'java': '☕ Java',
-        'c': '⚙️ C',
-        'cpp': '⚙️ C++',
-        'go': '🔷 Go',
-        'rs': '🦀 Rust',
-        'rb': '💎 Ruby',
-        'php': '🐘 PHP',
-        'swift': '🍎 Swift',
-        'kt': '🟣 Kotlin',
-        'yaml': '⚙️ YAML',
-        'yml': '⚙️ YAML',
-        'sh': '🖥️ Shell',
-        'log': '📋 Log'
-    };
+    const types = { 'js': '📜 JavaScript', 'ts': '📘 TypeScript', 'py': '🐍 Python', 'html': '🌐 HTML', 'css': '🎨 CSS', 'json': '📋 JSON', 'md': '📝 Markdown', 'txt': '📄 Text', 'csv': '📊 CSV', 'xml': '📰 XML', 'sql': '🗃️ SQL', 'java': '☕ Java', 'c': '⚙️ C', 'cpp': '⚙️ C++', 'go': '🔷 Go', 'rs': '🦀 Rust', 'rb': '💎 Ruby', 'php': '🐘 PHP', 'swift': '🍎 Swift', 'kt': '🟣 Kotlin', 'yaml': '⚙️ YAML', 'yml': '⚙️ YAML', 'sh': '🖥️ Shell', 'log': '📋 Log' };
     return types[ext] || '📄 File';
 }
 
@@ -1509,12 +1224,7 @@ function formatBytes(bytes) {
 
 function renderLoadedDocs() {
     const container = document.getElementById('loadedDocs');
-    
-    if (loadedDocuments.length === 0) {
-        container.innerHTML = '';
-        document.getElementById('docContextIndicator').classList.add('hidden');
-        return;
-    }
+    if (loadedDocuments.length === 0) { container.innerHTML = ''; document.getElementById('docContextIndicator').classList.add('hidden'); return; }
 
     container.innerHTML = loadedDocuments.map(doc => `
         <div class="loaded-doc-item">
@@ -1522,11 +1232,7 @@ function renderLoadedDocs() {
                 <span class="loaded-doc-icon">${doc.type.split(' ')[0]}</span>
                 <div class="loaded-doc-details">
                     <div class="loaded-doc-name">${doc.name}</div>
-                    <div class="loaded-doc-meta">
-                        <span>📦 ${formatBytes(doc.size)}</span>
-                        <span>📊 ~${doc.tokens.toLocaleString()} tokens</span>
-                        <span>${doc.source === 'url' ? '🌐 URL' : '📁 File'}</span>
-                    </div>
+                    <div class="loaded-doc-meta"><span>📦 ${formatBytes(doc.size)}</span><span>📊 ~${doc.tokens.toLocaleString()} tokens</span><span>${doc.source === 'url' ? '🌐 URL' : '📁 File'}</span></div>
                 </div>
             </div>
             <div class="loaded-doc-actions">
@@ -1535,90 +1241,48 @@ function renderLoadedDocs() {
             </div>
         </div>
     `).join('');
-
     document.getElementById('docContextIndicator').classList.remove('hidden');
 }
 
 function updateTokenInfo() {
     const totalTokens = loadedDocuments.reduce((sum, doc) => sum + doc.tokens, 0);
-    const docCount = loadedDocuments.length;
-    
     document.getElementById('tokenInfo').innerHTML = `📊 Context: ${totalTokens.toLocaleString()} tokens`;
-    document.getElementById('docContextText').textContent = 
-        `${docCount} document${docCount !== 1 ? 's' : ''} attached (~${totalTokens.toLocaleString()} tokens)`;
-    
-    // Warn if approaching limits
-    if (selectedModel && totalTokens > selectedModel.contextSize * 0.8) {
-        showToast(`⚠️ Approaching ${selectedModel.name}'s context limit!`, 'warning');
-    }
+    document.getElementById('docContextText').textContent = `${loadedDocuments.length} document${loadedDocuments.length !== 1 ? 's' : ''} attached (~${totalTokens.toLocaleString()} tokens)`;
+    if (selectedModel && totalTokens > selectedModel.contextSize * 0.8) showToast(`⚠️ Approaching ${selectedModel.name}'s context limit!`, 'warning');
 }
 
 function previewDoc(docId) {
     const doc = loadedDocuments.find(d => d.id == docId);
     if (!doc) return;
-    
     document.getElementById('previewTitle').textContent = `${doc.type} - ${doc.name}`;
-    document.getElementById('previewBody').textContent = doc.content.substring(0, 50000) + 
-        (doc.content.length > 50000 ? '\n\n... (truncated for preview)' : '');
+    document.getElementById('previewBody').textContent = doc.content.substring(0, 50000) + (doc.content.length > 50000 ? '\n\n... (truncated for preview)' : '');
     document.getElementById('docPreviewModal').classList.remove('hidden');
 }
 
-function closePreview(event) {
-    if (!event || event.target.id === 'docPreviewModal') {
-        document.getElementById('docPreviewModal').classList.add('hidden');
-    }
-}
-
-function removeDoc(docId) {
-    loadedDocuments = loadedDocuments.filter(d => d.id != docId);
-    renderLoadedDocs();
-    updateTokenInfo();
-    addLog('info', '🗑️ Document removed');
-}
-
-function clearAllDocuments() {
-    loadedDocuments = [];
-    renderLoadedDocs();
-    updateTokenInfo();
-    addLog('info', '🗑️ All documents cleared');
-    showToast('All documents cleared', 'success');
-}
+function closePreview(event) { if (!event || event.target.id === 'docPreviewModal') document.getElementById('docPreviewModal').classList.add('hidden'); }
+function removeDoc(docId) { loadedDocuments = loadedDocuments.filter(d => d.id != docId); renderLoadedDocs(); updateTokenInfo(); addLog('info', '🗑️ Document removed'); }
+function clearAllDocuments() { loadedDocuments = []; renderLoadedDocs(); updateTokenInfo(); addLog('info', '🗑️ All documents cleared'); showToast('All documents cleared', 'success'); }
 
 function buildPromptWithDocs(userPrompt) {
-    if (loadedDocuments.length === 0) {
-        return userPrompt;
-    }
-
+    if (loadedDocuments.length === 0) return userPrompt;
     let contextParts = ['📄 **ATTACHED DOCUMENTS:**\n'];
-    
-    loadedDocuments.forEach((doc, index) => {
-        contextParts.push(`\n--- Document ${index + 1}: ${doc.name} ---`);
-        contextParts.push('```' + doc.name.split('.').pop());
-        contextParts.push(doc.content);
-        contextParts.push('```\n');
-    });
-
+    loadedDocuments.forEach((doc, index) => { contextParts.push(`\n--- Document ${index + 1}: ${doc.name} ---`); contextParts.push('```' + doc.name.split('.').pop()); contextParts.push(doc.content); contextParts.push('```\n'); });
     contextParts.push('\n📝 **USER REQUEST:**');
     contextParts.push(userPrompt);
-
     return contextParts.join('\n');
 }
 
-// ===== MODEL RENDERING =====
 function renderModels() {
     const grid = document.getElementById('modelGrid');
     const search = document.getElementById('modelSearch').value.toLowerCase();
-    
     let models = MODELS_WITH_FALLBACKS.filter(m => {
         if (currentCategory !== 'all' && !m.categories.includes(currentCategory)) return false;
-        if (search && !m.name.toLowerCase().includes(search) && 
-            !m.provider.toLowerCase().includes(search)) return false;
+        if (search && !m.name.toLowerCase().includes(search) && !m.provider.toLowerCase().includes(search)) return false;
         return true;
     });
 
     grid.innerHTML = models.map(m => `
-        <div class="model-card ${selectedModel?.id === m.id ? 'selected' : ''}" 
-             onclick='selectModel(${JSON.stringify(m).replace(/'/g, "\\'")})'>
+        <div class="model-card ${selectedModel?.id === m.id ? 'selected' : ''}" onclick='selectModel(${JSON.stringify(m).replace(/'/g, "\\'")})'>
             <div class="model-badges">
                 <span class="badge badge-${m.provider}">${m.provider.toUpperCase()}</span>
                 ${m.isNew ? '<span class="badge badge-new">NEW</span>' : ''}
@@ -1629,9 +1293,7 @@ function renderModels() {
             </div>
             <div class="model-name">${m.icon} ${m.name}</div>
             <div class="model-desc">${m.desc}</div>
-            <div class="model-ids">
-                <div><span class="primary">Context: ${(m.contextSize/1000)}K tokens</span></div>
-            </div>
+            <div class="model-ids"><div><span class="primary">Context: ${(m.contextSize/1000)}K tokens</span></div></div>
         </div>
     `).join('');
 }
@@ -1644,109 +1306,79 @@ function filterCategory(category) {
 }
 
 function selectModel(model) {
-    if (typeof model === 'string') {
-        model = MODELS_WITH_FALLBACKS.find(m => m.id === model);
-    }
+    if (typeof model === 'string') model = MODELS_WITH_FALLBACKS.find(m => m.id === model);
     selectedModel = model;
-    
     document.getElementById('selectedIcon').textContent = model.icon;
     document.getElementById('selectedName').textContent = model.name;
     document.getElementById('selectedStatus').textContent = 'Ready';
     document.getElementById('selectedStatus').className = 'selected-status status-primary';
-    
     document.getElementById('chain1').textContent = model.id.substring(0, 25) + (model.id.length > 25 ? '...' : '');
     document.getElementById('chain2').textContent = model.fallbacks[0]?.substring(0, 25) + '...' || 'None';
     document.getElementById('chain3').textContent = model.fallbacks[1]?.substring(0, 25) + '...' || 'None';
-    
-    document.querySelectorAll('.chain-item').forEach(item => {
-        item.classList.remove('active', 'failed');
-        item.classList.add('pending');
-    });
-    
+    document.querySelectorAll('.chain-item').forEach(item => { item.classList.remove('active', 'failed'); item.classList.add('pending'); });
     renderModels();
-    updateTokenInfo(); // Check token limits
+    updateTokenInfo();
     addLog('info', `Selected: ${model.name} (${(model.contextSize/1000)}K context)`);
 }
 
-// ===== AI REQUESTS =====
+// ===== FIX: PROPER ERROR MESSAGE EXTRACTION =====
+function getErrorMessage(err) {
+    if (typeof err === 'string') return err;
+    if (err?.message) return err.message;
+    if (err?.error?.message) return err.error.message;
+    if (err?.error) return typeof err.error === 'string' ? err.error : JSON.stringify(err.error);
+    try { return JSON.stringify(err); } catch { return 'Unknown error'; }
+}
+
 async function askWithFallback() {
     if (!selectedModel || isProcessing) return;
-    
     const userText = document.getElementById('userQuestion').value.trim();
-    if (!userText) {
-        showToast('Please enter a prompt!', 'error');
-        return;
-    }
+    if (!userText) { showToast('Please enter a prompt!', 'error'); return; }
 
-    // Build prompt with documents
     const fullPrompt = buildPromptWithDocs(userText);
     const promptTokens = estimateTokens(fullPrompt);
-    
-    // Check token limit
-    if (promptTokens > selectedModel.contextSize * 0.9) {
-        showToast(`⚠️ Prompt too large (~${promptTokens} tokens) for ${selectedModel.name}!`, 'error');
-        return;
-    }
+    if (promptTokens > selectedModel.contextSize * 0.9) { showToast(`⚠️ Prompt too large (~${promptTokens} tokens) for ${selectedModel.name}!`, 'error'); return; }
 
     lastQuestion = userText;
     isProcessing = true;
     const output = document.getElementById('output');
     const sendBtn = document.getElementById('sendBtn');
     const startTime = Date.now();
-    
+
     sendBtn.disabled = true;
     sendBtn.innerHTML = '<div class="spinner"></div> Trying...';
     output.className = 'thinking';
-    
+
     const modelChain = [selectedModel.id, ...selectedModel.fallbacks];
     let successModel = null;
     let successResponse = null;
     let attemptCount = 0;
 
     const chainItems = document.querySelectorAll('.chain-item');
-    chainItems.forEach(item => {
-        item.classList.remove('active', 'failed');
-        item.classList.add('pending');
-    });
+    chainItems.forEach(item => { item.classList.remove('active', 'failed'); item.classList.add('pending'); });
 
     addLog('info', `Starting with ${loadedDocuments.length} docs (~${promptTokens} tokens)`);
 
     for (let i = 0; i < modelChain.length; i++) {
         const modelId = modelChain[i];
         attemptCount = i + 1;
-        
         output.textContent = `🔄 Attempt ${attemptCount}/${modelChain.length}\n\nModel: ${modelId}\n📄 Docs: ${loadedDocuments.length}\n📊 Tokens: ~${promptTokens}`;
-        
-        if (chainItems[i]) {
-            chainItems[i].classList.remove('pending');
-            chainItems[i].classList.add('active');
-        }
-        
+        if (chainItems[i]) { chainItems[i].classList.remove('pending'); chainItems[i].classList.add('active'); }
         addLog('info', `Attempt ${attemptCount}: ${modelId}`);
-        
+
         try {
             const response = await puter.ai.chat(fullPrompt, { model: modelId });
             successModel = modelId;
             successResponse = response;
-            
             addLog('success', `✅ Success: ${modelId}`);
-            
-            if (chainItems[i]) {
-                chainItems[i].style.borderColor = 'var(--success)';
-            }
+            if (chainItems[i]) chainItems[i].style.borderColor = 'var(--success)';
             break;
-            
         } catch (err) {
-            addLog('error', `❌ Failed: ${modelId}`);
-            
-            if (chainItems[i]) {
-                chainItems[i].classList.remove('active');
-                chainItems[i].classList.add('failed');
-            }
-            
-            if (i < modelChain.length - 1) {
-                addLog('warning', `⏳ Trying: ${modelChain[i + 1]}`);
-            }
+            // FIX: Use getErrorMessage to properly extract error
+            const errMsg = getErrorMessage(err);
+            addLog('error', `❌ Failed: ${modelId} - ${errMsg}`);
+            if (chainItems[i]) { chainItems[i].classList.remove('active'); chainItems[i].classList.add('failed'); }
+            if (i < modelChain.length - 1) addLog('warning', `⏳ Trying: ${modelChain[i + 1]}`);
         }
     }
 
@@ -1755,22 +1387,17 @@ async function askWithFallback() {
     if (successModel && successResponse) {
         const answer = extractResponse(successResponse);
         const isPrimary = successModel === selectedModel.id;
-        
         output.className = isPrimary ? 'success' : 'success fallback-used';
         output.innerHTML = `<div class="output-badge ${isPrimary ? 'primary' : 'fallback'}">${isPrimary ? '1️⃣ Primary' : '🔄 Fallback'}</div>\n${answer}`;
-        
         document.getElementById('responseTime').textContent = elapsed + 's';
         document.getElementById('tokenCount').textContent = '~' + Math.ceil(answer.length / 4);
         document.getElementById('usedModel').textContent = successModel.split('/').pop().substring(0, 15);
         document.getElementById('attemptNum').textContent = attemptCount;
         document.getElementById('modelSource').textContent = isPrimary ? 'Primary' : 'Fallback';
         document.getElementById('finalStatus').textContent = '✅';
-        
         document.getElementById('selectedStatus').textContent = isPrimary ? 'Primary ✓' : 'Fallback ✓';
         document.getElementById('selectedStatus').className = `selected-status ${isPrimary ? 'status-primary' : 'status-fallback'}`;
-        
         showToast(isPrimary ? '✅ Success!' : `🔄 Used fallback`, 'success');
-        
     } else {
         output.className = 'error';
         output.textContent = `❌ All ${modelChain.length} models failed!`;
@@ -1785,49 +1412,37 @@ async function askWithFallback() {
 
 async function streamWithFallback() {
     if (!selectedModel || isProcessing) return;
-    
     const userText = document.getElementById('userQuestion').value.trim();
-    if (!userText) {
-        showToast('Please enter a prompt!', 'error');
-        return;
-    }
+    if (!userText) { showToast('Please enter a prompt!', 'error'); return; }
 
     const fullPrompt = buildPromptWithDocs(userText);
     lastQuestion = userText;
     isProcessing = true;
     const output = document.getElementById('output');
     const startTime = Date.now();
-    
     const modelChain = [selectedModel.id, ...selectedModel.fallbacks];
     let successModel = null;
 
     for (let i = 0; i < modelChain.length; i++) {
         const modelId = modelChain[i];
-        
         output.className = '';
         output.textContent = `⚡ Streaming attempt ${i + 1}/${modelChain.length}\n\n`;
-        
+
         try {
             const response = await puter.ai.chat(fullPrompt, { model: modelId, stream: true });
             output.textContent = '';
-            
             for await (const chunk of response) {
                 const text = chunk?.text || chunk?.message?.content?.[0]?.text || chunk?.message?.content || '';
-                if (typeof text === 'string') {
-                    output.textContent += text;
-                }
+                if (typeof text === 'string') output.textContent += text;
             }
-            
             successModel = modelId;
             break;
-            
         } catch (err) {
             if (i < modelChain.length - 1) continue;
         }
     }
 
     const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
-
     if (successModel) {
         const isPrimary = successModel === selectedModel.id;
         output.className = isPrimary ? 'success' : 'success fallback-used';
@@ -1838,7 +1453,6 @@ async function streamWithFallback() {
         output.className = 'error';
         output.textContent = '❌ All streaming attempts failed';
     }
-
     isProcessing = false;
 }
 
@@ -1846,24 +1460,21 @@ async function testAllFallbacks() {
     if (!selectedModel) return;
     const output = document.getElementById('output');
     const modelChain = [selectedModel.id, ...selectedModel.fallbacks];
-    
     output.className = 'thinking';
     output.textContent = `🧪 Testing ${modelChain.length} models...\n\n`;
 
     for (let i = 0; i < modelChain.length; i++) {
         const modelId = modelChain[i];
         output.textContent += `Testing: ${modelId}...\n`;
-        
         try {
             const start = Date.now();
             await puter.ai.chat('Say OK', { model: modelId });
-            const time = Date.now() - start;
-            output.textContent += `  ✅ Working (${time}ms)\n`;
+            output.textContent += `  ✅ Working (${Date.now() - start}ms)\n`;
         } catch (err) {
-            output.textContent += `  ❌ Failed\n`;
+            // FIX: Show actual error message
+            output.textContent += `  ❌ Failed: ${getErrorMessage(err)}\n`;
         }
     }
-    
     output.className = 'success';
 }
 
@@ -1881,13 +1492,13 @@ async function forcePrimary() {
         const start = Date.now();
         const response = await puter.ai.chat(fullPrompt, { model: selectedModel.id });
         const elapsed = ((Date.now() - start) / 1000).toFixed(2);
-        
         output.className = 'success';
         output.innerHTML = `<div class="output-badge primary">1️⃣ Primary</div>\n${extractResponse(response)}`;
         document.getElementById('responseTime').textContent = elapsed + 's';
     } catch (err) {
         output.className = 'error';
-        output.textContent = `❌ Primary failed: ${err.message}`;
+        // FIX: Show actual error message
+        output.textContent = `❌ Primary failed: ${getErrorMessage(err)}`;
     }
 }
 
@@ -1906,23 +1517,20 @@ async function forceFallback() {
         const start = Date.now();
         const response = await puter.ai.chat(fullPrompt, { model: fallbackId });
         const elapsed = ((Date.now() - start) / 1000).toFixed(2);
-        
         output.className = 'success fallback-used';
         output.innerHTML = `<div class="output-badge fallback">2️⃣ Fallback</div>\n${extractResponse(response)}`;
         document.getElementById('responseTime').textContent = elapsed + 's';
     } catch (err) {
         output.className = 'error';
-        output.textContent = `❌ Fallback failed: ${err.message}`;
+        // FIX: Show actual error message
+        output.textContent = `❌ Fallback failed: ${getErrorMessage(err)}`;
     }
 }
 
-// ===== HELPERS =====
 function extractResponse(response) {
     if (typeof response === 'string') return response;
     if (response?.message?.content) {
-        if (Array.isArray(response.message.content)) {
-            return response.message.content.map(c => c.text || c).join('');
-        }
+        if (Array.isArray(response.message.content)) return response.message.content.map(c => c.text || c).join('');
         return response.message.content;
     }
     if (response?.content) return response.content;
@@ -1934,29 +1542,20 @@ function addLog(type, message) {
     const logDiv = document.getElementById('fallbackLog');
     const time = new Date().toLocaleTimeString();
     const icons = { success: '✅', error: '❌', info: 'ℹ️', warning: '⚠️' };
-    
     const entry = document.createElement('div');
     entry.className = `log-entry ${type}`;
     entry.innerHTML = `<span>${icons[type]}</span><span style="opacity:0.6">${time}</span><span>${message}</span>`;
-    
     logDiv.insertBefore(entry, logDiv.firstChild);
     while (logDiv.children.length > 20) logDiv.removeChild(logDiv.lastChild);
 }
 
-function copyOutput() {
-    navigator.clipboard.writeText(document.getElementById('output').textContent);
-    showToast('📋 Copied!', 'success');
-}
+function copyOutput() { navigator.clipboard.writeText(document.getElementById('output').textContent); showToast('📋 Copied!', 'success'); }
 
 function copyCode() {
     const text = document.getElementById('output').textContent;
     const codeMatch = text.match(/```[\s\S]*?```/g);
-    if (codeMatch) {
-        navigator.clipboard.writeText(codeMatch.map(c => c.replace(/```\w*\n?/g, '')).join('\n\n'));
-        showToast('📦 Code copied!', 'success');
-    } else {
-        showToast('No code blocks found', 'warning');
-    }
+    if (codeMatch) { navigator.clipboard.writeText(codeMatch.map(c => c.replace(/```\w*\n?/g, '')).join('\n\n')); showToast('📦 Code copied!', 'success'); }
+    else showToast('No code blocks found', 'warning');
 }
 
 function downloadOutput() {
@@ -1967,21 +1566,14 @@ function downloadOutput() {
     a.click();
 }
 
-function regenerate() {
-    if (lastQuestion) {
-        document.getElementById('userQuestion').value = lastQuestion;
-        askWithFallback();
-    }
-}
+function regenerate() { if (lastQuestion) { document.getElementById('userQuestion').value = lastQuestion; askWithFallback(); } }
 
 function clearAll() {
     document.getElementById('userQuestion').value = '';
     document.getElementById('output').textContent = '💭 AI response will appear here...';
     document.getElementById('output').className = 'empty';
     clearAllDocuments();
-    ['responseTime', 'tokenCount', 'usedModel', 'attemptNum', 'modelSource', 'finalStatus'].forEach(id => {
-        document.getElementById(id).textContent = '--';
-    });
+    ['responseTime', 'tokenCount', 'usedModel', 'attemptNum', 'modelSource', 'finalStatus'].forEach(id => document.getElementById(id).textContent = '--');
     showToast('🗑️ Cleared!', 'success');
 }
 
@@ -1994,11 +1586,8 @@ function showToast(message, type = 'success') {
     setTimeout(() => toast.remove(), 3500);
 }
 
-function showError(msg) {
-    updateStatus('error', '❌ ' + msg);
-}
+function showError(msg) { updateStatus('error', '❌ ' + msg); }
 
-// Keyboard shortcuts
 document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && e.key === 'Enter') { e.preventDefault(); askWithFallback(); }
     if (e.key === 'Escape') closePreview();
