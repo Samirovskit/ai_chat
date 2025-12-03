@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🧠 AI Pro Coder - Document Upload</title>
-    
-    <script src="https://js.puter.com/v2/" onload="initApp()"></script>
-
+    <title>🧠 AI Pro Coder</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         :root {
             --bg-primary: #0a0a0f;
             --bg-secondary: #12121a;
@@ -27,7 +23,6 @@
             --error: #ff4757;
             --border: #2a2a3e;
         }
-
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
             background: var(--bg-primary);
@@ -36,9 +31,7 @@
             padding: 15px;
             line-height: 1.6;
         }
-
         .container { max-width: 1100px; margin: 0 auto; }
-
         header {
             text-align: center;
             padding: 20px;
@@ -47,7 +40,6 @@
             border: 1px solid var(--border);
             margin-bottom: 18px;
         }
-
         header h1 {
             font-size: 1.8rem;
             background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-green));
@@ -55,9 +47,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         .subtitle { color: var(--text-secondary); margin: 5px 0; font-size: 14px; }
-
         #status {
             display: inline-flex;
             align-items: center;
@@ -66,24 +56,19 @@
             border-radius: 20px;
             font-size: 12px;
             margin-top: 8px;
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--success);
         }
-
-        .status-loading { background: rgba(255, 170, 0, 0.2); color: var(--warning); }
-        .status-ready { background: rgba(0, 255, 136, 0.2); color: var(--success); }
-        .status-error { background: rgba(255, 71, 87, 0.2); color: var(--error); }
-
         .pulse {
             width: 8px; height: 8px;
             border-radius: 50%;
             background: currentColor;
             animation: pulse 1.5s infinite;
         }
-
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.5; transform: scale(1.3); }
         }
-
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -91,9 +76,8 @@
             padding: 16px;
             margin-bottom: 16px;
         }
-
         .card-title {
-            font-size: 12px;
+            font-size: 13px;
             color: var(--text-secondary);
             margin-bottom: 12px;
             text-transform: uppercase;
@@ -102,7 +86,7 @@
             align-items: center;
             justify-content: space-between;
         }
-
+        
         /* Upload Section */
         .upload-section {
             background: var(--bg-card);
@@ -110,14 +94,11 @@
             border-radius: 14px;
             padding: 16px;
             margin-bottom: 16px;
-            transition: all 0.3s ease;
         }
-
         .upload-section.drag-over {
             border-color: var(--accent-blue);
             background: rgba(0, 212, 255, 0.1);
         }
-
         .upload-header {
             display: flex;
             align-items: center;
@@ -126,9 +107,7 @@
             flex-wrap: wrap;
             gap: 8px;
         }
-
         .upload-title { font-size: 14px; font-weight: 600; }
-
         .token-info {
             background: var(--bg-tertiary);
             padding: 4px 12px;
@@ -136,13 +115,11 @@
             font-size: 11px;
             color: var(--accent-green);
         }
-
         .upload-methods {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 10px;
         }
-
         .upload-method {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
@@ -150,17 +127,14 @@
             padding: 14px;
             text-align: center;
         }
-
         .upload-method-icon { font-size: 28px; margin-bottom: 6px; }
         .upload-method-title { font-weight: 600; margin-bottom: 4px; font-size: 13px; }
         .upload-method-desc { font-size: 10px; color: var(--text-secondary); margin-bottom: 10px; }
-
         .file-input-wrapper {
             position: relative;
             display: inline-block;
             width: 100%;
         }
-
         .file-input-wrapper input[type="file"] {
             position: absolute;
             opacity: 0;
@@ -168,7 +142,6 @@
             height: 100%;
             cursor: pointer;
         }
-
         .file-input-btn {
             display: flex;
             align-items: center;
@@ -182,9 +155,7 @@
             font-size: 12px;
             cursor: pointer;
         }
-
         .url-input-group { display: flex; gap: 6px; }
-
         .url-input {
             flex: 1;
             padding: 10px;
@@ -194,9 +165,7 @@
             color: var(--text-primary);
             font-size: 12px;
         }
-
         .url-input:focus { outline: none; border-color: var(--accent-blue); }
-
         .url-fetch-btn {
             padding: 10px 14px;
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
@@ -207,13 +176,9 @@
             cursor: pointer;
             font-size: 12px;
         }
-
-        .url-fetch-btn:disabled { opacity: 0.5; }
-
         .loaded-doc-item {
             display: flex;
             align-items: center;
-            justify-content: space-between;
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: 8px;
@@ -221,79 +186,75 @@
             margin-top: 8px;
             gap: 8px;
         }
-
-        .loaded-doc-info { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
-        .loaded-doc-icon { font-size: 18px; }
-        .loaded-doc-name { font-weight: 600; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .loaded-doc-info { display: flex; align-items: center; gap: 8px; flex: 1; }
+        .loaded-doc-name { font-weight: 600; font-size: 12px; }
         .loaded-doc-meta { font-size: 10px; color: var(--text-secondary); }
+        .doc-btn { padding: 4px 8px; border-radius: 4px; font-size: 10px; cursor: pointer; border: none; }
+        .doc-btn-view { background: var(--accent-blue); color: #000; }
+        .doc-btn-remove { background: var(--error); color: white; }
 
-        .doc-action-btn {
-            padding: 4px 8px;
-            border: none;
-            border-radius: 4px;
-            font-size: 10px;
-            cursor: pointer;
-        }
-
-        .doc-action-btn.preview { background: var(--accent-blue); color: #000; }
-        .doc-action-btn.remove { background: transparent; border: 1px solid var(--error); color: var(--error); }
-        .doc-action-btn.remove:hover { background: var(--error); color: white; }
-
-        /* Model Grid - FIXED */
+        /* ========== MODEL GRID - FIXED ========== */
         .model-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 8px;
-            max-height: 250px;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+            max-height: 280px;
             overflow-y: auto;
-            padding: 4px;
+            padding: 5px;
         }
-
         .model-card {
             background: var(--bg-tertiary);
             border: 2px solid var(--border);
-            border-radius: 10px;
-            padding: 12px;
+            border-radius: 12px;
+            padding: 14px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
-
-        .model-card:hover { border-color: var(--accent-blue); transform: translateY(-1px); }
-        
+        .model-card:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
         .model-card.selected {
             border-color: var(--accent-green);
-            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.1));
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.15), rgba(0, 212, 255, 0.1));
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
         }
-
-        .model-badges { display: flex; flex-wrap: wrap; gap: 3px; margin-bottom: 6px; }
-
-        .badge {
-            font-size: 8px;
-            padding: 2px 5px;
-            border-radius: 6px;
+        .model-provider {
+            display: inline-block;
+            font-size: 9px;
+            padding: 3px 8px;
+            border-radius: 10px;
             font-weight: 600;
             text-transform: uppercase;
+            margin-bottom: 8px;
         }
-
-        .badge-anthropic { background: #a855f7; color: white; }
-        .badge-openai { background: #10a37f; color: white; }
-        .badge-google { background: #4285f4; color: white; }
-        .badge-mistral { background: #ff7000; color: white; }
-        .badge-deepseek { background: #0066ff; color: white; }
-        .badge-meta { background: #0668E1; color: white; }
-        .badge-qwen { background: #6366f1; color: white; }
-        .badge-perplexity { background: #20b2aa; color: white; }
-        .badge-xai { background: #555; color: white; }
-        .badge-best { background: #ffd700; color: #000; }
-
-        .model-name { font-weight: 600; font-size: 13px; margin-bottom: 2px; }
-        .model-desc { font-size: 10px; color: var(--text-secondary); }
+        .provider-anthropic { background: #a855f7; color: white; }
+        .provider-openai { background: #10a37f; color: white; }
+        .provider-google { background: #4285f4; color: white; }
+        .provider-mistral { background: #ff7000; color: white; }
+        .provider-deepseek { background: #0066ff; color: white; }
+        .provider-meta { background: #0668E1; color: white; }
+        .provider-qwen { background: #6366f1; color: white; }
+        .provider-xai { background: #555; color: white; }
+        .provider-perplexity { background: #20b2aa; color: white; }
+        .model-name { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+        .model-desc { font-size: 11px; color: var(--text-secondary); }
+        .model-best { 
+            display: inline-block;
+            background: #ffd700;
+            color: #000;
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 8px;
+            margin-left: 6px;
+            font-weight: 600;
+        }
 
         /* Textarea */
         textarea {
             width: 100%;
-            min-height: 80px;
-            padding: 12px;
+            min-height: 100px;
+            padding: 14px;
             background: var(--bg-tertiary);
             border: 2px solid var(--border);
             border-radius: 10px;
@@ -302,10 +263,9 @@
             font-family: inherit;
             resize: vertical;
         }
-
         textarea:focus { outline: none; border-color: var(--accent-blue); }
-
-        .doc-context-indicator {
+        
+        .doc-indicator {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -314,249 +274,194 @@
             border: 1px solid var(--accent-purple);
             border-radius: 8px;
             margin-bottom: 10px;
-            font-size: 11px;
+            font-size: 12px;
         }
-
-        .doc-context-clear {
+        .doc-indicator button {
             margin-left: auto;
             background: transparent;
             border: 1px solid var(--error);
             color: var(--error);
-            padding: 2px 6px;
+            padding: 3px 8px;
             border-radius: 4px;
             font-size: 10px;
             cursor: pointer;
         }
 
         /* Buttons */
-        .btn-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        .btn-row {
+            display: flex;
             gap: 8px;
-            margin-top: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
         }
-
-        button {
-            padding: 10px 12px;
+        .btn {
+            padding: 12px 20px;
             border: none;
-            border-radius: 8px;
-            font-size: 12px;
+            border-radius: 10px;
+            font-size: 13px;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
-            transition: all 0.2s ease;
+            gap: 6px;
+            flex: 1;
+            min-width: 100px;
         }
-
         .btn-primary { background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); color: white; }
-        .btn-primary:hover:not(:disabled) { transform: translateY(-2px); }
-        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
-        .btn-secondary { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border); }
-        .btn-secondary:hover { border-color: var(--accent-blue); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
         .btn-success { background: var(--accent-green); color: #000; }
         .btn-warning { background: var(--accent-orange); color: #000; }
-        .btn-danger { background: transparent; border: 1px solid var(--error); color: var(--error); }
+        .btn-secondary { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border); }
 
-        /* ========== CONVERSATION HISTORY ========== */
-        .conversation-container {
+        /* Conversation */
+        .chat-container {
             max-height: 500px;
             overflow-y: auto;
-            padding: 10px;
+            padding: 15px;
             background: var(--bg-tertiary);
-            border-radius: 10px;
-            border: 2px solid var(--border);
+            border-radius: 12px;
+            border: 1px solid var(--border);
         }
-
-        .conversation-container.empty {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 150px;
+        .chat-empty {
+            text-align: center;
             color: var(--text-secondary);
+            padding: 40px;
             font-style: italic;
         }
-
-        .chat-message {
-            margin-bottom: 16px;
+        .chat-msg {
+            margin-bottom: 20px;
             animation: fadeIn 0.3s ease;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .chat-message.user {
-            text-align: right;
-        }
-
-        .chat-message.assistant {
-            text-align: left;
-        }
-
-        .message-header {
+        .chat-msg-user { text-align: right; }
+        .chat-msg-ai { text-align: left; }
+        .chat-header {
+            font-size: 11px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
             display: flex;
             align-items: center;
             gap: 8px;
-            margin-bottom: 6px;
-            font-size: 11px;
-            color: var(--text-secondary);
         }
-
-        .chat-message.user .message-header {
-            justify-content: flex-end;
-        }
-
-        .message-role {
-            font-weight: 600;
+        .chat-msg-user .chat-header { justify-content: flex-end; }
+        .chat-role {
             padding: 2px 8px;
             border-radius: 10px;
             font-size: 10px;
+            font-weight: 600;
         }
-
-        .message-role.user {
-            background: var(--accent-purple);
-            color: white;
-        }
-
-        .message-role.assistant {
-            background: var(--accent-blue);
-            color: #000;
-        }
-
-        .message-model {
-            font-size: 10px;
-            color: var(--accent-green);
-        }
-
-        .message-content {
+        .chat-role-user { background: var(--accent-purple); color: white; }
+        .chat-role-ai { background: var(--accent-blue); color: #000; }
+        .chat-bubble {
             display: inline-block;
             max-width: 85%;
             padding: 12px 16px;
-            border-radius: 12px;
+            border-radius: 16px;
             font-size: 14px;
             line-height: 1.6;
             white-space: pre-wrap;
             word-wrap: break-word;
             text-align: left;
         }
-
-        .chat-message.user .message-content {
+        .chat-msg-user .chat-bubble {
             background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
             color: white;
             border-bottom-right-radius: 4px;
         }
-
-        .chat-message.assistant .message-content {
+        .chat-msg-ai .chat-bubble {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-bottom-left-radius: 4px;
         }
-
-        .chat-message.assistant.error .message-content {
+        .chat-msg-ai.error .chat-bubble {
             background: rgba(255, 71, 87, 0.1);
             border-color: var(--error);
             color: var(--error);
         }
-
-        .message-status {
+        .chat-status {
             display: inline-block;
             padding: 2px 8px;
             border-radius: 8px;
             font-size: 9px;
-            margin-left: 8px;
+            font-weight: 600;
         }
-
-        .message-status.primary { background: var(--accent-blue); color: #000; }
-        .message-status.fallback { background: var(--accent-orange); color: #000; }
-
-        .message-time {
-            font-size: 10px;
-            color: var(--text-secondary);
-            margin-top: 4px;
-        }
-
-        .typing-indicator {
-            display: flex;
+        .chat-status-primary { background: var(--accent-green); color: #000; }
+        .chat-status-fallback { background: var(--accent-orange); color: #000; }
+        .chat-model { font-size: 10px; color: var(--accent-blue); }
+        .typing {
+            display: inline-flex;
             gap: 4px;
             padding: 12px 16px;
             background: var(--bg-secondary);
-            border-radius: 12px;
-            display: inline-flex;
+            border-radius: 16px;
         }
-
-        .typing-indicator span {
-            width: 8px;
-            height: 8px;
+        .typing span {
+            width: 8px; height: 8px;
             background: var(--accent-blue);
             border-radius: 50%;
-            animation: typing 1.4s infinite;
+            animation: bounce 1.4s infinite;
+        }
+        .typing span:nth-child(2) { animation-delay: 0.2s; }
+        .typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes bounce {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-8px); }
         }
 
-        .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-        .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-
-        @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
-            30% { transform: translateY(-8px); opacity: 1; }
-        }
-
-        /* Output Actions */
-        .output-actions {
+        /* Actions & Stats */
+        .action-row {
             display: flex;
-            gap: 6px;
-            margin-top: 10px;
+            gap: 8px;
+            margin-top: 12px;
             flex-wrap: wrap;
         }
-
-        .output-actions button { flex: 1; min-width: 70px; padding: 8px 10px; font-size: 11px; }
-
-        /* Stats */
-        .stats-grid {
+        .action-row button {
+            flex: 1;
+            min-width: 80px;
+            padding: 10px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 12px;
+            cursor: pointer;
+        }
+        .action-row button:hover { border-color: var(--accent-blue); }
+        .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-            gap: 6px;
-            margin-top: 10px;
+            gap: 8px;
+            margin-top: 12px;
         }
-
-        .stat-box {
+        .stat {
             background: var(--bg-tertiary);
-            padding: 8px;
+            padding: 10px;
             border-radius: 8px;
             text-align: center;
         }
-
         .stat-label { font-size: 9px; color: var(--text-secondary); text-transform: uppercase; }
-        .stat-value { font-size: 13px; font-weight: 700; color: var(--accent-blue); margin-top: 2px; }
-        .stat-value.fallback { color: var(--accent-orange); }
-
-        /* Log */
-        .fallback-log {
+        .stat-value { font-size: 14px; font-weight: 700; color: var(--accent-blue); margin-top: 3px; }
+        
+        .log {
             background: var(--bg-tertiary);
             border-radius: 8px;
-            padding: 8px;
-            margin-top: 10px;
+            padding: 10px;
+            margin-top: 12px;
             font-size: 10px;
             font-family: monospace;
             max-height: 100px;
             overflow-y: auto;
         }
-
-        .log-entry {
-            padding: 2px 0;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-
+        .log-entry { padding: 3px 0; border-bottom: 1px solid var(--border); display: flex; gap: 6px; }
         .log-entry:last-child { border: none; }
-        .log-entry.success { color: var(--success); }
-        .log-entry.error { color: var(--error); }
-        .log-entry.info { color: var(--accent-blue); }
-        .log-entry.warning { color: var(--warning); }
+        .log-success { color: var(--success); }
+        .log-error { color: var(--error); }
+        .log-info { color: var(--accent-blue); }
 
         .spinner {
             width: 14px; height: 14px;
@@ -564,93 +469,78 @@
             border-top-color: currentColor;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
+            display: inline-block;
         }
-
         @keyframes spin { to { transform: rotate(360deg); } }
 
         .toast {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            padding: 10px 18px;
-            background: var(--bg-secondary);
-            border: 2px solid var(--border);
+            padding: 12px 20px;
+            background: var(--bg-card);
+            border: 2px solid var(--success);
             border-radius: 10px;
             z-index: 1000;
             animation: slideIn 0.3s ease;
-            font-size: 13px;
         }
-
-        .toast.success { border-color: var(--success); }
-        .toast.error { border-color: var(--error); }
-        .toast.warning { border-color: var(--warning); }
-
+        .toast-error { border-color: var(--error); }
         @keyframes slideIn {
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
 
-        /* Preview Modal */
-        .doc-preview-modal {
+        .modal {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0,0,0,0.85);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1000;
             padding: 20px;
         }
-
-        .doc-preview-content {
+        .modal-content {
             background: var(--bg-card);
             border-radius: 14px;
             width: 100%;
             max-width: 700px;
-            max-height: 75vh;
+            max-height: 80vh;
             display: flex;
             flex-direction: column;
         }
-
-        .doc-preview-header {
+        .modal-header {
             display: flex;
             justify-content: space-between;
-            padding: 12px 16px;
+            align-items: center;
+            padding: 14px 18px;
             border-bottom: 1px solid var(--border);
-            font-size: 14px;
         }
-
-        .doc-preview-body {
+        .modal-body {
             flex: 1;
             overflow: auto;
-            padding: 16px;
+            padding: 18px;
             font-family: monospace;
             font-size: 12px;
             white-space: pre-wrap;
         }
-
-        .doc-preview-close {
+        .modal-close {
             background: var(--error);
             color: white;
             border: none;
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: 6px;
             cursor: pointer;
-            font-size: 12px;
         }
-
         .hidden { display: none !important; }
 
         @media (max-width: 600px) {
-            header h1 { font-size: 1.4rem; }
-            .model-grid { grid-template-columns: 1fr; }
+            .model-grid { grid-template-columns: 1fr 1fr; }
             .url-input-group { flex-direction: column; }
         }
-
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-secondary); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent-blue); }
     </style>
 </head>
 <body>
@@ -658,380 +548,373 @@
 <div class="container">
     <header>
         <h1>🧠 AI Pro Coder</h1>
-        <p class="subtitle">Auto-Fallback + Document Upload + Chat History</p>
-        <div id="status" class="status-loading">
+        <p class="subtitle">Auto-Fallback + Documents + Chat History</p>
+        <div id="status">
             <div class="pulse"></div>
-            <span>Loading...</span>
+            <span id="statusText">Loading...</span>
         </div>
     </header>
 
-    <!-- Upload Section -->
-    <div class="upload-section" id="uploadSection">
+    <!-- Upload -->
+    <div class="upload-section" id="uploadArea">
         <div class="upload-header">
             <div class="upload-title">📄 Document Upload</div>
             <div class="token-info" id="tokenInfo">📊 0 tokens</div>
         </div>
-
         <div class="upload-methods">
             <div class="upload-method">
                 <div class="upload-method-icon">📁</div>
                 <div class="upload-method-title">Upload Files</div>
-                <div class="upload-method-desc">.txt, .md, .json, .js, .py, .html, .css, etc.</div>
+                <div class="upload-method-desc">.txt, .md, .json, .js, .py, .html, etc.</div>
                 <div class="file-input-wrapper">
-                    <input type="file" id="fileInput" multiple
-                           accept=".txt,.md,.json,.csv,.js,.ts,.py,.html,.css,.xml,.log,.yaml,.yml,.sql,.java,.c,.cpp,.go,.rs,.rb,.php"
-                           onchange="handleFileUpload(event)">
+                    <input type="file" id="fileInput" multiple accept=".txt,.md,.json,.js,.py,.html,.css,.xml,.csv,.log,.yaml,.sql">
                     <div class="file-input-btn">📤 Choose Files</div>
                 </div>
             </div>
-
             <div class="upload-method">
                 <div class="upload-method-icon">🌐</div>
                 <div class="upload-method-title">Fetch from URL</div>
                 <div class="upload-method-desc">Paste URL to fetch content</div>
                 <div class="url-input-group">
                     <input type="url" class="url-input" id="urlInput" placeholder="https://...">
-                    <button class="url-fetch-btn" id="fetchBtn" onclick="fetchFromUrl()">🔗 Fetch</button>
+                    <button class="url-fetch-btn" id="fetchBtn">🔗 Fetch</button>
                 </div>
             </div>
         </div>
-
-        <div id="loadedDocs"></div>
+        <div id="docList"></div>
     </div>
 
-    <!-- Model Selection -->
+    <!-- Models -->
     <div class="card">
         <div class="card-title">
             🤖 Select Model
-            <span id="selectedModelDisplay" style="color: var(--accent-green); font-size: 11px;"></span>
+            <span id="selectedModelName" style="color: var(--accent-green)"></span>
         </div>
-        <div class="model-grid" id="modelGrid"></div>
+        <div class="model-grid" id="modelGrid">
+            <!-- Models will be inserted here -->
+        </div>
     </div>
 
     <!-- Input -->
     <div class="card">
         <div class="card-title">💬 Your Message</div>
-        <div class="doc-context-indicator hidden" id="docContextIndicator">
+        <div class="doc-indicator hidden" id="docIndicator">
             <span>📎</span>
-            <span id="docContextText">0 docs attached</span>
-            <button class="doc-context-clear" onclick="clearAllDocuments()">Clear Docs</button>
+            <span id="docCount">0 documents</span>
+            <button id="clearDocsBtn">Clear</button>
         </div>
-        <textarea id="userQuestion" placeholder="Type your message... (Ctrl+Enter to send)"></textarea>
-        
-        <div class="btn-group">
-            <button class="btn-primary" id="sendBtn" onclick="sendMessage()">🚀 Send</button>
-            <button class="btn-success" onclick="streamMessage()">⚡ Stream</button>
-            <button class="btn-warning" onclick="clearConversation()">🗑️ Clear Chat</button>
-            <button class="btn-secondary" onclick="exportConversation()">💾 Export</button>
+        <textarea id="messageInput" placeholder="Type your message... (Ctrl+Enter to send)"></textarea>
+        <div class="btn-row">
+            <button class="btn btn-primary" id="sendBtn">🚀 Send</button>
+            <button class="btn btn-success" id="streamBtn">⚡ Stream</button>
+            <button class="btn btn-warning" id="clearChatBtn">🗑️ Clear</button>
+            <button class="btn btn-secondary" id="exportBtn">💾 Export</button>
         </div>
     </div>
 
-    <!-- Conversation History -->
+    <!-- Chat -->
     <div class="card">
         <div class="card-title">
             📝 Conversation
-            <span id="messageCount" style="font-size: 11px; color: var(--accent-blue);">0 messages</span>
+            <span id="msgCount" style="color: var(--accent-blue)">0 messages</span>
         </div>
-        <div class="conversation-container empty" id="conversationContainer">
-            💭 Start a conversation...
+        <div class="chat-container" id="chatContainer">
+            <div class="chat-empty">💭 Start a conversation...</div>
         </div>
-        
-        <div class="output-actions">
-            <button class="btn-secondary" onclick="copyLastResponse()">📋 Copy Last</button>
-            <button class="btn-secondary" onclick="copyAllCode()">📦 All Code</button>
-            <button class="btn-secondary" onclick="regenerateLastMessage()">🔄 Retry</button>
+        <div class="action-row">
+            <button id="copyLastBtn">📋 Copy Last</button>
+            <button id="copyCodeBtn">📦 All Code</button>
+            <button id="retryBtn">🔄 Retry</button>
         </div>
-
-        <div class="stats-grid">
-            <div class="stat-box">
-                <div class="stat-label">⏱️ Last Time</div>
-                <div class="stat-value" id="responseTime">--</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-label">📊 Tokens</div>
-                <div class="stat-value" id="tokenCount">--</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-label">🎯 Model</div>
-                <div class="stat-value" id="usedModel" style="font-size:10px">--</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-label">🔄 Attempts</div>
-                <div class="stat-value" id="attemptNum">--</div>
-            </div>
-            <div class="stat-box">
-                <div class="stat-label">📍 Source</div>
-                <div class="stat-value" id="modelSource" style="font-size:10px">--</div>
-            </div>
+        <div class="stats">
+            <div class="stat"><div class="stat-label">⏱️ Time</div><div class="stat-value" id="statTime">--</div></div>
+            <div class="stat"><div class="stat-label">📊 Tokens</div><div class="stat-value" id="statTokens">--</div></div>
+            <div class="stat"><div class="stat-label">🎯 Model</div><div class="stat-value" id="statModel" style="font-size:10px">--</div></div>
+            <div class="stat"><div class="stat-label">🔄 Try</div><div class="stat-value" id="statAttempt">--</div></div>
+            <div class="stat"><div class="stat-label">📍 Source</div><div class="stat-value" id="statSource" style="font-size:10px">--</div></div>
         </div>
-
-        <div class="fallback-log" id="fallbackLog">
-            <div class="log-entry info">🔄 Ready</div>
-        </div>
+        <div class="log" id="log"></div>
     </div>
 </div>
 
-<!-- Preview Modal -->
-<div class="doc-preview-modal hidden" id="docPreviewModal" onclick="closePreview(event)">
-    <div class="doc-preview-content" onclick="event.stopPropagation()">
-        <div class="doc-preview-header">
-            <span id="previewTitle">Preview</span>
-            <button class="doc-preview-close" onclick="closePreview()">✕ Close</button>
+<!-- Modal -->
+<div class="modal hidden" id="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <span id="modalTitle">Preview</span>
+            <button class="modal-close" id="modalClose">✕ Close</button>
         </div>
-        <div class="doc-preview-body" id="previewBody"></div>
+        <div class="modal-body" id="modalBody"></div>
     </div>
 </div>
 
+<script src="https://js.puter.com/v2/"></script>
 <script>
-// ===== MODELS DATABASE =====
+// ============ MODELS ============
 const MODELS = [
-    { id: 'claude-sonnet-4-5', name: 'Claude Sonnet 4.5', icon: '⚡', provider: 'anthropic', desc: '200K context', isBest: true, context: 200000, fallbacks: ['openrouter:anthropic/claude-sonnet-4.5', 'claude-sonnet-4'] },
-    { id: 'claude-opus-4', name: 'Claude Opus 4', icon: '🧠', provider: 'anthropic', desc: '200K context', isBest: true, context: 200000, fallbacks: ['openrouter:anthropic/claude-opus-4', 'claude-sonnet-4'] },
-    { id: 'gpt-4o', name: 'GPT-4o', icon: '🎯', provider: 'openai', desc: '128K context', context: 128000, fallbacks: ['openrouter:openai/gpt-4o', 'gpt-4o-mini'] },
-    { id: 'gpt-4o-mini', name: 'GPT-4o Mini', icon: '🚀', provider: 'openai', desc: '128K - Fast', context: 128000, fallbacks: ['openrouter:openai/gpt-4o-mini', 'gpt-4o'] },
-    { id: 'gemini-2.5-pro', name: 'Gemini 2.5 Pro', icon: '💎', provider: 'google', desc: '1M context!', isBest: true, context: 1000000, fallbacks: ['openrouter:google/gemini-2.5-pro', 'gemini-2.5-flash'] },
-    { id: 'gemini-2.5-flash', name: 'Gemini 2.5 Flash', icon: '⚡', provider: 'google', desc: '1M - Fast', context: 1000000, fallbacks: ['openrouter:google/gemini-2.5-flash', 'gemini-2.0-flash'] },
-    { id: 'deepseek-chat', name: 'DeepSeek Chat', icon: '🐋', provider: 'deepseek', desc: '64K context', context: 64000, fallbacks: ['openrouter:deepseek/deepseek-chat', 'openrouter:deepseek/deepseek-v3'] },
-    { id: 'mistral-large-latest', name: 'Mistral Large', icon: '🌟', provider: 'mistral', desc: '128K context', context: 128000, fallbacks: ['openrouter:mistralai/mistral-large', 'codestral-latest'] },
-    { id: 'codestral-latest', name: 'Codestral', icon: '💻', provider: 'mistral', desc: 'Code Expert', isBest: true, context: 32000, fallbacks: ['openrouter:mistralai/codestral-latest', 'mistral-large-latest'] },
-    { id: 'grok-3', name: 'Grok 3', icon: '🤖', provider: 'xai', desc: '128K context', context: 128000, fallbacks: ['openrouter:x-ai/grok-3', 'openrouter:x-ai/grok-3-mini'] },
-    { id: 'openrouter:meta-llama/llama-4-maverick', name: 'Llama 4', icon: '🦙', provider: 'meta', desc: '128K context', context: 128000, fallbacks: ['openrouter:meta-llama/llama-4-scout', 'openrouter:meta-llama/llama-3.3-70b'] },
-    { id: 'openrouter:qwen/qwen3-235b-a22b', name: 'Qwen3 Max', icon: '👑', provider: 'qwen', desc: '128K context', context: 128000, fallbacks: ['openrouter:qwen/qwen3-coder', 'openrouter:qwen/qwen-2.5-72b'] }
+    { id: 'claude-sonnet-4-5', name: 'Claude Sonnet 4.5', icon: '⚡', provider: 'anthropic', desc: '200K ctx', best: true, ctx: 200000, fallbacks: ['openrouter:anthropic/claude-sonnet-4.5', 'claude-sonnet-4'] },
+    { id: 'claude-opus-4', name: 'Claude Opus 4', icon: '🧠', provider: 'anthropic', desc: '200K ctx', best: true, ctx: 200000, fallbacks: ['openrouter:anthropic/claude-opus-4', 'claude-sonnet-4'] },
+    { id: 'gpt-4o', name: 'GPT-4o', icon: '🎯', provider: 'openai', desc: '128K ctx', ctx: 128000, fallbacks: ['openrouter:openai/gpt-4o', 'gpt-4o-mini'] },
+    { id: 'gpt-4o-mini', name: 'GPT-4o Mini', icon: '🚀', provider: 'openai', desc: 'Fast', ctx: 128000, fallbacks: ['openrouter:openai/gpt-4o-mini'] },
+    { id: 'gemini-2.5-pro', name: 'Gemini 2.5 Pro', icon: '💎', provider: 'google', desc: '1M ctx!', best: true, ctx: 1000000, fallbacks: ['openrouter:google/gemini-2.5-pro', 'gemini-2.5-flash'] },
+    { id: 'gemini-2.5-flash', name: 'Gemini Flash', icon: '⚡', provider: 'google', desc: '1M Fast', ctx: 1000000, fallbacks: ['openrouter:google/gemini-2.5-flash'] },
+    { id: 'deepseek-chat', name: 'DeepSeek', icon: '🐋', provider: 'deepseek', desc: '64K ctx', ctx: 64000, fallbacks: ['openrouter:deepseek/deepseek-chat'] },
+    { id: 'mistral-large-latest', name: 'Mistral Large', icon: '🌟', provider: 'mistral', desc: '128K ctx', ctx: 128000, fallbacks: ['openrouter:mistralai/mistral-large'] },
+    { id: 'codestral-latest', name: 'Codestral', icon: '💻', provider: 'mistral', desc: 'Code', best: true, ctx: 32000, fallbacks: ['openrouter:mistralai/codestral-latest'] },
+    { id: 'grok-3', name: 'Grok 3', icon: '🤖', provider: 'xai', desc: '128K ctx', ctx: 128000, fallbacks: ['openrouter:x-ai/grok-3'] },
+    { id: 'openrouter:meta-llama/llama-4-maverick', name: 'Llama 4', icon: '🦙', provider: 'meta', desc: '128K ctx', ctx: 128000, fallbacks: ['openrouter:meta-llama/llama-3.3-70b'] },
+    { id: 'openrouter:qwen/qwen3-235b-a22b', name: 'Qwen3', icon: '👑', provider: 'qwen', desc: '128K ctx', ctx: 128000, fallbacks: ['openrouter:qwen/qwen-2.5-72b'] }
 ];
 
-// ===== STATE =====
-let selectedModelIndex = 0;
-let isProcessing = false;
-let loadedDocuments = [];
-let conversationHistory = []; // {role: 'user'|'assistant', content: string, model?: string, time: Date, status?: 'primary'|'fallback'}
+// ============ STATE ============
+let selectedIdx = 0;
+let docs = [];
+let chat = [];
+let processing = false;
 
-// ===== INIT =====
-function initApp() {
-    if (typeof puter !== 'undefined') {
-        updateStatus('ready', '✅ Ready');
-        renderModels();
-        selectModelByIndex(0);
-        setupDragDrop();
-    } else {
-        updateStatus('error', '❌ Puter failed');
-    }
-}
+// ============ INIT ============
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, rendering models...');
+    renderModels();
+    setupEvents();
+    log('info', 'Ready - Select a model and start chatting');
+    document.getElementById('statusText').textContent = '✅ Ready';
+});
 
-function updateStatus(type, msg) {
-    const s = document.getElementById('status');
-    s.className = 'status-' + type;
-    s.innerHTML = `<div class="pulse"></div><span>${msg}</span>`;
-}
-
-// ===== MODELS - FIXED =====
+// ============ RENDER MODELS ============
 function renderModels() {
     const grid = document.getElementById('modelGrid');
-    grid.innerHTML = MODELS.map((m, index) => `
-        <div class="model-card ${index === selectedModelIndex ? 'selected' : ''}" 
-             onclick="selectModelByIndex(${index})"
-             data-index="${index}">
-            <div class="model-badges">
-                <span class="badge badge-${m.provider}">${m.provider}</span>
-                ${m.isBest ? '<span class="badge badge-best">⭐</span>' : ''}
+    let html = '';
+    
+    for (let i = 0; i < MODELS.length; i++) {
+        const m = MODELS[i];
+        const selected = i === selectedIdx ? 'selected' : '';
+        html += `
+            <div class="model-card ${selected}" data-idx="${i}">
+                <span class="model-provider provider-${m.provider}">${m.provider}</span>
+                ${m.best ? '<span class="model-best">⭐ BEST</span>' : ''}
+                <div class="model-name">${m.icon} ${m.name}</div>
+                <div class="model-desc">${m.desc}</div>
             </div>
-            <div class="model-name">${m.icon} ${m.name}</div>
-            <div class="model-desc">${m.desc}</div>
-        </div>
-    `).join('');
+        `;
+    }
+    
+    grid.innerHTML = html;
+    
+    // Add click events
+    grid.querySelectorAll('.model-card').forEach(card => {
+        card.addEventListener('click', function() {
+            selectedIdx = parseInt(this.dataset.idx);
+            renderModels();
+            document.getElementById('selectedModelName').textContent = '✓ ' + MODELS[selectedIdx].name;
+            log('info', 'Selected: ' + MODELS[selectedIdx].name);
+        });
+    });
+    
+    document.getElementById('selectedModelName').textContent = '✓ ' + MODELS[selectedIdx].name;
+    console.log('Models rendered:', MODELS.length);
 }
 
-function selectModelByIndex(index) {
-    selectedModelIndex = index;
-    const model = MODELS[index];
-    document.getElementById('selectedModelDisplay').textContent = `✓ ${model.name}`;
-    renderModels();
-    addLog('info', `Selected: ${model.name}`);
-}
-
-function getSelectedModel() {
-    return MODELS[selectedModelIndex];
-}
-
-// ===== DOCUMENT HANDLING =====
-function setupDragDrop() {
-    const el = document.getElementById('uploadSection');
-    el.addEventListener('dragover', e => { e.preventDefault(); el.classList.add('drag-over'); });
-    el.addEventListener('dragleave', () => el.classList.remove('drag-over'));
-    el.addEventListener('drop', e => {
+// ============ EVENTS ============
+function setupEvents() {
+    // File upload
+    document.getElementById('fileInput').addEventListener('change', handleFiles);
+    
+    // URL fetch
+    document.getElementById('fetchBtn').addEventListener('click', fetchUrl);
+    
+    // Clear docs
+    document.getElementById('clearDocsBtn').addEventListener('click', () => {
+        docs = [];
+        renderDocs();
+    });
+    
+    // Send
+    document.getElementById('sendBtn').addEventListener('click', sendMessage);
+    
+    // Stream
+    document.getElementById('streamBtn').addEventListener('click', streamMessage);
+    
+    // Clear chat
+    document.getElementById('clearChatBtn').addEventListener('click', () => {
+        chat = [];
+        renderChat();
+        log('info', 'Chat cleared');
+    });
+    
+    // Export
+    document.getElementById('exportBtn').addEventListener('click', exportChat);
+    
+    // Copy last
+    document.getElementById('copyLastBtn').addEventListener('click', copyLast);
+    
+    // Copy code
+    document.getElementById('copyCodeBtn').addEventListener('click', copyAllCode);
+    
+    // Retry
+    document.getElementById('retryBtn').addEventListener('click', retry);
+    
+    // Modal close
+    document.getElementById('modalClose').addEventListener('click', () => {
+        document.getElementById('modal').classList.add('hidden');
+    });
+    document.getElementById('modal').addEventListener('click', (e) => {
+        if (e.target.id === 'modal') document.getElementById('modal').classList.add('hidden');
+    });
+    
+    // Keyboard
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key === 'Enter') sendMessage();
+    });
+    
+    // Drag drop
+    const area = document.getElementById('uploadArea');
+    area.addEventListener('dragover', (e) => { e.preventDefault(); area.classList.add('drag-over'); });
+    area.addEventListener('dragleave', () => area.classList.remove('drag-over'));
+    area.addEventListener('drop', (e) => {
         e.preventDefault();
-        el.classList.remove('drag-over');
-        handleFileUpload({ target: { files: e.dataTransfer.files } });
+        area.classList.remove('drag-over');
+        handleFiles({ target: { files: e.dataTransfer.files } });
     });
 }
 
-function estimateTokens(text) { return Math.ceil(text.length / 4); }
-
-async function handleFileUpload(event) {
-    const files = event.target.files;
-    if (!files?.length) return;
-
+// ============ DOCUMENTS ============
+async function handleFiles(e) {
+    const files = e.target.files;
     for (const file of files) {
         try {
             const content = await file.text();
-            const tokens = estimateTokens(content);
-            loadedDocuments.push({
+            docs.push({
                 id: Date.now() + Math.random(),
                 name: file.name,
-                content,
-                size: file.size,
-                tokens,
-                type: getFileIcon(file.name)
+                content: content,
+                tokens: Math.ceil(content.length / 4)
             });
-            addLog('success', `✅ ${file.name} (~${tokens} tokens)`);
+            log('success', 'Loaded: ' + file.name);
         } catch (err) {
-            addLog('error', `❌ ${file.name}`);
+            log('error', 'Failed: ' + file.name);
         }
     }
-    renderLoadedDocs();
-    updateTokenInfo();
-    event.target.value = '';
+    renderDocs();
+    e.target.value = '';
 }
 
-async function fetchFromUrl() {
+async function fetchUrl() {
     const url = document.getElementById('urlInput').value.trim();
-    if (!url) { showToast('Enter a URL', 'error'); return; }
-
+    if (!url) return toast('Enter URL', true);
+    
     const btn = document.getElementById('fetchBtn');
     btn.disabled = true;
-    btn.innerHTML = '<div class="spinner"></div>';
-
+    btn.innerHTML = '<span class="spinner"></span>';
+    
     try {
         let content;
         try {
             content = await (await fetch(url)).text();
         } catch {
-            content = await (await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`)).text();
+            content = await (await fetch('https://api.allorigins.win/raw?url=' + encodeURIComponent(url))).text();
         }
-
-        const tokens = estimateTokens(content);
-        const name = url.split('/').pop() || 'content.txt';
-        loadedDocuments.push({ id: Date.now(), name, content, size: content.length, tokens, type: getFileIcon(name) });
-        addLog('success', `✅ ${name}`);
-        renderLoadedDocs();
-        updateTokenInfo();
+        docs.push({
+            id: Date.now(),
+            name: url.split('/').pop() || 'content.txt',
+            content: content,
+            tokens: Math.ceil(content.length / 4)
+        });
+        log('success', 'Fetched URL');
+        renderDocs();
         document.getElementById('urlInput').value = '';
     } catch {
-        addLog('error', '❌ Fetch failed');
-        showToast('Fetch failed', 'error');
+        log('error', 'Fetch failed');
+        toast('Fetch failed', true);
     }
-
+    
     btn.disabled = false;
-    btn.innerHTML = '🔗 Fetch';
+    btn.textContent = '🔗 Fetch';
 }
 
-function getFileIcon(name) {
-    const ext = name.split('.').pop().toLowerCase();
-    return { js: '📜', py: '🐍', html: '🌐', css: '🎨', json: '📋', md: '📝' }[ext] || '📄';
-}
-
-function formatBytes(b) { return b < 1024 ? b + 'B' : (b/1024).toFixed(1) + 'KB'; }
-
-function renderLoadedDocs() {
-    const el = document.getElementById('loadedDocs');
-    if (!loadedDocuments.length) {
-        el.innerHTML = '';
-        document.getElementById('docContextIndicator').classList.add('hidden');
+function renderDocs() {
+    const list = document.getElementById('docList');
+    const indicator = document.getElementById('docIndicator');
+    
+    if (docs.length === 0) {
+        list.innerHTML = '';
+        indicator.classList.add('hidden');
+        document.getElementById('tokenInfo').textContent = '📊 0 tokens';
         return;
     }
-    el.innerHTML = loadedDocuments.map(d => `
+    
+    const totalTokens = docs.reduce((s, d) => s + d.tokens, 0);
+    document.getElementById('tokenInfo').textContent = '📊 ' + totalTokens.toLocaleString() + ' tokens';
+    document.getElementById('docCount').textContent = docs.length + ' doc(s) • ~' + totalTokens + ' tokens';
+    indicator.classList.remove('hidden');
+    
+    list.innerHTML = docs.map(d => `
         <div class="loaded-doc-item">
             <div class="loaded-doc-info">
-                <span class="loaded-doc-icon">${d.type}</span>
+                <span>📄</span>
                 <div>
                     <div class="loaded-doc-name">${d.name}</div>
-                    <div class="loaded-doc-meta">${formatBytes(d.size)} • ~${d.tokens} tokens</div>
+                    <div class="loaded-doc-meta">~${d.tokens} tokens</div>
                 </div>
             </div>
-            <button class="doc-action-btn preview" onclick="previewDoc(${d.id})">👁️</button>
-            <button class="doc-action-btn remove" onclick="removeDoc(${d.id})">✕</button>
+            <button class="doc-btn doc-btn-view" onclick="viewDoc(${d.id})">👁️</button>
+            <button class="doc-btn doc-btn-remove" onclick="removeDoc(${d.id})">✕</button>
         </div>
     `).join('');
-    document.getElementById('docContextIndicator').classList.remove('hidden');
 }
 
-function updateTokenInfo() {
-    const total = loadedDocuments.reduce((s, d) => s + d.tokens, 0);
-    document.getElementById('tokenInfo').textContent = `📊 ${total.toLocaleString()} tokens`;
-    document.getElementById('docContextText').textContent = `${loadedDocuments.length} doc(s) • ~${total.toLocaleString()} tokens`;
-}
-
-function previewDoc(id) {
-    const doc = loadedDocuments.find(d => d.id === id);
+function viewDoc(id) {
+    const doc = docs.find(d => d.id === id);
     if (!doc) return;
-    document.getElementById('previewTitle').textContent = doc.name;
-    document.getElementById('previewBody').textContent = doc.content.substring(0, 50000);
-    document.getElementById('docPreviewModal').classList.remove('hidden');
-}
-
-function closePreview(e) {
-    if (!e || e.target.id === 'docPreviewModal') {
-        document.getElementById('docPreviewModal').classList.add('hidden');
-    }
+    document.getElementById('modalTitle').textContent = doc.name;
+    document.getElementById('modalBody').textContent = doc.content.substring(0, 50000);
+    document.getElementById('modal').classList.remove('hidden');
 }
 
 function removeDoc(id) {
-    loadedDocuments = loadedDocuments.filter(d => d.id !== id);
-    renderLoadedDocs();
-    updateTokenInfo();
+    docs = docs.filter(d => d.id !== id);
+    renderDocs();
 }
 
-function clearAllDocuments() {
-    loadedDocuments = [];
-    renderLoadedDocs();
-    updateTokenInfo();
-}
-
-// ===== CONVERSATION RENDERING =====
-function renderConversation() {
-    const container = document.getElementById('conversationContainer');
+// ============ CHAT ============
+function renderChat() {
+    const container = document.getElementById('chatContainer');
     
-    if (conversationHistory.length === 0) {
-        container.className = 'conversation-container empty';
-        container.innerHTML = '💭 Start a conversation...';
-        document.getElementById('messageCount').textContent = '0 messages';
+    if (chat.length === 0) {
+        container.innerHTML = '<div class="chat-empty">💭 Start a conversation...</div>';
+        document.getElementById('msgCount').textContent = '0 messages';
         return;
     }
-
-    container.className = 'conversation-container';
-    container.innerHTML = conversationHistory.map((msg, index) => {
+    
+    container.innerHTML = chat.map(msg => {
         const time = new Date(msg.time).toLocaleTimeString();
         
         if (msg.role === 'user') {
             return `
-                <div class="chat-message user">
-                    <div class="message-header">
-                        <span class="message-role user">You</span>
+                <div class="chat-msg chat-msg-user">
+                    <div class="chat-header">
+                        <span class="chat-role chat-role-user">You</span>
                         <span>${time}</span>
                     </div>
-                    <div class="message-content">${escapeHtml(msg.content)}</div>
+                    <div class="chat-bubble">${escapeHtml(msg.content)}</div>
                 </div>
             `;
         } else {
-            const statusBadge = msg.status ? 
-                `<span class="message-status ${msg.status}">${msg.status === 'primary' ? '1️⃣ Primary' : '🔄 Fallback'}</span>` : '';
-            
             return `
-                <div class="chat-message assistant ${msg.error ? 'error' : ''}">
-                    <div class="message-header">
-                        <span class="message-role assistant">AI</span>
-                        ${msg.model ? `<span class="message-model">${msg.model}</span>` : ''}
-                        ${statusBadge}
+                <div class="chat-msg chat-msg-ai ${msg.error ? 'error' : ''}">
+                    <div class="chat-header">
+                        <span class="chat-role chat-role-ai">AI</span>
+                        ${msg.model ? `<span class="chat-model">${msg.model}</span>` : ''}
+                        ${msg.status ? `<span class="chat-status chat-status-${msg.status}">${msg.status === 'primary' ? '1️⃣' : '🔄'}</span>` : ''}
                         <span>${time}</span>
                     </div>
-                    <div class="message-content">${escapeHtml(msg.content)}</div>
+                    <div class="chat-bubble">${escapeHtml(msg.content)}</div>
                 </div>
             `;
         }
     }).join('');
-
-    document.getElementById('messageCount').textContent = `${conversationHistory.length} messages`;
     
-    // Scroll to bottom
+    document.getElementById('msgCount').textContent = chat.length + ' messages';
     container.scrollTop = container.scrollHeight;
 }
 
@@ -1041,313 +924,247 @@ function escapeHtml(text) {
     return div.innerHTML;
 }
 
-function addTypingIndicator() {
-    const container = document.getElementById('conversationContainer');
-    const typing = document.createElement('div');
-    typing.className = 'chat-message assistant';
-    typing.id = 'typingIndicator';
-    typing.innerHTML = `
-        <div class="message-header">
-            <span class="message-role assistant">AI</span>
-            <span>typing...</span>
-        </div>
-        <div class="typing-indicator">
-            <span></span><span></span><span></span>
-        </div>
-    `;
-    container.appendChild(typing);
-    container.scrollTop = container.scrollHeight;
-}
-
-function removeTypingIndicator() {
-    const typing = document.getElementById('typingIndicator');
-    if (typing) typing.remove();
-}
-
-// ===== BUILD PROMPT WITH HISTORY =====
 function buildPrompt(userText) {
     let parts = [];
     
-    // Add documents if any
-    if (loadedDocuments.length > 0) {
-        parts.push('📄 ATTACHED DOCUMENTS:\n');
-        loadedDocuments.forEach(d => {
-            parts.push(`\n--- ${d.name} ---\n\`\`\`\n${d.content}\n\`\`\`\n`);
-        });
-        parts.push('\n---\n');
+    if (docs.length > 0) {
+        parts.push('📄 DOCUMENTS:\n');
+        docs.forEach(d => parts.push(`--- ${d.name} ---\n${d.content}\n\n`));
     }
     
-    // Add conversation history (last 10 messages for context)
-    const recentHistory = conversationHistory.slice(-10);
-    if (recentHistory.length > 0) {
-        parts.push('CONVERSATION HISTORY:\n');
-        recentHistory.forEach(msg => {
-            parts.push(`${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.content}\n`);
-        });
-        parts.push('\n---\n');
+    // Last 10 messages for context
+    const recent = chat.slice(-10);
+    if (recent.length > 0) {
+        parts.push('\nCONVERSATION:\n');
+        recent.forEach(m => parts.push(`${m.role === 'user' ? 'User' : 'AI'}: ${m.content}\n`));
     }
     
-    parts.push('USER: ' + userText);
-    
+    parts.push('\nUser: ' + userText);
     return parts.join('');
 }
 
-// ===== SEND MESSAGE =====
+// ============ SEND ============
 async function sendMessage() {
-    const model = getSelectedModel();
-    if (!model || isProcessing) return;
+    if (processing) return;
     
-    const userText = document.getElementById('userQuestion').value.trim();
-    if (!userText) { showToast('Enter a message', 'error'); return; }
-
-    // Add user message to history
-    conversationHistory.push({
-        role: 'user',
-        content: userText,
-        time: new Date()
-    });
-    renderConversation();
+    const input = document.getElementById('messageInput');
+    const text = input.value.trim();
+    if (!text) return toast('Enter a message', true);
     
-    // Clear input
-    document.getElementById('userQuestion').value = '';
+    const model = MODELS[selectedIdx];
+    const prompt = buildPrompt(text);
     
-    const prompt = buildPrompt(userText);
-    const tokens = estimateTokens(prompt);
+    // Add user message
+    chat.push({ role: 'user', content: text, time: new Date() });
+    renderChat();
+    input.value = '';
     
-    if (tokens > model.context * 0.95) {
-        showToast(`Too large! (~${tokens} tokens)`, 'error');
-        return;
-    }
-
-    isProcessing = true;
+    processing = true;
     const btn = document.getElementById('sendBtn');
-    const start = Date.now();
-
     btn.disabled = true;
-    btn.innerHTML = '<div class="spinner"></div>';
-    addTypingIndicator();
-
+    btn.innerHTML = '<span class="spinner"></span> Sending...';
+    
+    // Add typing indicator
+    const container = document.getElementById('chatContainer');
+    container.innerHTML += `
+        <div class="chat-msg chat-msg-ai" id="typing">
+            <div class="chat-header"><span class="chat-role chat-role-ai">AI</span><span>typing...</span></div>
+            <div class="typing"><span></span><span></span><span></span></div>
+        </div>
+    `;
+    container.scrollTop = container.scrollHeight;
+    
+    const start = Date.now();
     const chain = [model.id, ...model.fallbacks];
     let success = null, response = null, attempt = 0;
-
-    addLog('info', `Sending (~${tokens} tokens)`);
-
+    
+    log('info', 'Sending to ' + model.name);
+    
     for (let i = 0; i < chain.length; i++) {
-        const id = chain[i];
         attempt = i + 1;
-        addLog('info', `Try ${attempt}: ${id.split('/').pop()}`);
-
+        const id = chain[i];
+        log('info', 'Try ' + attempt + ': ' + id.split('/').pop());
+        
         try {
             response = await puter.ai.chat(prompt, { model: id });
             success = id;
-            addLog('success', `✅ ${id.split('/').pop()}`);
+            log('success', '✓ ' + id.split('/').pop());
             break;
         } catch (err) {
-            addLog('error', `❌ ${id.split('/').pop()}`);
+            log('error', '✗ ' + id.split('/').pop());
         }
     }
-
-    removeTypingIndicator();
+    
+    // Remove typing
+    const typing = document.getElementById('typing');
+    if (typing) typing.remove();
+    
     const elapsed = ((Date.now() - start) / 1000).toFixed(2);
-
+    
     if (success && response) {
         const answer = extractResponse(response);
         const isPrimary = success === model.id;
         
-        // Add assistant message to history
-        conversationHistory.push({
+        chat.push({
             role: 'assistant',
             content: answer,
             model: success.split('/').pop(),
             time: new Date(),
             status: isPrimary ? 'primary' : 'fallback'
         });
-
-        document.getElementById('responseTime').textContent = elapsed + 's';
-        document.getElementById('tokenCount').textContent = '~' + estimateTokens(answer);
-        document.getElementById('usedModel').textContent = success.split('/').pop().substring(0, 12);
-        document.getElementById('attemptNum').textContent = attempt;
-        document.getElementById('modelSource').textContent = isPrimary ? 'Primary' : 'Fallback';
         
-        showToast(isPrimary ? '✅ Sent!' : '🔄 Used fallback', 'success');
+        document.getElementById('statTime').textContent = elapsed + 's';
+        document.getElementById('statTokens').textContent = '~' + Math.ceil(answer.length / 4);
+        document.getElementById('statModel').textContent = success.split('/').pop().substring(0, 10);
+        document.getElementById('statAttempt').textContent = attempt;
+        document.getElementById('statSource').textContent = isPrimary ? 'Primary' : 'Fallback';
+        
+        toast(isPrimary ? '✅ Sent!' : '🔄 Used fallback');
     } else {
-        // Add error message
-        conversationHistory.push({
+        chat.push({
             role: 'assistant',
             content: '❌ All models failed. Please try again.',
             time: new Date(),
             error: true
         });
-        showToast('All failed', 'error');
+        toast('All models failed', true);
     }
-
-    renderConversation();
-    isProcessing = false;
+    
+    renderChat();
+    processing = false;
     btn.disabled = false;
     btn.innerHTML = '🚀 Send';
 }
 
-// ===== STREAM MESSAGE =====
+// ============ STREAM ============
 async function streamMessage() {
-    const model = getSelectedModel();
-    if (!model || isProcessing) return;
+    if (processing) return;
     
-    const userText = document.getElementById('userQuestion').value.trim();
-    if (!userText) return;
-
-    // Add user message
-    conversationHistory.push({ role: 'user', content: userText, time: new Date() });
-    renderConversation();
-    document.getElementById('userQuestion').value = '';
-
-    const prompt = buildPrompt(userText);
-    isProcessing = true;
+    const input = document.getElementById('messageInput');
+    const text = input.value.trim();
+    if (!text) return;
+    
+    const model = MODELS[selectedIdx];
+    const prompt = buildPrompt(text);
+    
+    chat.push({ role: 'user', content: text, time: new Date() });
+    renderChat();
+    input.value = '';
+    
+    processing = true;
     const start = Date.now();
-
     const chain = [model.id, ...model.fallbacks];
     let success = null;
-    let streamedContent = '';
-
-    // Add placeholder for streaming
-    const streamIndex = conversationHistory.length;
-    conversationHistory.push({
-        role: 'assistant',
-        content: '▌',
-        model: '',
-        time: new Date()
-    });
-    renderConversation();
-
+    
+    // Add streaming placeholder
+    const streamIdx = chat.length;
+    chat.push({ role: 'assistant', content: '▌', time: new Date() });
+    renderChat();
+    
     for (let i = 0; i < chain.length; i++) {
         try {
             const stream = await puter.ai.chat(prompt, { model: chain[i], stream: true });
-            streamedContent = '';
             success = chain[i];
+            let content = '';
             
             for await (const chunk of stream) {
-                const text = chunk?.text || chunk?.message?.content || '';
-                if (text) {
-                    streamedContent += text;
-                    conversationHistory[streamIndex].content = streamedContent + '▌';
-                    conversationHistory[streamIndex].model = success.split('/').pop();
-                    renderConversation();
+                const t = chunk?.text || chunk?.message?.content || '';
+                if (t) {
+                    content += t;
+                    chat[streamIdx].content = content + '▌';
+                    chat[streamIdx].model = success.split('/').pop();
+                    renderChat();
                 }
             }
+            
+            chat[streamIdx].content = content;
+            chat[streamIdx].status = success === model.id ? 'primary' : 'fallback';
             break;
         } catch {
             continue;
         }
     }
-
-    if (success) {
-        conversationHistory[streamIndex].content = streamedContent;
-        conversationHistory[streamIndex].status = success === model.id ? 'primary' : 'fallback';
-    } else {
-        conversationHistory[streamIndex].content = '❌ Stream failed';
-        conversationHistory[streamIndex].error = true;
+    
+    if (!success) {
+        chat[streamIdx].content = '❌ Stream failed';
+        chat[streamIdx].error = true;
     }
-
-    renderConversation();
-    document.getElementById('responseTime').textContent = ((Date.now() - start) / 1000).toFixed(2) + 's';
-    isProcessing = false;
+    
+    renderChat();
+    document.getElementById('statTime').textContent = ((Date.now() - start) / 1000).toFixed(2) + 's';
+    processing = false;
 }
 
-// ===== HELPERS =====
+// ============ HELPERS ============
 function extractResponse(r) {
     if (typeof r === 'string') return r;
     if (r?.message?.content) {
         if (Array.isArray(r.message.content)) return r.message.content.map(c => c.text || c).join('');
         return r.message.content;
     }
-    return r?.content || r?.text || JSON.stringify(r, null, 2);
+    return r?.content || r?.text || JSON.stringify(r);
 }
 
-function addLog(type, msg) {
-    const log = document.getElementById('fallbackLog');
-    const icons = { success: '✅', error: '❌', info: 'ℹ️', warning: '⚠️' };
-    const entry = document.createElement('div');
-    entry.className = `log-entry ${type}`;
-    entry.innerHTML = `<span>${icons[type]}</span><span>${new Date().toLocaleTimeString()}</span><span>${msg}</span>`;
-    log.insertBefore(entry, log.firstChild);
-    while (log.children.length > 15) log.removeChild(log.lastChild);
+function log(type, msg) {
+    const el = document.getElementById('log');
+    const icons = { success: '✅', error: '❌', info: 'ℹ️' };
+    el.innerHTML = `<div class="log-entry log-${type}"><span>${icons[type]}</span><span>${new Date().toLocaleTimeString()}</span><span>${msg}</span></div>` + el.innerHTML;
+    while (el.children.length > 10) el.removeChild(el.lastChild);
 }
 
-function copyLastResponse() {
-    const lastAssistant = [...conversationHistory].reverse().find(m => m.role === 'assistant');
-    if (lastAssistant) {
-        navigator.clipboard.writeText(lastAssistant.content);
-        showToast('📋 Copied!', 'success');
+function toast(msg, isError) {
+    document.querySelectorAll('.toast').forEach(t => t.remove());
+    const t = document.createElement('div');
+    t.className = 'toast' + (isError ? ' toast-error' : '');
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 3000);
+}
+
+function copyLast() {
+    const last = [...chat].reverse().find(m => m.role === 'assistant');
+    if (last) {
+        navigator.clipboard.writeText(last.content);
+        toast('📋 Copied!');
     }
 }
 
 function copyAllCode() {
-    const allContent = conversationHistory
-        .filter(m => m.role === 'assistant')
-        .map(m => m.content)
-        .join('\n\n');
-    const codeBlocks = allContent.match(/```[\s\S]*?```/g);
-    if (codeBlocks) {
-        navigator.clipboard.writeText(codeBlocks.map(c => c.replace(/```\w*\n?/g, '')).join('\n\n'));
-        showToast('📦 Code copied!', 'success');
+    const all = chat.filter(m => m.role === 'assistant').map(m => m.content).join('\n');
+    const code = all.match(/```[\s\S]*?```/g);
+    if (code) {
+        navigator.clipboard.writeText(code.map(c => c.replace(/```\w*\n?/g, '')).join('\n\n'));
+        toast('📦 Code copied!');
     } else {
-        showToast('No code found', 'warning');
+        toast('No code found', true);
     }
 }
 
-function regenerateLastMessage() {
-    // Remove last assistant message and resend last user message
-    const lastUserIndex = [...conversationHistory].reverse().findIndex(m => m.role === 'user');
-    if (lastUserIndex >= 0) {
-        const lastUser = [...conversationHistory].reverse()[lastUserIndex];
-        // Remove messages after last user message
-        while (conversationHistory.length > 0 && conversationHistory[conversationHistory.length - 1].role === 'assistant') {
-            conversationHistory.pop();
-        }
-        document.getElementById('userQuestion').value = lastUser.content;
-        conversationHistory.pop(); // Remove the user message too, sendMessage will re-add it
-        renderConversation();
+function retry() {
+    const lastUser = [...chat].reverse().find(m => m.role === 'user');
+    if (lastUser) {
+        // Remove last assistant
+        while (chat.length && chat[chat.length - 1].role === 'assistant') chat.pop();
+        document.getElementById('messageInput').value = lastUser.content;
+        chat.pop();
+        renderChat();
         sendMessage();
     }
 }
 
-function clearConversation() {
-    conversationHistory = [];
-    renderConversation();
-    ['responseTime', 'tokenCount', 'usedModel', 'attemptNum', 'modelSource'].forEach(id => {
-        document.getElementById(id).textContent = '--';
-    });
-    showToast('🗑️ Chat cleared', 'success');
-}
-
-function exportConversation() {
-    const text = conversationHistory.map(m => {
+function exportChat() {
+    const text = chat.map(m => {
         const time = new Date(m.time).toLocaleString();
-        const role = m.role === 'user' ? '👤 You' : '🤖 AI';
-        return `[${time}] ${role}:\n${m.content}\n`;
+        return `[${time}] ${m.role === 'user' ? '👤 You' : '🤖 AI'}:\n${m.content}\n`;
     }).join('\n---\n\n');
     
     const blob = new Blob([text], { type: 'text/plain' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = `conversation-${Date.now()}.txt`;
+    a.download = 'chat-' + Date.now() + '.txt';
     a.click();
-    showToast('💾 Exported!', 'success');
+    toast('💾 Exported!');
 }
-
-function showToast(msg, type = 'success') {
-    document.querySelectorAll('.toast').forEach(t => t.remove());
-    const toast = document.createElement('div');
-    toast.className = `toast ${type}`;
-    toast.textContent = msg;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3000);
-}
-
-// Keyboard shortcuts
-document.addEventListener('keydown', e => {
-    if (e.ctrlKey && e.key === 'Enter') { e.preventDefault(); sendMessage(); }
-    if (e.key === 'Escape') closePreview();
-});
 </script>
 
 </body>
