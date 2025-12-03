@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🧠 AI Pro Coder - Auto Fallback + Document Upload</title>
+    <title>🧠 AI Pro Coder - FREE Models</title>
     
-    <script src="https://js.puter.com/v2/" 
-            onload="initApp()" 
-            onerror="showError('Failed to load Puter.js')">
-    </script>
+    <script src="https://js.puter.com/v2/" onload="initApp()" onerror="showError('Failed to load Puter.js')"></script>
 
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         :root {
             --bg-primary: #0a0a0f;
             --bg-secondary: #12121a;
@@ -31,7 +27,6 @@
             --error: #ff4757;
             --border: #2a2a3e;
         }
-
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
             background: var(--bg-primary);
@@ -40,9 +35,7 @@
             padding: 15px;
             line-height: 1.6;
         }
-
         .container { max-width: 1100px; margin: 0 auto; }
-
         header {
             text-align: center;
             padding: 30px 20px;
@@ -53,20 +46,15 @@
             position: relative;
             overflow: hidden;
         }
-
         header::before {
             content: '';
             position: absolute;
-            top: -100%;
-            left: -100%;
-            width: 300%;
-            height: 300%;
+            top: -100%; left: -100%;
+            width: 300%; height: 300%;
             background: conic-gradient(from 0deg, transparent, rgba(0,212,255,0.1), transparent, rgba(168,85,247,0.1), transparent);
             animation: rotate 15s linear infinite;
         }
-
         @keyframes rotate { to { transform: rotate(360deg); } }
-
         header h1 {
             font-size: 2.2rem;
             background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-green));
@@ -75,23 +63,20 @@
             background-clip: text;
             position: relative;
         }
-
         .subtitle { color: var(--text-secondary); margin: 10px 0; position: relative; }
-
-        .fallback-badge {
+        .free-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
-            color: white;
+            background: linear-gradient(135deg, var(--accent-green), #00aa55);
+            color: #000;
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 13px;
-            font-weight: 600;
+            font-weight: 700;
             margin-top: 10px;
             position: relative;
         }
-
         #status {
             display: inline-flex;
             align-items: center;
@@ -102,23 +87,19 @@
             margin-top: 15px;
             position: relative;
         }
-
         .status-loading { background: rgba(255, 170, 0, 0.2); color: var(--warning); }
         .status-ready { background: rgba(0, 255, 136, 0.2); color: var(--success); }
         .status-error { background: rgba(255, 71, 87, 0.2); color: var(--error); }
-
         .pulse {
             width: 10px; height: 10px;
             border-radius: 50%;
             background: currentColor;
             animation: pulse 1.5s infinite;
         }
-
         @keyframes pulse {
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.5; transform: scale(1.3); }
         }
-
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -126,7 +107,6 @@
             padding: 20px;
             margin-bottom: 20px;
         }
-
         .card-title {
             font-size: 14px;
             color: var(--text-secondary);
@@ -137,14 +117,22 @@
             align-items: center;
             justify-content: space-between;
         }
-
+        .quota-warning {
+            background: linear-gradient(135deg, rgba(255, 170, 0, 0.2), rgba(255, 71, 87, 0.1));
+            border: 2px solid var(--warning);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .quota-warning h3 { color: var(--warning); margin-bottom: 8px; }
+        .quota-warning p { font-size: 13px; color: var(--text-secondary); }
+        .quota-warning ul { margin: 10px 0 0 20px; font-size: 13px; }
         .category-tabs {
             display: flex;
             gap: 8px;
             margin-bottom: 15px;
             flex-wrap: wrap;
         }
-
         .category-tab {
             padding: 10px 18px;
             background: var(--bg-tertiary);
@@ -156,15 +144,9 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .category-tab:hover { border-color: var(--accent-blue); color: var(--text-primary); }
-        .category-tab.active { background: var(--accent-blue); color: #000; border-color: var(--accent-blue); }
-
-        .search-box {
-            position: relative;
-            margin-bottom: 15px;
-        }
-
+        .category-tab.active { background: var(--accent-green); color: #000; border-color: var(--accent-green); }
+        .search-box { position: relative; margin-bottom: 15px; }
         .search-box input {
             width: 100%;
             padding: 14px 16px 14px 50px;
@@ -174,10 +156,8 @@
             color: var(--text-primary);
             font-size: 15px;
         }
-
         .search-box input:focus { outline: none; border-color: var(--accent-blue); }
         .search-box::before { content: "🔍"; position: absolute; left: 18px; top: 50%; transform: translateY(-50%); }
-
         .model-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -186,7 +166,6 @@
             overflow-y: auto;
             padding: 5px;
         }
-
         .model-card {
             background: var(--bg-tertiary);
             border: 2px solid var(--border);
@@ -196,26 +175,18 @@
             transition: all 0.3s ease;
             position: relative;
         }
-
-        .model-card:hover {
-            border-color: var(--accent-blue);
-            transform: translateY(-2px);
-        }
-
+        .model-card:hover { border-color: var(--accent-blue); transform: translateY(-2px); }
         .model-card.selected {
-            border-color: var(--accent-blue);
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(168, 85, 247, 0.1));
+            border-color: var(--accent-green);
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 212, 255, 0.1));
         }
-
         .model-card.selected::before {
             content: '✓';
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: var(--accent-blue);
+            top: 10px; right: 10px;
+            background: var(--accent-green);
             color: #000;
-            width: 24px;
-            height: 24px;
+            width: 24px; height: 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -223,14 +194,7 @@
             font-weight: bold;
             font-size: 14px;
         }
-
-        .model-badges {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-bottom: 8px;
-        }
-
+        .model-badges { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
         .badge {
             font-size: 9px;
             padding: 3px 8px;
@@ -238,26 +202,19 @@
             font-weight: 700;
             letter-spacing: 0.3px;
         }
-
         .badge-anthropic { background: linear-gradient(135deg, #a855f7, #7c3aed); color: white; }
         .badge-openai { background: linear-gradient(135deg, #10a37f, #059669); color: white; }
         .badge-google { background: linear-gradient(135deg, #4285f4, #1d4ed8); color: white; }
         .badge-mistral { background: linear-gradient(135deg, #ff7000, #ea580c); color: white; }
         .badge-deepseek { background: linear-gradient(135deg, #0066ff, #2563eb); color: white; }
-        .badge-xai { background: linear-gradient(135deg, #333, #555); color: white; }
         .badge-meta { background: linear-gradient(135deg, #0668E1, #1877f2); color: white; }
         .badge-qwen { background: linear-gradient(135deg, #6366f1, #4f46e5); color: white; }
-        .badge-perplexity { background: linear-gradient(135deg, #20b2aa, #008b8b); color: white; }
-
-        .badge-new { background: linear-gradient(135deg, #ff6b9d, #c44569); color: white; }
-        .badge-best { background: linear-gradient(135deg, #ffd700, #ffaa00); color: #000; }
-        .badge-coding { background: var(--accent-green); color: #000; }
-        .badge-search { background: var(--accent-orange); color: #000; }
+        .badge-free { background: linear-gradient(135deg, #00ff88, #00cc66); color: #000; font-weight: 800; }
+        .badge-paid { background: linear-gradient(135deg, #ff6b6b, #ee5a5a); color: white; }
+        .badge-coding { background: var(--accent-blue); color: #000; }
         .badge-fallback { background: linear-gradient(135deg, #ff9500, #ff6b00); color: white; }
-
         .model-name { font-weight: 700; font-size: 15px; margin-bottom: 5px; }
         .model-desc { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
-
         .model-ids {
             font-size: 10px;
             font-family: 'Consolas', monospace;
@@ -266,10 +223,7 @@
             padding: 8px;
             border-radius: 6px;
         }
-
-        .model-ids .primary { color: var(--accent-blue); }
-        .model-ids .fallback { color: var(--accent-orange); }
-
+        .model-ids .primary { color: var(--accent-green); }
         .selected-display {
             background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-card));
             border: 2px solid var(--border);
@@ -277,7 +231,6 @@
             border-radius: 14px;
             margin-bottom: 20px;
         }
-
         .selected-header {
             display: flex;
             align-items: center;
@@ -286,33 +239,11 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-
-        .selected-name {
-            font-size: 20px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .selected-status {
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .status-primary { background: var(--accent-blue); color: #000; }
+        .selected-name { font-size: 20px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        .selected-status { padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .status-primary { background: var(--accent-green); color: #000; }
         .status-fallback { background: var(--accent-orange); color: #000; }
-        .status-failed { background: var(--error); color: white; }
-
-        .model-chain {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
+        .model-chain { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
         .chain-item {
             background: var(--bg-tertiary);
             padding: 8px 14px;
@@ -323,13 +254,10 @@
             align-items: center;
             gap: 6px;
         }
-
         .chain-item.active { border: 2px solid var(--accent-green); }
         .chain-item.failed { border: 2px solid var(--error); opacity: 0.6; text-decoration: line-through; }
         .chain-item.pending { border: 2px solid var(--border); opacity: 0.5; }
-
         .chain-arrow { color: var(--text-secondary); font-size: 18px; }
-
         .upload-section {
             background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-card));
             border: 2px dashed var(--border);
@@ -338,10 +266,8 @@
             margin-bottom: 20px;
             transition: all 0.3s ease;
         }
-
         .upload-section:hover { border-color: var(--accent-purple); }
         .upload-section.drag-over { border-color: var(--accent-blue); background: rgba(0, 212, 255, 0.1); }
-
         .upload-header {
             display: flex;
             align-items: center;
@@ -350,15 +276,7 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-
-        .upload-title {
-            font-size: 16px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
+        .upload-title { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
         .token-info {
             background: var(--bg-tertiary);
             padding: 6px 14px;
@@ -367,13 +285,7 @@
             color: var(--accent-yellow);
             border: 1px solid var(--accent-yellow);
         }
-
-        .upload-methods {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-        }
-
+        .upload-methods { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
         .upload-method {
             background: var(--bg-secondary);
             border: 2px solid var(--border);
@@ -382,24 +294,18 @@
             text-align: center;
             transition: all 0.3s ease;
         }
-
         .upload-method:hover { border-color: var(--accent-blue); }
         .upload-method-icon { font-size: 40px; margin-bottom: 10px; }
         .upload-method-title { font-weight: 600; margin-bottom: 8px; }
         .upload-method-desc { font-size: 12px; color: var(--text-secondary); margin-bottom: 12px; }
-
         .file-input-wrapper { position: relative; display: inline-block; width: 100%; }
-
         .file-input-wrapper input[type="file"] {
             position: absolute;
-            left: 0;
-            top: 0;
+            left: 0; top: 0;
             opacity: 0;
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             cursor: pointer;
         }
-
         .file-input-btn {
             display: flex;
             align-items: center;
@@ -414,14 +320,8 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
-        .file-input-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(168, 85, 247, 0.4);
-        }
-
+        .file-input-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(168, 85, 247, 0.4); }
         .url-input-group { display: flex; gap: 10px; }
-
         .url-input {
             flex: 1;
             padding: 12px 16px;
@@ -431,9 +331,7 @@
             color: var(--text-primary);
             font-size: 14px;
         }
-
         .url-input:focus { outline: none; border-color: var(--accent-blue); }
-
         .url-fetch-btn {
             padding: 12px 20px;
             background: linear-gradient(135deg, var(--accent-blue), var(--accent-green));
@@ -445,12 +343,9 @@
             transition: all 0.3s ease;
             white-space: nowrap;
         }
-
         .url-fetch-btn:hover:not(:disabled) { transform: translateY(-2px); }
         .url-fetch-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-
         .loaded-docs { margin-top: 15px; }
-
         .loaded-doc-item {
             display: flex;
             align-items: center;
@@ -461,87 +356,19 @@
             padding: 12px 16px;
             margin-bottom: 8px;
         }
-
-        .loaded-doc-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex: 1;
-            min-width: 0;
-        }
-
+        .loaded-doc-info { display: flex; align-items: center; gap: 12px; flex: 1; min-width: 0; }
         .loaded-doc-icon { font-size: 24px; flex-shrink: 0; }
         .loaded-doc-details { min-width: 0; }
-
-        .loaded-doc-name {
-            font-weight: 600;
-            font-size: 14px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .loaded-doc-meta {
-            font-size: 11px;
-            color: var(--text-secondary);
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
+        .loaded-doc-name { font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .loaded-doc-meta { font-size: 11px; color: var(--text-secondary); display: flex; gap: 15px; flex-wrap: wrap; }
         .loaded-doc-actions { display: flex; gap: 8px; flex-shrink: 0; }
-
-        .doc-action-btn {
-            padding: 6px 12px;
-            border: none;
-            border-radius: 6px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
+        .doc-action-btn { padding: 6px 12px; border: none; border-radius: 6px; font-size: 12px; cursor: pointer; transition: all 0.2s ease; }
         .doc-action-btn.preview { background: var(--accent-blue); color: #000; }
         .doc-action-btn.remove { background: transparent; border: 1px solid var(--error); color: var(--error); }
         .doc-action-btn.remove:hover { background: var(--error); color: white; }
-
-        .token-limits-card {
-            background: var(--bg-tertiary);
-            border-radius: 12px;
-            padding: 15px;
-            margin-top: 15px;
-        }
-
-        .token-limits-title {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .token-limits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 8px;
-        }
-
-        .token-limit-item {
-            background: var(--bg-secondary);
-            padding: 10px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .token-limit-model { font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; }
-        .token-limit-value { font-size: 14px; font-weight: 700; color: var(--accent-green); }
-
         .doc-preview-modal {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(0, 0, 0, 0.8);
             display: flex;
             align-items: center;
@@ -549,7 +376,6 @@
             z-index: 1000;
             padding: 20px;
         }
-
         .doc-preview-content {
             background: var(--bg-card);
             border-radius: 16px;
@@ -560,7 +386,6 @@
             display: flex;
             flex-direction: column;
         }
-
         .doc-preview-header {
             display: flex;
             align-items: center;
@@ -568,7 +393,6 @@
             padding: 16px 20px;
             border-bottom: 1px solid var(--border);
         }
-
         .doc-preview-body {
             flex: 1;
             overflow: auto;
@@ -578,16 +402,7 @@
             white-space: pre-wrap;
             word-wrap: break-word;
         }
-
-        .doc-preview-close {
-            background: var(--error);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
+        .doc-preview-close { background: var(--error); color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; }
         textarea {
             width: 100%;
             min-height: 140px;
@@ -600,9 +415,7 @@
             font-family: inherit;
             resize: vertical;
         }
-
         textarea:focus { outline: none; border-color: var(--accent-blue); }
-
         .doc-context-indicator {
             display: flex;
             align-items: center;
@@ -614,9 +427,7 @@
             margin-bottom: 15px;
             font-size: 13px;
         }
-
         .doc-context-indicator .icon { font-size: 20px; }
-
         .doc-context-clear {
             margin-left: auto;
             background: transparent;
@@ -627,14 +438,7 @@
             font-size: 11px;
             cursor: pointer;
         }
-
-        .btn-group {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 10px;
-            margin-top: 15px;
-        }
-
+        .btn-group { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; margin-top: 15px; }
         button {
             padding: 14px 18px;
             border: none;
@@ -648,32 +452,15 @@
             justify-content: center;
             gap: 8px;
         }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
-            color: white;
-        }
-
-        .btn-primary:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
-        }
-
+        .btn-primary { background: linear-gradient(135deg, var(--accent-green), #00cc66); color: #000; }
+        .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 255, 136, 0.3); }
         .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
-
-        .btn-secondary {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            border: 2px solid var(--border);
-        }
-
+        .btn-secondary { background: var(--bg-tertiary); color: var(--text-primary); border: 2px solid var(--border); }
         .btn-secondary:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
-
-        .btn-success { background: var(--accent-green); color: #000; }
+        .btn-success { background: var(--accent-blue); color: #000; }
         .btn-warning { background: var(--accent-orange); color: #000; }
         .btn-danger { background: transparent; border: 2px solid var(--error); color: var(--error); }
         .btn-danger:hover { background: var(--error); color: white; }
-
         #output {
             background: var(--bg-tertiary);
             border: 2px solid var(--border);
@@ -686,62 +473,20 @@
             line-height: 1.7;
             position: relative;
         }
-
-        #output.empty { 
-            color: var(--text-secondary); 
-            font-style: italic; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            text-align: center;
-        }
-
+        #output.empty { color: var(--text-secondary); font-style: italic; display: flex; align-items: center; justify-content: center; text-align: center; }
         #output.thinking { color: var(--warning); border-color: var(--warning); }
         #output.error { color: var(--error); background: rgba(255, 71, 87, 0.1); border-color: var(--error); }
         #output.success { border-color: var(--success); }
         #output.fallback-used { border-color: var(--accent-orange); }
-
-        .output-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-            font-weight: 600;
-        }
-
-        .output-badge.primary { background: var(--accent-blue); color: #000; }
+        .output-badge { position: absolute; top: 10px; right: 10px; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+        .output-badge.primary { background: var(--accent-green); color: #000; }
         .output-badge.fallback { background: var(--accent-orange); color: #000; }
-
-        .output-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 12px;
-            flex-wrap: wrap;
-        }
-
+        .output-actions { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
         .output-actions button { flex: 1; min-width: 90px; padding: 10px 14px; font-size: 13px; }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .stat-box {
-            background: var(--bg-tertiary);
-            padding: 12px;
-            border-radius: 10px;
-            text-align: center;
-            border: 1px solid var(--border);
-        }
-
+        .stats-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 15px; }
+        .stat-box { background: var(--bg-tertiary); padding: 12px; border-radius: 10px; text-align: center; border: 1px solid var(--border); }
         .stat-label { font-size: 10px; color: var(--text-secondary); text-transform: uppercase; }
-        .stat-value { font-size: 16px; font-weight: 700; color: var(--accent-blue); margin-top: 4px; }
-        .stat-value.fallback { color: var(--accent-orange); }
-
+        .stat-value { font-size: 16px; font-weight: 700; color: var(--accent-green); margin-top: 4px; }
         .fallback-log {
             background: var(--bg-tertiary);
             border-radius: 10px;
@@ -752,35 +497,17 @@
             max-height: 150px;
             overflow-y: auto;
         }
-
-        .log-entry {
-            padding: 4px 0;
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
+        .log-entry { padding: 4px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
         .log-entry:last-child { border: none; }
         .log-entry.success { color: var(--success); }
         .log-entry.error { color: var(--error); }
         .log-entry.info { color: var(--accent-blue); }
         .log-entry.warning { color: var(--warning); }
-
-        .spinner {
-            width: 18px; height: 18px;
-            border: 3px solid transparent;
-            border-top-color: currentColor;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-
+        .spinner { width: 18px; height: 18px; border: 3px solid transparent; border-top-color: currentColor; border-radius: 50%; animation: spin 0.8s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-
         .toast {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
+            bottom: 25px; right: 25px;
             padding: 14px 24px;
             background: var(--bg-secondary);
             border: 2px solid var(--border);
@@ -791,16 +518,10 @@
             animation: slideIn 0.3s ease;
             max-width: 350px;
         }
-
         .toast.success { border-color: var(--success); }
         .toast.error { border-color: var(--error); }
         .toast.warning { border-color: var(--warning); }
-
-        @keyframes slideIn {
-            from { transform: translateX(120%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
+        @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @media (max-width: 768px) {
             header h1 { font-size: 1.6rem; }
             .model-grid { grid-template-columns: 1fr; }
@@ -809,12 +530,10 @@
             .chain-arrow { transform: rotate(90deg); }
             .url-input-group { flex-direction: column; }
         }
-
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-secondary); }
         ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent-blue); }
-
         .hidden { display: none !important; }
     </style>
 </head>
@@ -823,33 +542,41 @@
 <div class="container">
     <header>
         <h1>🧠 AI Pro Coder</h1>
-        <p class="subtitle">Auto-Fallback + Document Upload</p>
-        <div class="fallback-badge">🔄 Auto-Fallback + 📄 Document Analysis</div>
+        <p class="subtitle">FREE Models - No Quota Limits!</p>
+        <div class="free-badge">🆓 100% FREE - Unlimited Usage</div>
         <div id="status" class="status-loading">
             <div class="pulse"></div>
             <span>Initializing...</span>
         </div>
     </header>
 
+    <!-- Quota Warning -->
+    <div class="quota-warning">
+        <h3>⚠️ Quota Limits Detected</h3>
+        <p>Paid models (Claude, GPT-4o) have usage limits. This version uses <strong>FREE models</strong> that work without restrictions:</p>
+        <ul>
+            <li>🆓 <strong>Llama 3.1/3.3</strong> - Free via OpenRouter</li>
+            <li>🆓 <strong>Qwen 2.5</strong> - Free coding models</li>
+            <li>🆓 <strong>Gemma 2</strong> - Google's free model</li>
+            <li>🆓 <strong>Mistral 7B</strong> - Fast & free</li>
+        </ul>
+    </div>
+
     <div class="upload-section" id="uploadSection">
         <div class="upload-header">
             <div class="upload-title">📄 Document Upload</div>
             <div class="token-info" id="tokenInfo">📊 Context: 0 tokens used</div>
         </div>
-
         <div class="upload-methods">
             <div class="upload-method">
                 <div class="upload-method-icon">📁</div>
                 <div class="upload-method-title">Upload from Device</div>
-                <div class="upload-method-desc">.txt, .md, .json, .csv, .js, .py, .html, .css, .xml, .log</div>
+                <div class="upload-method-desc">.txt, .md, .json, .csv, .js, .py, .html, .css</div>
                 <div class="file-input-wrapper">
-                    <input type="file" id="fileInput" 
-                           accept=".txt,.md,.json,.csv,.js,.ts,.py,.html,.css,.xml,.log,.yaml,.yml,.toml,.ini,.cfg,.env,.sh,.bat,.sql,.java,.c,.cpp,.h,.go,.rs,.rb,.php,.swift,.kt"
-                           multiple onchange="handleFileUpload(event)">
+                    <input type="file" id="fileInput" accept=".txt,.md,.json,.csv,.js,.ts,.py,.html,.css,.xml,.log,.yaml,.yml" multiple onchange="handleFileUpload(event)">
                     <div class="file-input-btn">📤 Choose Files</div>
                 </div>
             </div>
-
             <div class="upload-method">
                 <div class="upload-method-icon">🌐</div>
                 <div class="upload-method-title">Fetch from URL</div>
@@ -860,35 +587,19 @@
                 </div>
             </div>
         </div>
-
         <div class="loaded-docs" id="loadedDocs"></div>
-
-        <div class="token-limits-card">
-            <div class="token-limits-title">📊 Token Limits by Model</div>
-            <div class="token-limits-grid">
-                <div class="token-limit-item"><div class="token-limit-model">Claude 3.5</div><div class="token-limit-value">200K</div></div>
-                <div class="token-limit-item"><div class="token-limit-model">GPT-4o</div><div class="token-limit-value">128K</div></div>
-                <div class="token-limit-item"><div class="token-limit-model">Gemini 1.5 Pro</div><div class="token-limit-value">1M</div></div>
-                <div class="token-limit-item"><div class="token-limit-model">DeepSeek</div><div class="token-limit-value">64K</div></div>
-                <div class="token-limit-item"><div class="token-limit-model">Mistral Large</div><div class="token-limit-value">128K</div></div>
-                <div class="token-limit-item"><div class="token-limit-model">Llama 3.3</div><div class="token-limit-value">128K</div></div>
-            </div>
-        </div>
     </div>
 
     <div class="card">
         <div class="category-tabs">
-            <button class="category-tab active" onclick="filterCategory('all')">🌟 All</button>
+            <button class="category-tab active" onclick="filterCategory('all')">🌟 All FREE</button>
             <button class="category-tab" onclick="filterCategory('coding')">💻 Coding</button>
-            <button class="category-tab" onclick="filterCategory('search')">🔍 Search</button>
-            <button class="category-tab" onclick="filterCategory('analysis')">🧪 Analysis</button>
-            <button class="category-tab" onclick="filterCategory('free')">🆓 Free</button>
+            <button class="category-tab" onclick="filterCategory('fast')">⚡ Fast</button>
+            <button class="category-tab" onclick="filterCategory('large')">🧠 Large</button>
         </div>
-
         <div class="search-box">
             <input type="text" id="modelSearch" placeholder="Search models..." oninput="renderModels()">
         </div>
-
         <div class="model-grid" id="modelGrid"></div>
     </div>
 
@@ -900,9 +611,7 @@
             </div>
             <div class="selected-status status-primary" id="selectedStatus">Ready</div>
         </div>
-        
         <div class="card-title" style="margin-bottom: 10px; margin-top: 10px;">🔄 Fallback Chain:</div>
-        
         <div class="model-chain" id="modelChain">
             <div class="chain-item pending"><span>1️⃣</span><span id="chain1">Primary</span></div>
             <span class="chain-arrow">→</span>
@@ -914,51 +623,43 @@
 
     <div class="card">
         <div class="card-title">💬 Your Prompt</div>
-        
         <div class="doc-context-indicator hidden" id="docContextIndicator">
             <span class="icon">📎</span>
             <span id="docContextText">0 documents attached (0 tokens)</span>
             <button class="doc-context-clear" onclick="clearAllDocuments()">Clear All</button>
         </div>
+        <textarea id="userQuestion" placeholder="Enter your coding question...
 
-        <textarea id="userQuestion" placeholder="Enter your coding question, search query, or analysis request...
-
-📄 You can upload documents above to analyze, review code, or ask questions about files.
-
-💡 The system will automatically include document content in your prompt."></textarea>
-        
+🆓 All models are FREE with no quota limits!
+📄 Upload documents above to analyze them."></textarea>
         <div class="btn-group">
-            <button class="btn-primary" id="sendBtn" onclick="askWithFallback()">🚀 Send (Auto-Fallback)</button>
+            <button class="btn-primary" id="sendBtn" onclick="askWithFallback()">🚀 Send (FREE)</button>
             <button class="btn-success" onclick="streamWithFallback()">⚡ Stream</button>
-            <button class="btn-warning" onclick="testAllFallbacks()">🧪 Test Chain</button>
-            <button class="btn-secondary" onclick="forcePrimary()">1️⃣ Primary</button>
-            <button class="btn-secondary" onclick="forceFallback()">2️⃣ Fallback</button>
+            <button class="btn-warning" onclick="discoverModels()">🔍 Find Models</button>
+            <button class="btn-secondary" onclick="testAllFallbacks()">🧪 Test Chain</button>
             <button class="btn-danger" onclick="clearAll()">🗑️ Clear</button>
         </div>
     </div>
 
     <div class="card">
-        <div class="card-title">📝 Response <span id="usedModelBadge" class="hidden"></span></div>
-        <div id="output" class="empty">💭 AI response will appear here...<br><br>📄 Upload documents above to analyze them</div>
-        
+        <div class="card-title">📝 Response</div>
+        <div id="output" class="empty">💭 AI response will appear here...<br><br>🆓 Using FREE models only!</div>
         <div class="output-actions">
             <button class="btn-secondary" onclick="copyOutput()">📋 Copy</button>
             <button class="btn-secondary" onclick="copyCode()">📦 Code</button>
             <button class="btn-secondary" onclick="downloadOutput()">💾 Save</button>
             <button class="btn-secondary" onclick="regenerate()">🔄 Retry</button>
         </div>
-
         <div class="stats-grid">
             <div class="stat-box"><div class="stat-label">⏱️ Time</div><div class="stat-value" id="responseTime">--</div></div>
             <div class="stat-box"><div class="stat-label">📊 Tokens</div><div class="stat-value" id="tokenCount">--</div></div>
             <div class="stat-box"><div class="stat-label">🎯 Model</div><div class="stat-value" id="usedModel" style="font-size: 11px;">--</div></div>
             <div class="stat-box"><div class="stat-label">🔄 Attempt</div><div class="stat-value" id="attemptNum">--</div></div>
             <div class="stat-box"><div class="stat-label">📍 Source</div><div class="stat-value" id="modelSource" style="font-size: 11px;">--</div></div>
-            <div class="stat-box"><div class="stat-label">✅ Status</div><div class="stat-value" id="finalStatus">--</div></div>
+            <div class="stat-box"><div class="stat-label">💰 Cost</div><div class="stat-value" id="finalStatus">FREE</div></div>
         </div>
-
         <div class="fallback-log" id="fallbackLog">
-            <div class="log-entry info">🔄 System ready. Upload documents or type your question.</div>
+            <div class="log-entry info">🆓 Using FREE models - no quota limits!</div>
         </div>
     </div>
 </div>
@@ -974,212 +675,154 @@
 </div>
 
 <script>
-// ===== CORRECTED MODEL DATABASE WITH REAL MODEL IDs =====
+// ===== FREE MODELS ONLY - NO QUOTA LIMITS =====
 const MODELS_WITH_FALLBACKS = [
-    // ===== CLAUDE MODELS (CORRECT IDs) =====
-    {
-        id: 'claude-3-5-sonnet',
-        name: 'Claude 3.5 Sonnet',
-        icon: '⚡',
-        provider: 'anthropic',
-        desc: 'Best balance - 200K context',
-        categories: ['coding', 'analysis'],
-        isBest: true,
-        contextSize: 200000,
-        fallbacks: ['claude-3-5-sonnet-20241022', 'claude-3-sonnet-20240229', 'gpt-4o']
-    },
-    {
-        id: 'claude-3-opus',
-        name: 'Claude 3 Opus',
-        icon: '🧠',
-        provider: 'anthropic',
-        desc: 'Most powerful Claude - 200K context',
-        categories: ['coding', 'analysis'],
-        isBest: true,
-        contextSize: 200000,
-        fallbacks: ['claude-3-opus-20240229', 'claude-3-5-sonnet', 'gpt-4o']
-    },
-    {
-        id: 'claude-3-haiku',
-        name: 'Claude 3 Haiku',
-        icon: '🚀',
-        provider: 'anthropic',
-        desc: 'Fast & efficient - 200K context',
-        categories: ['coding', 'analysis'],
-        contextSize: 200000,
-        fallbacks: ['claude-3-haiku-20240307', 'claude-3-5-sonnet', 'gpt-4o-mini']
-    },
-
-    // ===== OPENAI MODELS =====
-    {
-        id: 'gpt-4o',
-        name: 'GPT-4o',
-        icon: '🎯',
-        provider: 'openai',
-        desc: 'Latest OpenAI - 128K context',
-        categories: ['coding', 'analysis'],
-        isBest: true,
-        contextSize: 128000,
-        fallbacks: ['gpt-4o-2024-08-06', 'gpt-4-turbo', 'gpt-4o-mini']
-    },
-    {
-        id: 'gpt-4o-mini',
-        name: 'GPT-4o Mini',
-        icon: '⚡',
-        provider: 'openai',
-        desc: 'Fast & cheap - 128K context',
-        categories: ['coding', 'analysis', 'free'],
-        contextSize: 128000,
-        fallbacks: ['gpt-4o', 'gpt-3.5-turbo', 'claude-3-haiku']
-    },
-    {
-        id: 'o1-mini',
-        name: 'o1 Mini',
-        icon: '🔬',
-        provider: 'openai',
-        desc: 'Reasoning model - 128K context',
-        categories: ['coding', 'analysis'],
-        contextSize: 128000,
-        fallbacks: ['gpt-4o', 'claude-3-5-sonnet', 'gpt-4o-mini']
-    },
-
-    // ===== GOOGLE MODELS =====
-    {
-        id: 'gemini-2.0-flash',
-        name: 'Gemini 2.0 Flash',
-        icon: '⚡',
-        provider: 'google',
-        desc: 'Latest Gemini - 1M context',
-        categories: ['coding', 'analysis'],
-        isBest: true,
-        contextSize: 1000000,
-        fallbacks: ['gemini-1.5-pro', 'gemini-1.5-flash', 'gpt-4o']
-    },
-    {
-        id: 'gemini-1.5-pro',
-        name: 'Gemini 1.5 Pro',
-        icon: '💎',
-        provider: 'google',
-        desc: 'Powerful - 1M context',
-        categories: ['coding', 'analysis'],
-        contextSize: 1000000,
-        fallbacks: ['gemini-2.0-flash', 'gemini-1.5-flash', 'gpt-4o']
-    },
-    {
-        id: 'gemini-1.5-flash',
-        name: 'Gemini 1.5 Flash',
-        icon: '🚀',
-        provider: 'google',
-        desc: 'Fast Gemini - 1M context',
-        categories: ['coding', 'analysis', 'free'],
-        contextSize: 1000000,
-        fallbacks: ['gemini-1.5-pro', 'gemini-2.0-flash', 'gpt-4o-mini']
-    },
-
-    // ===== DEEPSEEK =====
-    {
-        id: 'deepseek-chat',
-        name: 'DeepSeek V3',
-        icon: '🐋',
-        provider: 'deepseek',
-        desc: 'Great coder - 64K context',
-        categories: ['coding', 'free'],
-        contextSize: 64000,
-        fallbacks: ['deepseek-reasoner', 'gpt-4o-mini', 'claude-3-haiku']
-    },
-    {
-        id: 'deepseek-reasoner',
-        name: 'DeepSeek R1',
-        icon: '🧠',
-        provider: 'deepseek',
-        desc: 'Reasoning model - 64K context',
-        categories: ['coding', 'analysis'],
-        isBest: true,
-        contextSize: 64000,
-        fallbacks: ['deepseek-chat', 'o1-mini', 'claude-3-5-sonnet']
-    },
-
-    // ===== MISTRAL =====
-    {
-        id: 'mistral-large-latest',
-        name: 'Mistral Large',
-        icon: '🌟',
-        provider: 'mistral',
-        desc: 'Flagship Mistral - 128K context',
-        categories: ['coding', 'analysis'],
-        contextSize: 128000,
-        fallbacks: ['mistral-medium', 'codestral-latest', 'gpt-4o']
-    },
-    {
-        id: 'codestral-latest',
-        name: 'Codestral',
-        icon: '🔧',
-        provider: 'mistral',
-        desc: 'Code specialist - 32K context',
-        categories: ['coding'],
-        isBest: true,
-        contextSize: 32000,
-        fallbacks: ['mistral-large-latest', 'deepseek-chat', 'gpt-4o']
-    },
-
-    // ===== META LLAMA (via OpenRouter) =====
-    {
-        id: 'openrouter:meta-llama/llama-3.3-70b-instruct',
-        name: 'Llama 3.3 70B',
-        icon: '🦙',
-        provider: 'meta',
-        desc: 'Latest Llama - 128K context',
-        categories: ['coding', 'analysis', 'free'],
-        contextSize: 128000,
-        fallbacks: ['openrouter:meta-llama/llama-3.1-70b-instruct', 'openrouter:meta-llama/llama-3.1-8b-instruct', 'gpt-4o-mini']
-    },
+    // ===== LLAMA (FREE) =====
     {
         id: 'openrouter:meta-llama/llama-3.1-8b-instruct:free',
-        name: 'Llama 3.1 8B (Free)',
+        name: 'Llama 3.1 8B',
         icon: '🦙',
         provider: 'meta',
-        desc: 'Free Llama - 128K context',
-        categories: ['coding', 'free'],
+        desc: 'Fast & FREE - 128K context',
+        categories: ['coding', 'fast'],
+        isFree: true,
         contextSize: 128000,
-        fallbacks: ['openrouter:meta-llama/llama-3.3-70b-instruct', 'gpt-4o-mini', 'gemini-1.5-flash']
+        fallbacks: ['openrouter:meta-llama/llama-3.2-3b-instruct:free', 'openrouter:qwen/qwen-2.5-7b-instruct:free', 'openrouter:google/gemma-2-9b-it:free']
+    },
+    {
+        id: 'openrouter:meta-llama/llama-3.2-3b-instruct:free',
+        name: 'Llama 3.2 3B',
+        icon: '🦙',
+        provider: 'meta',
+        desc: 'Ultra fast & FREE',
+        categories: ['fast'],
+        isFree: true,
+        contextSize: 128000,
+        fallbacks: ['openrouter:meta-llama/llama-3.1-8b-instruct:free', 'openrouter:qwen/qwen-2.5-7b-instruct:free', 'openrouter:google/gemma-2-9b-it:free']
+    },
+    {
+        id: 'openrouter:meta-llama/llama-3.2-1b-instruct:free',
+        name: 'Llama 3.2 1B',
+        icon: '🦙',
+        provider: 'meta',
+        desc: 'Tiny & instant - FREE',
+        categories: ['fast'],
+        isFree: true,
+        contextSize: 128000,
+        fallbacks: ['openrouter:meta-llama/llama-3.2-3b-instruct:free', 'openrouter:meta-llama/llama-3.1-8b-instruct:free', 'openrouter:google/gemma-2-9b-it:free']
     },
 
-    // ===== QWEN (via OpenRouter) =====
+    // ===== QWEN (FREE) =====
     {
-        id: 'openrouter:qwen/qwen-2.5-coder-32b-instruct',
-        name: 'Qwen 2.5 Coder 32B',
+        id: 'openrouter:qwen/qwen-2.5-7b-instruct:free',
+        name: 'Qwen 2.5 7B',
         icon: '💻',
         provider: 'qwen',
-        desc: 'Alibaba code model - 32K',
+        desc: 'Great coder - FREE',
+        categories: ['coding', 'fast'],
+        isFree: true,
+        contextSize: 32000,
+        fallbacks: ['openrouter:qwen/qwen-2.5-coder-7b-instruct:free', 'openrouter:meta-llama/llama-3.1-8b-instruct:free', 'openrouter:google/gemma-2-9b-it:free']
+    },
+    {
+        id: 'openrouter:qwen/qwen-2.5-coder-7b-instruct:free',
+        name: 'Qwen 2.5 Coder 7B',
+        icon: '🔧',
+        provider: 'qwen',
+        desc: 'Code specialist - FREE',
         categories: ['coding'],
+        isFree: true,
         isBest: true,
         contextSize: 32000,
-        fallbacks: ['openrouter:qwen/qwen-2.5-72b-instruct', 'codestral-latest', 'deepseek-chat']
+        fallbacks: ['openrouter:qwen/qwen-2.5-7b-instruct:free', 'openrouter:meta-llama/llama-3.1-8b-instruct:free', 'openrouter:google/gemma-2-9b-it:free']
+    },
+    {
+        id: 'openrouter:qwen/qwen3-1.7b:free',
+        name: 'Qwen3 1.7B',
+        icon: '⚡',
+        provider: 'qwen',
+        desc: 'New & fast - FREE',
+        categories: ['fast'],
+        isFree: true,
+        contextSize: 32000,
+        fallbacks: ['openrouter:qwen/qwen-2.5-7b-instruct:free', 'openrouter:meta-llama/llama-3.2-3b-instruct:free', 'openrouter:google/gemma-2-9b-it:free']
     },
 
-    // ===== PERPLEXITY SEARCH =====
+    // ===== GOOGLE GEMMA (FREE) =====
     {
-        id: 'openrouter:perplexity/sonar',
-        name: 'Perplexity Sonar',
-        icon: '🔍',
-        provider: 'perplexity',
-        desc: 'Web search AI',
-        categories: ['search'],
+        id: 'openrouter:google/gemma-2-9b-it:free',
+        name: 'Gemma 2 9B',
+        icon: '💎',
+        provider: 'google',
+        desc: 'Google free model',
+        categories: ['coding', 'fast'],
+        isFree: true,
+        isBest: true,
+        contextSize: 8192,
+        fallbacks: ['openrouter:meta-llama/llama-3.1-8b-instruct:free', 'openrouter:qwen/qwen-2.5-7b-instruct:free', 'openrouter:mistralai/mistral-7b-instruct:free']
+    },
+    {
+        id: 'openrouter:google/gemma-3-4b-it:free',
+        name: 'Gemma 3 4B',
+        icon: '💎',
+        provider: 'google',
+        desc: 'Newest Gemma - FREE',
+        categories: ['fast'],
+        isFree: true,
+        contextSize: 8192,
+        fallbacks: ['openrouter:google/gemma-2-9b-it:free', 'openrouter:meta-llama/llama-3.2-3b-instruct:free', 'openrouter:qwen/qwen-2.5-7b-instruct:free']
+    },
+
+    // ===== MISTRAL (FREE) =====
+    {
+        id: 'openrouter:mistralai/mistral-7b-instruct:free',
+        name: 'Mistral 7B',
+        icon: '🌟',
+        provider: 'mistral',
+        desc: 'Classic & FREE',
+        categories: ['coding', 'fast'],
+        isFree: true,
+        contextSize: 32000,
+        fallbacks: ['openrouter:meta-llama/llama-3.1-8b-instruct:free', 'openrouter:qwen/qwen-2.5-7b-instruct:free', 'openrouter:google/gemma-2-9b-it:free']
+    },
+
+    // ===== DEEPSEEK (Usually FREE) =====
+    {
+        id: 'openrouter:deepseek/deepseek-r1-distill-llama-8b:free',
+        name: 'DeepSeek R1 8B',
+        icon: '🐋',
+        provider: 'deepseek',
+        desc: 'Reasoning model - FREE',
+        categories: ['coding', 'large'],
+        isFree: true,
+        isBest: true,
+        contextSize: 64000,
+        fallbacks: ['openrouter:meta-llama/llama-3.1-8b-instruct:free', 'openrouter:qwen/qwen-2.5-coder-7b-instruct:free', 'openrouter:google/gemma-2-9b-it:free']
+    },
+
+    // ===== LARGE MODELS (FREE) =====
+    {
+        id: 'openrouter:nvidia/llama-3.1-nemotron-70b-instruct:free',
+        name: 'Nemotron 70B',
+        icon: '🚀',
+        provider: 'meta',
+        desc: 'NVIDIA tuned Llama 70B - FREE',
+        categories: ['coding', 'large'],
+        isFree: true,
         isBest: true,
         contextSize: 128000,
-        fallbacks: ['openrouter:perplexity/sonar-pro', 'gpt-4o', 'gemini-1.5-pro']
+        fallbacks: ['openrouter:meta-llama/llama-3.1-8b-instruct:free', 'openrouter:qwen/qwen-2.5-7b-instruct:free', 'openrouter:google/gemma-2-9b-it:free']
     },
-
-    // ===== GROK (xAI) =====
     {
-        id: 'grok-beta',
-        name: 'Grok Beta',
-        icon: '🤖',
-        provider: 'xai',
-        desc: 'xAI model - 128K context',
-        categories: ['coding', 'analysis'],
+        id: 'openrouter:microsoft/phi-3-mini-128k-instruct:free',
+        name: 'Phi-3 Mini',
+        icon: '🔬',
+        provider: 'mistral',
+        desc: 'Microsoft small model - FREE',
+        categories: ['fast', 'coding'],
+        isFree: true,
         contextSize: 128000,
-        fallbacks: ['gpt-4o', 'claude-3-5-sonnet', 'gemini-1.5-pro']
+        fallbacks: ['openrouter:meta-llama/llama-3.2-3b-instruct:free', 'openrouter:qwen/qwen3-1.7b:free', 'openrouter:google/gemma-3-4b-it:free']
     }
 ];
 
@@ -1191,7 +834,7 @@ let loadedDocuments = [];
 
 function initApp() {
     if (typeof puter !== 'undefined') {
-        updateStatus('ready', `✅ Ready - ${MODELS_WITH_FALLBACKS.length} models`);
+        updateStatus('ready', `✅ Ready - ${MODELS_WITH_FALLBACKS.length} FREE models`);
         renderModels();
         selectModel(MODELS_WITH_FALLBACKS[0]);
         setupDragDrop();
@@ -1218,7 +861,6 @@ function estimateTokens(text) { return Math.ceil(text.length / 4); }
 async function handleFileUpload(event) {
     const files = event.target.files;
     if (!files || files.length === 0) return;
-
     for (const file of files) {
         try {
             addLog('info', `📄 Loading: ${file.name}`);
@@ -1227,8 +869,7 @@ async function handleFileUpload(event) {
             loadedDocuments.push({ id: Date.now() + Math.random(), name: file.name, content, size: file.size, tokens, type: getFileType(file.name), source: 'file' });
             addLog('success', `✅ Loaded: ${file.name} (~${tokens} tokens)`);
         } catch (err) {
-            addLog('error', `❌ Failed to load ${file.name}: ${err.message}`);
-            showToast(`Failed to load ${file.name}`, 'error');
+            addLog('error', `❌ Failed: ${err.message}`);
         }
     }
     renderLoadedDocs();
@@ -1249,69 +890,57 @@ async function fetchFromUrl() {
     const urlInput = document.getElementById('urlInput');
     const url = urlInput.value.trim();
     if (!url) { showToast('Please enter a URL', 'error'); return; }
-
     const fetchBtn = document.getElementById('fetchBtn');
     fetchBtn.disabled = true;
     fetchBtn.innerHTML = '<div class="spinner"></div>';
-    addLog('info', `🌐 Fetching: ${url}`);
-
     try {
         let content;
         try {
             const response = await fetch(url);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
             content = await response.text();
-        } catch (corsError) {
-            addLog('warning', '⚠️ CORS blocked, trying proxy...');
+        } catch {
             const proxyResponse = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`);
-            if (!proxyResponse.ok) throw new Error('Proxy failed');
             content = await proxyResponse.text();
         }
-
         const tokens = estimateTokens(content);
-        const fileName = url.split('/').pop() || 'fetched-content.txt';
-        loadedDocuments.push({ id: Date.now() + Math.random(), name: fileName, content, size: content.length, tokens, type: getFileType(fileName), source: 'url', url });
-        addLog('success', `✅ Fetched: ${fileName} (~${tokens} tokens)`);
-        showToast(`Loaded from URL (~${tokens} tokens)`, 'success');
+        const fileName = url.split('/').pop() || 'fetched.txt';
+        loadedDocuments.push({ id: Date.now(), name: fileName, content, size: content.length, tokens, type: getFileType(fileName), source: 'url' });
+        showToast(`Loaded (~${tokens} tokens)`, 'success');
         renderLoadedDocs();
         updateTokenInfo();
         urlInput.value = '';
     } catch (err) {
-        addLog('error', `❌ Fetch failed: ${err.message}`);
-        showToast(`Failed to fetch URL: ${err.message}`, 'error');
+        showToast('Fetch failed', 'error');
     }
-
     fetchBtn.disabled = false;
     fetchBtn.innerHTML = '🔗 Fetch';
 }
 
 function getFileType(filename) {
     const ext = filename.split('.').pop().toLowerCase();
-    const types = { 'js': '📜 JavaScript', 'ts': '📘 TypeScript', 'py': '🐍 Python', 'html': '🌐 HTML', 'css': '🎨 CSS', 'json': '📋 JSON', 'md': '📝 Markdown', 'txt': '📄 Text', 'csv': '📊 CSV', 'xml': '📰 XML', 'sql': '🗃️ SQL', 'java': '☕ Java', 'c': '⚙️ C', 'cpp': '⚙️ C++', 'go': '🔷 Go', 'rs': '🦀 Rust', 'rb': '💎 Ruby', 'php': '🐘 PHP', 'swift': '🍎 Swift', 'kt': '🟣 Kotlin', 'yaml': '⚙️ YAML', 'yml': '⚙️ YAML', 'sh': '🖥️ Shell', 'log': '📋 Log' };
+    const types = { 'js': '📜 JS', 'py': '🐍 Python', 'html': '🌐 HTML', 'css': '🎨 CSS', 'json': '📋 JSON', 'md': '📝 Markdown', 'txt': '📄 Text' };
     return types[ext] || '📄 File';
 }
 
 function formatBytes(bytes) {
     if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+    return (bytes / 1024).toFixed(1) + ' KB';
 }
 
 function renderLoadedDocs() {
     const container = document.getElementById('loadedDocs');
     if (loadedDocuments.length === 0) { container.innerHTML = ''; document.getElementById('docContextIndicator').classList.add('hidden'); return; }
-
     container.innerHTML = loadedDocuments.map(doc => `
         <div class="loaded-doc-item">
             <div class="loaded-doc-info">
                 <span class="loaded-doc-icon">${doc.type.split(' ')[0]}</span>
                 <div class="loaded-doc-details">
                     <div class="loaded-doc-name">${doc.name}</div>
-                    <div class="loaded-doc-meta"><span>📦 ${formatBytes(doc.size)}</span><span>📊 ~${doc.tokens.toLocaleString()} tokens</span><span>${doc.source === 'url' ? '🌐 URL' : '📁 File'}</span></div>
+                    <div class="loaded-doc-meta"><span>${formatBytes(doc.size)}</span><span>~${doc.tokens} tokens</span></div>
                 </div>
             </div>
             <div class="loaded-doc-actions">
-                <button class="doc-action-btn preview" onclick="previewDoc('${doc.id}')">👁️ View</button>
+                <button class="doc-action-btn preview" onclick="previewDoc('${doc.id}')">👁️</button>
                 <button class="doc-action-btn remove" onclick="removeDoc('${doc.id}')">✕</button>
             </div>
         </div>
@@ -1321,30 +950,28 @@ function renderLoadedDocs() {
 
 function updateTokenInfo() {
     const totalTokens = loadedDocuments.reduce((sum, doc) => sum + doc.tokens, 0);
-    document.getElementById('tokenInfo').innerHTML = `📊 Context: ${totalTokens.toLocaleString()} tokens`;
-    document.getElementById('docContextText').textContent = `${loadedDocuments.length} document${loadedDocuments.length !== 1 ? 's' : ''} attached (~${totalTokens.toLocaleString()} tokens)`;
-    if (selectedModel && totalTokens > selectedModel.contextSize * 0.8) showToast(`⚠️ Approaching ${selectedModel.name}'s context limit!`, 'warning');
+    document.getElementById('tokenInfo').innerHTML = `📊 ${totalTokens.toLocaleString()} tokens`;
+    document.getElementById('docContextText').textContent = `${loadedDocuments.length} doc(s) (~${totalTokens} tokens)`;
 }
 
 function previewDoc(docId) {
     const doc = loadedDocuments.find(d => d.id == docId);
     if (!doc) return;
-    document.getElementById('previewTitle').textContent = `${doc.type} - ${doc.name}`;
-    document.getElementById('previewBody').textContent = doc.content.substring(0, 50000) + (doc.content.length > 50000 ? '\n\n... (truncated for preview)' : '');
+    document.getElementById('previewTitle').textContent = doc.name;
+    document.getElementById('previewBody').textContent = doc.content.substring(0, 50000);
     document.getElementById('docPreviewModal').classList.remove('hidden');
 }
 
 function closePreview(event) { if (!event || event.target.id === 'docPreviewModal') document.getElementById('docPreviewModal').classList.add('hidden'); }
-function removeDoc(docId) { loadedDocuments = loadedDocuments.filter(d => d.id != docId); renderLoadedDocs(); updateTokenInfo(); addLog('info', '🗑️ Document removed'); }
-function clearAllDocuments() { loadedDocuments = []; renderLoadedDocs(); updateTokenInfo(); addLog('info', '🗑️ All documents cleared'); showToast('All documents cleared', 'success'); }
+function removeDoc(docId) { loadedDocuments = loadedDocuments.filter(d => d.id != docId); renderLoadedDocs(); updateTokenInfo(); }
+function clearAllDocuments() { loadedDocuments = []; renderLoadedDocs(); updateTokenInfo(); }
 
 function buildPromptWithDocs(userPrompt) {
     if (loadedDocuments.length === 0) return userPrompt;
-    let contextParts = ['📄 **ATTACHED DOCUMENTS:**\n'];
-    loadedDocuments.forEach((doc, index) => { contextParts.push(`\n--- Document ${index + 1}: ${doc.name} ---`); contextParts.push('```' + doc.name.split('.').pop()); contextParts.push(doc.content); contextParts.push('```\n'); });
-    contextParts.push('\n📝 **USER REQUEST:**');
-    contextParts.push(userPrompt);
-    return contextParts.join('\n');
+    let parts = ['DOCUMENTS:\n'];
+    loadedDocuments.forEach((doc, i) => { parts.push(`--- ${doc.name} ---\n${doc.content}\n`); });
+    parts.push('\nREQUEST: ' + userPrompt);
+    return parts.join('\n');
 }
 
 function renderModels() {
@@ -1360,15 +987,13 @@ function renderModels() {
         <div class="model-card ${selectedModel?.id === m.id ? 'selected' : ''}" onclick='selectModel(${JSON.stringify(m).replace(/'/g, "\\'")})'>
             <div class="model-badges">
                 <span class="badge badge-${m.provider}">${m.provider.toUpperCase()}</span>
-                ${m.isBest ? '<span class="badge badge-best">⭐ BEST</span>' : ''}
-                ${m.categories.includes('coding') ? '<span class="badge badge-coding">CODE</span>' : ''}
-                ${m.categories.includes('search') ? '<span class="badge badge-search">SEARCH</span>' : ''}
-                ${m.categories.includes('free') ? '<span class="badge badge-new">FREE</span>' : ''}
+                <span class="badge badge-free">🆓 FREE</span>
+                ${m.isBest ? '<span class="badge badge-coding">⭐ BEST</span>' : ''}
                 <span class="badge badge-fallback">+${m.fallbacks.length}</span>
             </div>
             <div class="model-name">${m.icon} ${m.name}</div>
             <div class="model-desc">${m.desc}</div>
-            <div class="model-ids"><div><span class="primary">ID: ${m.id}</span></div></div>
+            <div class="model-ids"><span class="primary">${m.id.split('/').pop()}</span></div>
         </div>
     `).join('');
 }
@@ -1385,34 +1010,29 @@ function selectModel(model) {
     selectedModel = model;
     document.getElementById('selectedIcon').textContent = model.icon;
     document.getElementById('selectedName').textContent = model.name;
-    document.getElementById('selectedStatus').textContent = 'Ready';
+    document.getElementById('selectedStatus').textContent = '🆓 FREE';
     document.getElementById('selectedStatus').className = 'selected-status status-primary';
-    document.getElementById('chain1').textContent = model.id.substring(0, 25) + (model.id.length > 25 ? '...' : '');
-    document.getElementById('chain2').textContent = model.fallbacks[0]?.substring(0, 25) || 'None';
-    document.getElementById('chain3').textContent = model.fallbacks[1]?.substring(0, 25) || 'None';
+    document.getElementById('chain1').textContent = model.id.split('/').pop().substring(0, 20);
+    document.getElementById('chain2').textContent = model.fallbacks[0]?.split('/').pop().substring(0, 20) || 'None';
+    document.getElementById('chain3').textContent = model.fallbacks[1]?.split('/').pop().substring(0, 20) || 'None';
     document.querySelectorAll('.chain-item').forEach(item => { item.classList.remove('active', 'failed'); item.classList.add('pending'); });
     renderModels();
-    updateTokenInfo();
-    addLog('info', `Selected: ${model.name} (${(model.contextSize/1000)}K context)`);
+    addLog('info', `Selected: ${model.name} (FREE)`);
 }
 
 function getErrorMessage(err) {
     if (typeof err === 'string') return err;
     if (err?.message) return err.message;
     if (err?.error?.message) return err.error.message;
-    if (err?.error) return typeof err.error === 'string' ? err.error : JSON.stringify(err.error);
     try { return JSON.stringify(err); } catch { return 'Unknown error'; }
 }
 
 async function askWithFallback() {
     if (!selectedModel || isProcessing) return;
     const userText = document.getElementById('userQuestion').value.trim();
-    if (!userText) { showToast('Please enter a prompt!', 'error'); return; }
+    if (!userText) { showToast('Enter a prompt!', 'error'); return; }
 
     const fullPrompt = buildPromptWithDocs(userText);
-    const promptTokens = estimateTokens(fullPrompt);
-    if (promptTokens > selectedModel.contextSize * 0.9) { showToast(`⚠️ Prompt too large (~${promptTokens} tokens) for ${selectedModel.name}!`, 'error'); return; }
-
     lastQuestion = userText;
     isProcessing = true;
     const output = document.getElementById('output');
@@ -1431,27 +1051,26 @@ async function askWithFallback() {
     const chainItems = document.querySelectorAll('.chain-item');
     chainItems.forEach(item => { item.classList.remove('active', 'failed'); item.classList.add('pending'); });
 
-    addLog('info', `Starting with ${loadedDocuments.length} docs (~${promptTokens} tokens)`);
+    addLog('info', `Starting request...`);
 
     for (let i = 0; i < modelChain.length; i++) {
         const modelId = modelChain[i];
         attemptCount = i + 1;
-        output.textContent = `🔄 Attempt ${attemptCount}/${modelChain.length}\n\nModel: ${modelId}\n📄 Docs: ${loadedDocuments.length}\n📊 Tokens: ~${promptTokens}`;
+        output.textContent = `🔄 Trying ${attemptCount}/${modelChain.length}\n\n${modelId.split('/').pop()}`;
         if (chainItems[i]) { chainItems[i].classList.remove('pending'); chainItems[i].classList.add('active'); }
-        addLog('info', `Attempt ${attemptCount}: ${modelId}`);
+        addLog('info', `Attempt ${attemptCount}: ${modelId.split('/').pop()}`);
 
         try {
             const response = await puter.ai.chat(fullPrompt, { model: modelId });
             successModel = modelId;
             successResponse = response;
-            addLog('success', `✅ Success: ${modelId}`);
+            addLog('success', `✅ Success: ${modelId.split('/').pop()}`);
             if (chainItems[i]) chainItems[i].style.borderColor = 'var(--success)';
             break;
         } catch (err) {
             const errMsg = getErrorMessage(err);
-            addLog('error', `❌ Failed: ${modelId} - ${errMsg}`);
+            addLog('error', `❌ ${modelId.split('/').pop()}: ${errMsg.substring(0, 50)}`);
             if (chainItems[i]) { chainItems[i].classList.remove('active'); chainItems[i].classList.add('failed'); }
-            if (i < modelChain.length - 1) addLog('warning', `⏳ Trying: ${modelChain[i + 1]}`);
         }
     }
 
@@ -1461,32 +1080,27 @@ async function askWithFallback() {
         const answer = extractResponse(successResponse);
         const isPrimary = successModel === selectedModel.id;
         output.className = isPrimary ? 'success' : 'success fallback-used';
-        output.innerHTML = `<div class="output-badge ${isPrimary ? 'primary' : 'fallback'}">${isPrimary ? '1️⃣ Primary' : '🔄 Fallback'}</div>\n${answer}`;
+        output.innerHTML = `<div class="output-badge ${isPrimary ? 'primary' : 'fallback'}">${isPrimary ? '🆓 FREE' : '🔄 Fallback'}</div>\n${answer}`;
         document.getElementById('responseTime').textContent = elapsed + 's';
         document.getElementById('tokenCount').textContent = '~' + Math.ceil(answer.length / 4);
-        document.getElementById('usedModel').textContent = successModel.split('/').pop().substring(0, 15);
+        document.getElementById('usedModel').textContent = successModel.split('/').pop().substring(0, 12);
         document.getElementById('attemptNum').textContent = attemptCount;
         document.getElementById('modelSource').textContent = isPrimary ? 'Primary' : 'Fallback';
-        document.getElementById('finalStatus').textContent = '✅';
-        document.getElementById('selectedStatus').textContent = isPrimary ? 'Primary ✓' : 'Fallback ✓';
-        document.getElementById('selectedStatus').className = `selected-status ${isPrimary ? 'status-primary' : 'status-fallback'}`;
-        showToast(isPrimary ? '✅ Success!' : `🔄 Used fallback`, 'success');
+        showToast('✅ Success!', 'success');
     } else {
         output.className = 'error';
-        output.textContent = `❌ All ${modelChain.length} models failed!\n\nTry selecting a different model.`;
-        document.getElementById('finalStatus').textContent = '❌';
-        showToast('❌ All models failed', 'error');
+        output.textContent = `❌ All models failed!\n\nTry "Find Models" to discover working ones.`;
     }
 
     isProcessing = false;
     sendBtn.disabled = false;
-    sendBtn.innerHTML = '🚀 Send (Auto-Fallback)';
+    sendBtn.innerHTML = '🚀 Send (FREE)';
 }
 
 async function streamWithFallback() {
     if (!selectedModel || isProcessing) return;
     const userText = document.getElementById('userQuestion').value.trim();
-    if (!userText) { showToast('Please enter a prompt!', 'error'); return; }
+    if (!userText) { showToast('Enter a prompt!', 'error'); return; }
 
     const fullPrompt = buildPromptWithDocs(userText);
     lastQuestion = userText;
@@ -1499,36 +1113,78 @@ async function streamWithFallback() {
     for (let i = 0; i < modelChain.length; i++) {
         const modelId = modelChain[i];
         output.className = '';
-        output.textContent = `⚡ Streaming attempt ${i + 1}/${modelChain.length}: ${modelId}\n\n`;
+        output.textContent = `⚡ Streaming: ${modelId.split('/').pop()}\n\n`;
 
         try {
             const response = await puter.ai.chat(fullPrompt, { model: modelId, stream: true });
             output.textContent = '';
             for await (const chunk of response) {
-                const text = chunk?.text || chunk?.message?.content?.[0]?.text || chunk?.message?.content || '';
+                const text = chunk?.text || chunk?.message?.content || '';
                 if (typeof text === 'string') output.textContent += text;
             }
             successModel = modelId;
-            addLog('success', `✅ Streamed: ${modelId}`);
             break;
         } catch (err) {
-            addLog('error', `❌ Stream failed: ${modelId} - ${getErrorMessage(err)}`);
-            if (i < modelChain.length - 1) continue;
+            addLog('error', `Stream failed: ${modelId.split('/').pop()}`);
         }
     }
 
-    const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
     if (successModel) {
-        const isPrimary = successModel === selectedModel.id;
-        output.className = isPrimary ? 'success' : 'success fallback-used';
-        document.getElementById('responseTime').textContent = elapsed + 's';
-        document.getElementById('finalStatus').textContent = '✅';
-        showToast('⚡ Streaming complete!', 'success');
+        output.className = 'success';
+        document.getElementById('responseTime').textContent = ((Date.now() - startTime) / 1000).toFixed(2) + 's';
+        showToast('⚡ Streamed!', 'success');
     } else {
         output.className = 'error';
-        output.textContent = '❌ All streaming attempts failed';
+        output.textContent = '❌ All streaming failed';
     }
     isProcessing = false;
+}
+
+async function discoverModels() {
+    const output = document.getElementById('output');
+    output.className = 'thinking';
+    output.textContent = '🔍 Discovering working FREE models...\n\n';
+
+    const testModels = [
+        'openrouter:meta-llama/llama-3.1-8b-instruct:free',
+        'openrouter:meta-llama/llama-3.2-3b-instruct:free',
+        'openrouter:meta-llama/llama-3.2-1b-instruct:free',
+        'openrouter:qwen/qwen-2.5-7b-instruct:free',
+        'openrouter:qwen/qwen-2.5-coder-7b-instruct:free',
+        'openrouter:google/gemma-2-9b-it:free',
+        'openrouter:google/gemma-3-4b-it:free',
+        'openrouter:mistralai/mistral-7b-instruct:free',
+        'openrouter:deepseek/deepseek-r1-distill-llama-8b:free',
+        'openrouter:microsoft/phi-3-mini-128k-instruct:free',
+        'openrouter:nvidia/llama-3.1-nemotron-70b-instruct:free',
+        'openrouter:qwen/qwen3-1.7b:free',
+        'deepseek-chat',
+        'mistral-tiny'
+    ];
+
+    let working = [];
+
+    for (const modelId of testModels) {
+        output.textContent += `Testing: ${modelId.split('/').pop() || modelId}...`;
+        try {
+            const start = Date.now();
+            await puter.ai.chat('Hi', { model: modelId });
+            const time = Date.now() - start;
+            output.textContent += ` ✅ ${time}ms\n`;
+            working.push({ id: modelId, time });
+        } catch (err) {
+            output.textContent += ` ❌\n`;
+        }
+    }
+
+    output.textContent += `\n\n✅ WORKING MODELS (${working.length}):\n`;
+    working.sort((a, b) => a.time - b.time);
+    working.forEach(m => {
+        output.textContent += `  • ${m.id.split('/').pop() || m.id} (${m.time}ms)\n`;
+    });
+
+    output.className = 'success';
+    showToast(`Found ${working.length} working models!`, 'success');
 }
 
 async function testAllFallbacks() {
@@ -1536,72 +1192,19 @@ async function testAllFallbacks() {
     const output = document.getElementById('output');
     const modelChain = [selectedModel.id, ...selectedModel.fallbacks];
     output.className = 'thinking';
-    output.textContent = `🧪 Testing ${modelChain.length} models...\n\n`;
+    output.textContent = `🧪 Testing ${selectedModel.name} chain...\n\n`;
 
-    for (let i = 0; i < modelChain.length; i++) {
-        const modelId = modelChain[i];
-        output.textContent += `Testing: ${modelId}...\n`;
+    for (const modelId of modelChain) {
+        output.textContent += `${modelId.split('/').pop()}... `;
         try {
             const start = Date.now();
-            await puter.ai.chat('Say "OK" and nothing else.', { model: modelId });
-            output.textContent += `  ✅ Working (${Date.now() - start}ms)\n\n`;
+            await puter.ai.chat('Say OK', { model: modelId });
+            output.textContent += `✅ ${Date.now() - start}ms\n`;
         } catch (err) {
-            output.textContent += `  ❌ Failed: ${getErrorMessage(err)}\n\n`;
+            output.textContent += `❌ ${getErrorMessage(err).substring(0, 30)}\n`;
         }
     }
     output.className = 'success';
-    showToast('🧪 Test complete!', 'success');
-}
-
-async function forcePrimary() {
-    if (!selectedModel) return;
-    const userText = document.getElementById('userQuestion').value.trim();
-    if (!userText) { showToast('Enter a prompt first!', 'warning'); return; }
-
-    const fullPrompt = buildPromptWithDocs(userText);
-    const output = document.getElementById('output');
-    output.className = 'thinking';
-    output.textContent = `1️⃣ Primary only: ${selectedModel.id}...`;
-
-    try {
-        const start = Date.now();
-        const response = await puter.ai.chat(fullPrompt, { model: selectedModel.id });
-        const elapsed = ((Date.now() - start) / 1000).toFixed(2);
-        output.className = 'success';
-        output.innerHTML = `<div class="output-badge primary">1️⃣ Primary</div>\n${extractResponse(response)}`;
-        document.getElementById('responseTime').textContent = elapsed + 's';
-        addLog('success', `✅ Primary success: ${selectedModel.id}`);
-    } catch (err) {
-        output.className = 'error';
-        output.textContent = `❌ Primary failed: ${getErrorMessage(err)}`;
-        addLog('error', `❌ Primary failed: ${getErrorMessage(err)}`);
-    }
-}
-
-async function forceFallback() {
-    if (!selectedModel?.fallbacks?.length) { showToast('No fallbacks available!', 'warning'); return; }
-    const userText = document.getElementById('userQuestion').value.trim();
-    if (!userText) { showToast('Enter a prompt first!', 'warning'); return; }
-
-    const fullPrompt = buildPromptWithDocs(userText);
-    const fallbackId = selectedModel.fallbacks[0];
-    const output = document.getElementById('output');
-    output.className = 'thinking';
-    output.textContent = `2️⃣ Fallback: ${fallbackId}...`;
-
-    try {
-        const start = Date.now();
-        const response = await puter.ai.chat(fullPrompt, { model: fallbackId });
-        const elapsed = ((Date.now() - start) / 1000).toFixed(2);
-        output.className = 'success fallback-used';
-        output.innerHTML = `<div class="output-badge fallback">2️⃣ Fallback</div>\n${extractResponse(response)}`;
-        document.getElementById('responseTime').textContent = elapsed + 's';
-        addLog('success', `✅ Fallback success: ${fallbackId}`);
-    } catch (err) {
-        output.className = 'error';
-        output.textContent = `❌ Fallback failed: ${getErrorMessage(err)}`;
-        addLog('error', `❌ Fallback failed: ${getErrorMessage(err)}`);
-    }
 }
 
 function extractResponse(response) {
@@ -1610,9 +1213,7 @@ function extractResponse(response) {
         if (Array.isArray(response.message.content)) return response.message.content.map(c => c.text || c).join('');
         return response.message.content;
     }
-    if (response?.content) return response.content;
-    if (response?.text) return response.text;
-    return JSON.stringify(response, null, 2);
+    return response?.content || response?.text || JSON.stringify(response, null, 2);
 }
 
 function addLog(type, message) {
@@ -1627,42 +1228,33 @@ function addLog(type, message) {
 }
 
 function copyOutput() { navigator.clipboard.writeText(document.getElementById('output').textContent); showToast('📋 Copied!', 'success'); }
-
 function copyCode() {
     const text = document.getElementById('output').textContent;
     const codeMatch = text.match(/```[\s\S]*?```/g);
     if (codeMatch) { navigator.clipboard.writeText(codeMatch.map(c => c.replace(/```\w*\n?/g, '')).join('\n\n')); showToast('📦 Code copied!', 'success'); }
-    else showToast('No code blocks found', 'warning');
+    else showToast('No code blocks', 'warning');
 }
-
 function downloadOutput() {
     const blob = new Blob([document.getElementById('output').textContent], { type: 'text/plain' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `ai-response-${Date.now()}.txt`;
-    a.click();
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `response-${Date.now()}.txt`; a.click();
 }
-
 function regenerate() { if (lastQuestion) { document.getElementById('userQuestion').value = lastQuestion; askWithFallback(); } }
-
 function clearAll() {
     document.getElementById('userQuestion').value = '';
     document.getElementById('output').textContent = '💭 AI response will appear here...';
     document.getElementById('output').className = 'empty';
     clearAllDocuments();
-    ['responseTime', 'tokenCount', 'usedModel', 'attemptNum', 'modelSource', 'finalStatus'].forEach(id => document.getElementById(id).textContent = '--');
-    showToast('🗑️ Cleared!', 'success');
+    ['responseTime', 'tokenCount', 'usedModel', 'attemptNum', 'modelSource'].forEach(id => document.getElementById(id).textContent = '--');
+    document.getElementById('finalStatus').textContent = 'FREE';
 }
-
 function showToast(message, type = 'success') {
     document.querySelectorAll('.toast').forEach(t => t.remove());
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
     toast.textContent = message;
     document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3500);
+    setTimeout(() => toast.remove(), 3000);
 }
-
 function showError(msg) { updateStatus('error', '❌ ' + msg); }
 
 document.addEventListener('keydown', (e) => {
